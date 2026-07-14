@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kad Imbas · Nota Padat Sirah UPKK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3E9; --paper-2:#FBF8F0; --ink:#2B2A26; --ink-soft:#5B574C;
+    --gold:#C9A227; --gold-deep:#A47F14; --line:#E4DBC5;
+    --t3:#C2703D; --t3-bg:#FBEEE4;
+    --t4:#2E7D5B; --t4-bg:#E7F3EC;
+    --t5:#7B4B94; --t5-bg:#F1E9F5;
+    --info:#2F6F9E; --info-bg:#E6EFF5;
+    --accent:var(--t3); --accent-bg:var(--t3-bg);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{overflow-x:hidden}
+  .a-body,.single,.plain li,.points li{overflow-wrap:anywhere}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #FDFBF4 0%, transparent 60%), var(--paper);
+    color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:20px 16px 40px;-webkit-tap-highlight-color:transparent}
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:16px}
+  header{text-align:center;padding-top:6px}
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  h1{font-family:'Amiri',serif;font-weight:700;font-size:27px;line-height:1.2;margin:6px 0 2px}
+  .sub{font-size:12.5px;color:var(--ink-soft)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 2px;color:var(--gold)}
+  .divider::before,.divider::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .divider span{font-size:13px}
+  .tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+  .tab{border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
+    font:inherit;font-weight:600;font-size:12.5px;padding:8px 12px;border-radius:999px;cursor:pointer;
+    transition:.18s;display:flex;align-items:center;gap:6px}
+  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+  .tab[data-k="t3"]{--c:var(--t3)} .tab[data-k="t4"]{--c:var(--t4)}
+  .tab[data-k="t5"]{--c:var(--t5)} .tab[data-k="info"]{--c:var(--info)} .tab[data-k="all"]{--c:var(--gold-deep)}
+  .tab.active{background:var(--c,var(--gold-deep));border-color:var(--c,var(--gold-deep));color:#fff}
+  .tab.active .dot{opacity:1;background:#fff}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+  .meta .known{color:var(--t4)}
+  .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .stage{perspective:1600px}
+  .card{position:relative;width:100%;cursor:pointer;display:grid;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+  .stage{width:100%}
+  .card.flip{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .face{grid-area:1/1;width:100%;min-height:320px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:18px;background:var(--paper-2);border:1px solid var(--line);
+    box-shadow:0 1px 0 #fff inset, 0 18px 40px -24px rgba(60,50,20,.5);
+    padding:24px 22px;display:flex;flex-direction:column;overflow:visible}
+  .face::before{content:"";position:absolute;inset:9px;border-radius:12px;pointer-events:none;
+    border:1.5px solid color-mix(in srgb, var(--accent) 28%, transparent)}
+  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--gold);opacity:.7}
+  .corner.tl{top:13px;left:13px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+  .corner.tr{top:13px;right:13px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+  .corner.bl{bottom:13px;left:13px;border-right:0;border-top:0;border-radius:0 0 0 4px}
+  .corner.br{bottom:13px;right:13px;border-left:0;border-top:0;border-radius:0 0 4px 0}
+  .back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1}
+  .chip{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--accent);
+    background:var(--accent-bg);padding:5px 10px;border-radius:999px}
+  .side{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;position:relative;z-index:1;padding:8px 4px}
+  .qmark{font-family:'Amiri',serif;font-size:26px;color:var(--gold-deep);line-height:1}
+  .question{font-family:'Amiri',serif;font-size:21px;font-weight:700;line-height:1.35;color:var(--ink)}
+  .hint{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:6px}
+  .hint .tapdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+  .a-body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:11px;position:relative;z-index:1;padding-top:4px}
+  ol.points{list-style:none;counter-reset:p;display:flex;flex-direction:column;gap:7px;align-self:center;max-width:490px;width:100%}
+  ol.points li{counter-increment:p;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}
+  ol.points li::before{content:counter(p);flex:0 0 auto;width:21px;height:21px;border-radius:6px;
+    background:var(--accent);color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  ul.plain{list-style:none;display:flex;flex-direction:column;gap:7px;align-self:center;max-width:500px}
+  ul.plain li{display:flex;gap:9px;align-items:flex-start;font-size:14.5px;line-height:1.45}
+  ul.plain li::before{content:"\25C8";color:var(--gold);font-size:11px;margin-top:3px}
+  .single{font-size:15.5px;line-height:1.55;text-align:center;color:var(--ink);max-width:500px;align-self:center}
+  .single b{color:var(--accent)}
+  dl.pairs{align-self:center;max-width:520px;width:100%;display:flex;flex-direction:column;gap:6px}
+  dl.pairs .pair{display:flex;gap:8px;font-size:14px;line-height:1.4;border-bottom:1px dashed var(--line);padding-bottom:5px}
+  dl.pairs .pair:last-child{border-bottom:0}
+  dl.pairs .pk{flex:0 0 38%;min-width:0;font-weight:700;color:var(--accent);overflow-wrap:anywhere}
+  dl.pairs .pv{flex:1;min-width:0;overflow-wrap:anywhere}
+  .formula{position:relative;z-index:1;margin-top:6px;align-self:center;max-width:520px;
+    border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:12px;padding:11px 14px}
+  .formula .ft{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--gold-deep);margin-bottom:5px}
+  .formula .fc{font-size:13.5px;line-height:1.5;color:var(--ink)}
+  .formula .fc b{color:var(--gold-deep)}
+  .note{position:relative;z-index:1;margin-top:9px;font-size:11.5px;color:var(--ink-soft);text-align:center;font-style:italic}
+  .note::before{content:"\203B  "}
+  .controls{display:flex;flex-direction:column;gap:12px}
+  .nav{display:flex;gap:10px}
+  .btn{flex:1;font:inherit;font-weight:700;font-size:14.5px;padding:13px;border-radius:13px;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .btn:active{transform:translateY(1px)}
+  .btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.solid:hover{filter:brightness(1.05);color:#fff}
+  .mark{display:flex;gap:10px}
+  .btn.known{color:var(--t4)} .btn.known:hover{border-color:var(--t4)}
+  .btn.review{color:var(--t3)} .btn.review:hover{border-color:var(--t3)}
+  .btn.known.on{background:var(--t4);border-color:var(--t4);color:#fff}
+  .util{display:flex;gap:10px}
+  .util .btn{font-size:13px;font-weight:600;padding:10px}
+  footer{text-align:center;font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:4px}
+  footer b{color:var(--gold-deep)}
+  @media (max-width:420px){h1{font-size:22px}.question{font-size:18px}.face{padding:22px 16px}
+    ol.points li,ul.plain li,dl.pairs .pair{font-size:13.5px}.single{font-size:14.5px}}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kad Imbas &middot; UPKK &middot; Edisi Rumi</div>
+    <h1>Nota Padat Sirah</h1>
+    <div class="sub">Tahun 3 &middot; Tahun 4 &middot; Tahun 5 &middot; Info Tambahan</div>
+    <div class="divider"><span>&#1758;</span></div>
+  </header>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-k="all"><span class="dot"></span>Semua</button>
+    <button class="tab" data-k="t3"><span class="dot"></span>Tahun 3</button>
+    <button class="tab" data-k="t4"><span class="dot"></span>Tahun 4</button>
+    <button class="tab" data-k="t5"><span class="dot"></span>Tahun 5</button>
+    <button class="tab" data-k="info"><span class="dot"></span>Info</button>
+  </div>
+  <div class="meta">
+    <span id="counter">Kad 1 / 1</span>
+    <span class="known" id="knownCount">&#10003; 0 sudah tahu</span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="face front">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><span class="chip" id="fChip">&mdash;</span><span class="side">Soalan</span></div>
+        <div class="q-center"><div class="qmark">&#1567;</div><div class="question" id="fQuestion">&mdash;</div></div>
+        <div class="hint"><span class="tapdot"></span> Ketik kad untuk lihat jawapan</div>
+      </div>
+      <div class="face back">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><span class="chip" id="bChip">&mdash;</span><span class="side">Jawapan</span></div>
+        <div class="a-body" id="bAnswer"></div>
+        <div class="formula" id="bFormula" style="display:none"></div>
+        <div class="note" id="bNote" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="mark">
+      <button class="btn known" id="btnKnown">&#10003; Sudah tahu</button>
+      <button class="btn review" id="btnReview">&#8635; Ulang semula</button>
+    </div>
+    <div class="nav">
+      <button class="btn" id="btnPrev">&lsaquo; Sebelum</button>
+      <button class="btn solid" id="btnFlip">Selak kad</button>
+      <button class="btn" id="btnNext">Seterus &rsaquo;</button>
+    </div>
+    <div class="util">
+      <button class="btn" id="btnShuffle">&#128256; Kocok</button>
+      <button class="btn" id="btnReset">&#10226; Set semula progres</button>
+    </div>
+  </div>
+  <footer>
+    <b>Nota Padat Sirah UPKK (Edisi Rumi)</b> &middot; Kurikulum Standard KAFA JAKIM 2.0<br>
+    Susunan: Ustazah Syahirah
+  </footer>
+</div>
+<script>
+const DECK = [
+/* ========== TAHUN 3 ========== */
+{s:"t3",q:"Sikap masyarakat Arab Jahiliah sebelum kelahiran Nabi",type:"points",
+ a:["Suka pergaduhan","Suka pembunuhan dan peperangan","Hidup berpecah-belah (asabiyah)","Berebut harta dan kuasa"]},
+{s:"t3",q:"Amalan dan kepercayaan masyarakat Arab Jahiliah",type:"points",
+ a:["Menyembah berhala","Menilik nasib","Bunuh anak perempuan"]},
+{s:"t3",q:"Sejarah keturunan Nabi Muhammad SAW",type:"plain",
+ a:["Berasal daripada keturunan Nabi Ismail A.S","Berbangsa Arab Quraisy","Dilahirkan di Mekah, hari Isnin, 12 Rabiul Awwal Tahun Gajah","Mendapat gelaran Al-Amin dalam peristiwa perletakan Hajarul Aswad","Berakhlak baik: jujur, amanah, adil dan pemaaf"]},
+{s:"t3",q:"Mengapa tahun kelahiran Rasulullah disebut Tahun Gajah?",type:"single",
+ a:"Kerana berlaku peristiwa tentera bergajah datang ke Mekah untuk meruntuhkan Kaabah."},
+{s:"t3",q:"Mengapa Rasulullah lahir sebagai anak yatim?",type:"single",
+ a:"Kerana bapa baginda, <b>Abdullah bin Abdul Muthalib</b> meninggal dunia ketika baginda masih dalam kandungan ibunya."},
+{s:"t3",q:"Siapa menamakan baginda MUHAMMAD, dan apa maksudnya?",type:"single",
+ a:"Datuk baginda, <b>Abdul Muthalib</b> membawa baginda ke Kaabah dan memberi nama Muhammad. Bermaksud <b>YANG TERPUJI</b> - nama yang belum pernah digunakan masyarakat Arab ketika itu."},
+{s:"t3",q:"2 orang ibu susuan Rasulullah",type:"points",
+ a:["Tsuwaibah Al-Aslamiyah","Halimah As-Sa'diyah"]},
+{s:"t3",q:"Siapa menjaga Rasulullah selepas kematian ibu dan datuknya?",type:"plain",
+ a:["Ibu (Aminah) meninggal ketika baginda berusia 6 tahun","Dijaga datuk, Abdul Muthalib sehingga usia 8 tahun","Selepas itu dijaga bapa saudaranya, Abu Talib"]},
+{s:"t3",q:"Sifat wajib bagi Rasulullah",type:"points",
+ a:["Siddiq (benar)","Amanah (jujur)","Tabligh (menyampaikan)","Fatanah (bijaksana)"],
+ formula:["FAST","F = Fathonah &middot; A = Amanah &middot; S = Sidiq &middot; T = Tabligh"]},
+{s:"t3",q:"Nasab keturunan Rasulullah sebelah AYAH",type:"points",
+ a:["Abdullah","Abdul Muthalib","Hasyim","Abdul Manaf","Qusai","Kilab bin Murrah"],
+ formula:["A.AM.H.AM.Qu.Ki","Abdullah, Abdul Muthalib, Hasyim, Abdul Manaf, Qusai, Kilab"]},
+{s:"t3",q:"Nasab keturunan Rasulullah sebelah IBU",type:"points",
+ a:["Aminah","Wahab","Abdul Manaf","Zuhrah","Kilab bin Murrah"],
+ formula:["A.W.AM.Zu.Ki","Aminah, Wahab, Abdul Manaf, Zuhrah, Kilab"]},
+{s:"t3",q:"Usia 9 tahun - apa berlaku?",type:"single",a:"Baginda mula berniaga bersama bapa saudaranya, <b>Abu Thalib</b>."},
+{s:"t3",q:"Usia 12 tahun - apa berlaku?",type:"single",a:"Baginda mengikut Abu Thalib berniaga ke negeri <b>Syam</b>."},
+{s:"t3",q:"Usia 25 tahun - apa berlaku?",type:"plain",
+ a:["Mengetuai rombongan dagangan milik Saidatina Khadijah ke Syam, ditemani Maisarah (pembantu lelaki Khadijah)","Berkahwin dengan Saidatina Khadijah yang ketika itu berusia 40 tahun - beza umur mereka 15 tahun"]},
+{s:"t3",q:"Anak-anak Nabi (7 orang)",type:"plain",
+ a:["<b>3 lelaki:</b> Qasim, Abdullah, Ibrahim","<b>4 perempuan:</b> Zainab, Ruqaiyah, Ummu Kalsum, Fatimah"],
+ note:"Semua lahir di Mekah bersama Saidatina Khadijah; hanya Ibrahim dilahirkan di Madinah"},
+{s:"t3",q:"Qasim - anak Rasulullah",type:"single",
+ a:"Anak lelaki sulung Rasulullah. 'Al-Qasim' juga nama gelaran baginda. Dilahirkan sebelum baginda dilantik menjadi rasul dan meninggal dunia ketika berusia <b>2 tahun</b> (sebelum kenabian)."},
+{s:"t3",q:"Abdullah - anak Rasulullah",type:"single",
+ a:"Dipanggil <b>At-Tayyib</b> dan <b>At-Tahir</b>. Dilahirkan ketika nabi dilantik menjadi nabi."},
+{s:"t3",q:"Ibrahim - anak Rasulullah",type:"single",
+ a:"Anak lelaki hasil perkongsian dengan <b>Mariyah Al-Qibtiah</b>. Meninggal dunia ketika berusia 70 hari @ 7 bulan mengikut riwayat lain."},
+{s:"t3",q:"Zainab - anak Rasulullah",type:"single",
+ a:"Anak perempuan sulung. Berkahwin dengan <b>Abu Al-'As bin Ar-Rabi'</b>. Dikurniakan anak lelaki (Ali, meninggal ketika kanak-kanak) dan anak perempuan (Umamah). Rasulullah pernah menggendong Umamah sambil mendirikan solat."},
+{s:"t3",q:"Ruqaiyah - anak Rasulullah",type:"single",
+ a:"Berkahwin dengan <b>Saidina Uthman bin Affan</b>. Dikurniakan anak lelaki bernama Abdullah. Meninggal dunia ketika tentera Islam menang dalam Perang Badar."},
+{s:"t3",q:"Ummu Kalsum - anak Rasulullah",type:"single",
+ a:"Selepas kematian Ruqaiyah, berkahwin pula dengan <b>Saidina Uthman bin Affan</b>. Perkahwinan Uthman dengan 2 puteri Rasulullah menyebabkan beliau digelar <b>Zun Nurain</b> (yang mempunyai dua cahaya mata)."},
+{s:"t3",q:"Fatimah - anak Rasulullah",type:"single",
+ a:"Anak perempuan bongsu. Berkahwin dengan <b>Ali bin Abi Thalib</b>. Dikurniakan 3 anak lelaki (Hasan, Husin, Muhsin - Muhsin meninggal semasa kanak-kanak) dan 2 anak perempuan (Zainab, Ummu Kalsum)."},
+{s:"t3",q:"Cucu Rasulullah (8 orang)",type:"plain",
+ a:["Zainab & Abu Al-'As -> Ali dan Umamah","Fatimah & Ali -> Hassan, Hussin, Muhsin, Zainab, Ummu Kalsum","Ruqaiyah & Uthman -> Abdullah"]},
+{s:"t3",q:"Kepentingan institusi kekeluargaan dalam kehidupan",type:"points",
+ a:["Ingin zuriat","Mengeratkan kasih sayang","Kemuliaan akhlak dan peribadi","Keselamatan sosial terjamin"]},
+{s:"t3",q:"Apakah Wahyu?",type:"single",a:"Wahyu ialah <b>kalam Allah</b> yang disampaikan kepada para nabi dan rasul."},
+{s:"t3",q:"Peristiwa awal kenabian",type:"points",
+ a:["Rasulullah mula berkhalwat (mengasingkan diri) di Gua Hira' ketika berusia 38 tahun","Baginda melihat cahaya terang-benderang","Baginda mendengar suara tanpa diketahui dari mana dan daripada siapa"]},
+{s:"t3",q:"Peristiwa Nabi menerima Wahyu Pertama",type:"pairs",
+ a:[["Hari","Isnin"],["Tarikh","17 Ramadan bersamaan 6 Ogos 610 Masihi"],["Tempat","Gua Hira', puncak Jabal Nur (642m, 3.2km dari Mekah)"],["Usia","40 tahun"],["Perantara","Malaikat Jibril"],["Surah","Al-Alaq ayat 1-5"]]},
+{s:"t3",q:"Peristiwa selepas menerima Wahyu Pertama",type:"plain",
+ a:["Nabi pulang ke rumah dalam keadaan runsing dan keletihan","Baginda meminta Saidatina Khadijah menyelimutkannya","Khadijah membawa baginda bertemu sepupunya, Waraqah bin Naufal","Waraqah seorang lelaki tua beragama Nasrani yang mendalam pengetahuannya tentang kitab Injil"]},
+{s:"t3",q:"Wahyu Pertama vs Wahyu Kedua",type:"plain",
+ a:["<b>Wahyu Pertama:</b> Surah Al-Alaq (1-5) - Nabi diangkat menjadi seorang <b>nabi</b>","<b>Wahyu Kedua:</b> Surah Al-Muddassir (1-7) - Nabi diangkat menjadi seorang <b>rasul</b>"]},
+{s:"t3",q:"Kepentingan membaca dalam kehidupan",type:"points",
+ a:["Meningkatkan kecerdasan akal dan mencergaskan memori","Melahirkan generasi berpendidikan tinggi dan berinovatif","Meningkatkan penguasaan bahasa dan cara berkomunikasi"]},
+{s:"t3",q:"Kamus maksud: Al-Alaq & Al-Muddassir",type:"plain",
+ a:["<b>Al-Alaq:</b> Segumpal Darah","<b>Al-Muddassir:</b> Orang Yang Berselimut"],
+ note:"Malaikat Jibril menyuruh baginda membaca & memeluk baginda 3 kali sebelum mengajar Surah Al-Alaq"},
+{s:"t3",q:"Peranan Saidatina Khadijah sebagai ISTERI",type:"points",
+ a:["Menenangkan Rasulullah ketika menerima wahyu pertama","Membenarkan ajaran Islam yang dibawa baginda tanpa ragu-ragu","Mengorbankan hartanya untuk dakwah suaminya","Komited dan sempurna dalam melakukan kebaikan","Melahirkan zuriat Nabi seramai 6 orang","Menjadi isteri yang sangat baik, setia, jujur dan tabah"]},
+{s:"t3",q:"Peranan Saidatina Khadijah sebagai SAHABAT",type:"points",
+ a:["Membawa baginda bertemu Waraqah bin Naufal selepas peristiwa wahyu pertama","Menghantar wakil untuk melihat keadaan Rasulullah di Gua Hira'"],
+ note:"Isteri Rasulullah digelar Ummahatul Mukminin; Khadijah ialah Ummul Mukminin pertama dalam Islam"},
+{s:"t3",q:"Peranan Saidatina Khadijah sebagai KEKASIH",type:"points",
+ a:["Tidak pernah rasa jemu walau sering ditinggalkan oleh Rasulullah","Menyantuni baginda dengan penuh kasih sayang dan kemesraan","Sentiasa bersama baginda waktu senang dan susah (cth: pemulauan orang Islam selama 3 tahun)","Memberi dorongan kepada baginda untuk bersabar dalam berdakwah","Meringankan kesedihan hati dan menghilangkan keletihan Rasulullah ketika berdakwah","Sanggup memilih hidup bersusah payah demi melihat Islam terus berkembang"]},
+{s:"t3",q:"Peranan Saidatina Khadijah sebagai PEMBANTU",type:"points",
+ a:["Menghadiahkan hambanya, Zaid bin Harisah, kepada Rasulullah (lalu dijadikan anak angkat baginda)","Menjadi manusia pertama memeluk Islam dan pertama solat di belakang Rasulullah bersama Saidina Ali","Membantu menyebarkan Islam","Setia di sisi baginda saat dicaci dan dihina"]},
+/* ========== TAHUN 4 ========== */
+{s:"t4",q:"Golongan pertama memeluk Islam",type:"plain",
+ a:["<b>Wanita pertama</b> (isteri Rasulullah): Saidatina Khadijah binti Khuwailid","<b>Lelaki pertama</b> (sahabat karib): Saidina Abu Bakar As-Siddiq","<b>Kanak-kanak pertama</b> (sepupu): Saidina Ali bin Abi Thalib","<b>Hamba pertama</b> (hamba Khadijah): Zaid bin Harisah"]},
+{s:"t4",q:"Sahabat yang memeluk Islam melalui Saidina Abu Bakar",type:"points",
+ a:["Uthman bin Affan","Saad bin Abi Waqas","Thalhah bin Ubaidillah","Abdul Rahman bin Auf","Zubair bin Awwam","Al-Arqam bin Abi Al-Arqam"],
+ formula:["USTAZA / Saya Tengok Unta Arnab Ada di Zoo","U-S-T-A-Z-A: Uthman, Saad, Thalhah, Abdul Rahman, Zubair, Al-Arqam"]},
+{s:"t4",q:"Dua cara Rasulullah berdakwah",type:"points",a:["Secara rahsia","Secara terbuka"]},
+{s:"t4",q:"Dakwah secara RAHSIA",type:"plain",
+ a:["Surah Al-Muddassir ayat 1-7","Disampaikan kepada ahli keluarga terdekat dan sahabat rapat sahaja","Dijalankan selama 3 tahun","Berpusat di Darul Arqam (pusat pengajaran Islam pertama) - rumah Al-Arqam bin Abi Al-Arqam"],
+ formula:["Ringgit Malaysia = RM","Rahsia - Muddassir"]},
+{s:"t4",q:"Dakwah secara TERBUKA",type:"plain",
+ a:["Surah As-Syuara' ayat 214 - seruan terbuka kepada keluarga terdekat kali pertama","Menjemput 45 orang ahli keluarga rapat (Bani Hasyim & Bani Abdul Manaf) untuk memperkenalkan Islam","Dakwah dibantah oleh Abu Lahab (dua kali)","Surah Al-Hijr ayat 89 - dakwah terbuka di Bukit Safa, disokong bapa saudaranya Abu Thalib","Abu Lahab menentang; Allah menurunkan Surah Al-Masad melaknat perbuatannya"],
+ formula:["TKRS & TH","TKRS = Terbuka-KeluaRga-Syu'ara' &middot; TH = Terbuka-Hijr"]},
+{s:"t4",q:"Akhlak Rasulullah ketika berdakwah",type:"points",
+ a:["Menunaikan amanah yang diperintahkan oleh Allah","Menghormati orang yang lebih tua","Bijak bertindak dalam menyelesaikan masalah","Sabar dalam berdakwah","Sentiasa tenang dalam tindakan"]},
+{s:"t4",q:"Suku kaum penduduk Mekah",type:"points",
+ a:["Bani Abdul Muthalib","Bani Abdul Manaf","Bani Fihr","Bani Adi"]},
+{s:"t4",q:"Bagaimana kita berdakwah dalam kehidupan seharian",type:"points",
+ a:["Perlu bersikap baik kepada semua orang","Mesti bersabar apabila timpa masalah","Perkara yang baik dikongsi bersama","Saling bantu-membantu merapatkan hubungan sesama manusia","Perlu menuntut ilmu bagi memantapkan akidah"]},
+{s:"t4",q:"Peristiwa dakwah sahabat ke Habsyah",type:"plain",
+ a:["Hanya melibatkan sebahagian umat Islam; Rasulullah tidak ikut","Tercetus setelah hamba bernama Kaab mengadu diseksa kerana beriman kepada Allah","Allah memberi ilham kepada baginda untuk memerintahkan umat Islam berhijrah ke Habsyah","Penghijrahan terjadi sebanyak 2 kali"]},
+{s:"t4",q:"Hijrah ke Habsyah: Kali Pertama vs Kali Kedua",type:"plain",
+ a:["<b>Kali Pertama:</b> kerana umat Islam diseksa; secara sulit/sembunyi; diketuai Saidina Uthman bin Affan & isterinya Ruqaiyah binti Muhammad; 16 orang (11 L, 5 P)","<b>Kali Kedua:</b> kerana kaum Muslimin dipulaukan Musyrikin; diketuai Jaafar bin Abi Thalib (sepupu Rasulullah & abang Saidina Ali); 101 orang (83 L, 18 P)"],
+ note:"Disambut baik oleh Raja Habsyah, Raja An-Najasyi. Habsyah kini dikenali Euthopia (Ethiopia)"},
+{s:"t4",q:"Reaksi kaum Musyrikin terhadap hijrah ke Habsyah",type:"plain",
+ a:["Terkejut & risau Islam tersebar di sana","Menghantar 2 utusan: Amru bin Al-'As dan Abdullah bin Abi Rabiah","Membawa cenderamata untuk Raja & meminta kaum Muslimin dikembalikan ke Mekah","Memfitnah kaum Muslimin membawa agama yang bertentangan & memecah-belah penduduk Mekah","Raja An-Najasyi meminta Jaafar bin Abi Thalib memberi penjelasan","Raja merasakan Islam sama seperti agama Nabi Isa; mengusir utusan & memulangkan hadiah (dianggap rasuah)","Kaum Muslimin dilindungi & hidup aman"]},
+{s:"t4",q:"Peristiwa dakwah Rasulullah ke Taif",type:"plain",
+ a:["Kaum Muslimin semakin tertindas; keselamatan Nabi terancam selepas Abu Thalib meninggal","Kesedihan bertambah apabila Saidatina Khadijah pula meninggal dunia","Syawal tahun ke-10 kenabian (619 M), baginda berhijrah ke Taif (100km dari Mekah)","Ditemani Zaid bin Harisah; berjalan kaki","Berdakwah setiap kali berselisih dengan kabilah, namun tiada yang beriman","Baginda tetap cekal dan tidak berputus asa"]},
+{s:"t4",q:"3 adik-beradik yang ditemui di Taif",type:"plain",
+ a:["Abdu Yalil bin Amru bin Umair Al-Thaqafi","Mas'ud bin Amru bin Umair Al-Thaqafi","Hubaib bin Amru bin Umair Al-Thaqafi"],
+ note:"Anak kepada Amru bin Umair Al-Thaqafi, dari Bani Tsaqif (kabilah terbesar di Taif). Mereka menolak dakwah & menghina baginda dengan kata kesat"},
+{s:"t4",q:"Cabaran di Taif",type:"plain",
+ a:["Selepas 10 hari, Nabi & Zaid dihalau keluar oleh pembesar Taif","Kanak-kanak & hamba diupah membaling batu; baginda luka walau dilindungi Zaid","Berlindung di para pokok anggur milik Utbah bin Syaibah","Utbah kasihan, menyuruh hambanya Addas (beragama Nasrani) memberi anggur & minuman","Addas kagum melihat baginda membaca Bismillah sebelum makan","Baginda beritahu Addas tentang Nabi Yunus bin Mata dari Kampung Ninawa; Addas memeluk Islam","Malaikat Jibril tawarkan hancurkan penduduk Taif; baginda memohon mereka tidak dihukum"]},
+{s:"t4",q:"Strategi hijrah Rasulullah ke Yathrib (Madinah)",type:"plain",
+ a:["Kaum Musyrikin merancang membunuh Rasulullah; wahyu memerintah baginda berhijrah","Baginda menyusun rancangan dengan Saidina Abu Bakar As-Siddiq","Saidina Ali disuruh tidur di katil baginda untuk mengelirukan musuh","Rumah dikepung; baginda menggenggam tanah & membaca Surah Yasin ayat 9, lalu melepasi kepungan (musuh tertidur)","Berhijrah pada malam 27 Safar tahun ke-14 kenabian bersama Abu Bakar","Bersembunyi di Gua Thur selama 3 hari"]},
+{s:"t4",q:"Bantuan Allah di Gua Thur",type:"points",
+ a:["Labah-labah membuat sarang pada pintu gua","Sarang burung merpati di tepi pintu gua","Pokok-pokok kecil tumbuh di sekitar gua"],
+ note:"Hadiah 100 ekor unta ditawarkan kepada sesiapa yang berjaya menangkap Nabi"},
+{s:"t4",q:"Perjalanan dari Gua Thur ke Yathrib",type:"plain",
+ a:["Dipandu oleh Abdullah bin Uraiqit melalui jalan yang mencabar & jarang dilalui","Cuaca panas terik; memakan masa 7 hari untuk tiba di Yathrib","Suraqah bin Malik (musyrikin) menemui jejak mereka tetapi gagal menangkap baginda"]},
+{s:"t4",q:"Orang yang terlibat dalam penghijrahan ke Madinah",type:"pairs",
+ a:[["Abdullah bin Uraiqit","Penunjuk jalan menuju ke Madinah"],["Abdullah bin Abi Bakar","Pemberi maklumat pergerakan musuh"],["Asma binti Abi Bakar","Menghantar makanan kepada Rasulullah & Abu Bakar"],["Amir bin Fuhairah","Menutup jejak Abdullah & Asma dengan kambing; membekalkan susu"]]},
+{s:"t4",q:"Tiba di Quba'",type:"plain",
+ a:["8 Rabiul Awwal tahun ke-14 kenabian, Rasulullah tiba di Quba'","Singgah di rumah Kalthum bin Al-Hidm; tinggal 4 hari (Isnin-Khamis)","Membina Masjid Quba' - masjid pertama dalam sejarah Islam"]},
+{s:"t4",q:"Tiba di Yathrib (Madinah)",type:"plain",
+ a:["12 Rabiul Awwal tahun ke-14 kenabian, selepas solat Jumaat baginda memasuki Kota Yathrib","Disambut meriah dengan puisi 'Tala'al Badru 'Alaina' oleh anak-anak Ansar","Unta baginda berhenti di hadapan rumah Abu Ayyub Al-Ansari di Kampung Bani An-Najjar","Baginda menukar nama Yathrib kepada Madinah (bererti bandar)"],
+ note:"Yathrib ditukar kepada Madinah Al-Munawwarah - bermaksud Bandar Yang Bercahaya"},
+{s:"t4",q:"Contoh peribadi mulia Rasulullah SAW",type:"points",
+ a:["Mendahului ucapan salam ketika bertemu seseorang","Berlapang dada dan bersabar","Menjauhi perkara yang dilarang dalam syariat","Bermurah hati memberi pertolongan","Sangat berani dan tabah menghadapi sesuatu perkara","Mengelak daripada memandang sesuatu yang buruk","Memanggil seseorang dengan gelaran yang mereka sukai","Adil, bercakap benar, amanah sehingga digelar Al-Amin","Sentiasa bersifat tawaddhuk (merendah diri)","Beriltizam dengan janji dan tidak pernah memungkirinya"]},
+{s:"t4",q:"Pengertian peribadi mulia",type:"plain",
+ a:["<b>Peribadi:</b> sifat yang telah sebati dalam diri seseorang","<b>Mulia:</b> luhur, terhormat dan tinggi budi pekerti"]},
+{s:"t4",q:"Pengertian & tujuan Mukjizat",type:"plain",
+ a:["<b>Pengertian:</b> perkara luar biasa yang dikurniakan Allah kepada para nabi dan rasul","<b>Tujuan 1:</b> menguatkan lagi seruan dakwah para nabi & rasul","<b>Tujuan 2:</b> membuktikan kebenaran seruan Islam dari Allah","<b>Tujuan 3:</b> melemahkan & mengalahkan tentangan musuh terhadap Islam"]},
+{s:"t4",q:"Contoh mukjizat Nabi Muhammad",type:"points",
+ a:["Al-Quran","Bulan Terbelah Dua","Keluar Air Dari Celah-Celah Jari","Peristiwa Israk dan Mikraj"]},
+{s:"t4",q:"Al-Quran sebagai mukjizat - pengertian",type:"plain",
+ a:["Kalam Allah yang diwahyukan kepada Rasulullah melalui perantaraan Malaikat Jibril","Merupakan kitab suci yang terakhir diturunkan oleh Allah","<b>4 Kitab Suci:</b> Zabur, Taurat, Injil dan Al-Quran"]},
+{s:"t4",q:"Latar belakang Al-Quran",type:"plain",
+ a:["Mukjizat Nabi yang paling agung","Diturunkan secara beransur-ansur dalam tempoh 23 tahun (13 tahun Mekah, 10 tahun Madinah)","Menurut ahli Kufah, berjumlah 6236 ayat","Mempunyai 114 surah dan 30 juzuk","Diturunkan dalam Bahasa Arab","Sentiasa terpelihara dan kekal sehingga hari kiamat"],
+ note:"Al-Quran diturunkan pada bulan Ramadan, malam Lailatul Qadar. Ahli Kufah = ahli Al-Quran di Iraq"},
+{s:"t4",q:"Ciri-ciri mukjizat Al-Quran",type:"plain",
+ a:["<b>Kehebatan bahasa:</b> kesusasteraan & susunan ayat bermutu tinggi; hanya difahami orang yang membaca & mengkajinya","<b>Menceritakan perkara ghaib:</b> dosa, pahala, syurga, neraka; keimanan kepada Allah, malaikat, hari kiamat","<b>Sumber pelbagai ilmu:</b> akidah, syariah, akhlak, sains, perubatan, astronomi","<b>Terpelihara:</b> dijamin tanpa sebarang perubahan sehingga hari kiamat"]},
+{s:"t4",q:"Al-Quran sebagai wahyu - 3 tahap",type:"plain",
+ a:["<b>Tahap 1:</b> Daripada Allah ke Luh Mahfuz - tiada yang tahu bentuknya kecuali Allah","<b>Tahap 2:</b> Dari Luh Mahfuz ke Baitul Izzah di langit dunia - diturunkan sekali gus pada malam Lailatul Qadar","<b>Tahap 3:</b> Dari Baitul Izzah kepada Nabi Muhammad - beransur-ansur mengikut kesesuaian melalui Malaikat Jibril"]},
+{s:"t4",q:"Mukjizat: Bulan Terbelah Dua",type:"plain",
+ a:["Mukjizat untuk membuktikan kerasulan baginda kepada kaum Musyrikin","Berlaku 5 tahun sebelum baginda berhijrah ke Madinah","Kaum Musyrikin mencabar baginda membuktikan kebenaran Al-Quran dengan membelah bulan","Nabi berdoa & Allah mengabulkan - bulan dibelah ke tempat berlainan (Jabal Quaiqian & Jabal Qubais)","Musyrikin terkejut tetapi tetap tidak beriman, malah menuduh baginda ahli sihir","Diceritakan dalam Surah Al-Qamar ayat 1-5"]},
+{s:"t4",q:"Mukjizat: Keluar air dari celah-celah jari",type:"plain",
+ a:["Berlaku ketika ketiadaan air sewaktu hendak mendirikan solat fardu asar","Baginda meminta sebekas air lalu mencelup jarinya","Dengan kuasa Allah, keluarlah air dari celah-celah jari baginda","Semua orang dapat berwuduk dengan sempurna","Berlaku juga ketika peristiwa Perjanjian Hudaibiyah"]},
+{s:"t4",q:"Israk & Mikraj - maksud",type:"plain",
+ a:["<b>Israk:</b> perjalanan Nabi pada waktu malam dari Masjidil Haram (Mekah) ke Masjidil Aqsa (Palestin)","<b>Mikraj:</b> perjalanan dari Masjidil Aqsa ke Sidratul Muntaha dengan menaiki Buroq"]},
+{s:"t4",q:"Peristiwa Israk & Mikraj",type:"plain",
+ a:["Berlaku pada malam 27 Rejab bersamaan 621 Masihi","Malaikat Jibril & Mikail membelah dada Rasulullah, disucikan dengan air zam-zam & diisi ilmu dan iman","Baginda dimikrajkan dari Baitul Maqdis ke langit yang paling dekat","Jibril memberi salam & meminta izin supaya pintu langit dibuka","Baginda bergerak dari langit pertama hingga ketujuh"],
+ note:"Israk Mikraj ialah pujukan/motivasi Allah selepas baginda kehilangan Khadijah & Abu Thalib serta keengganan penduduk Mekah & Taif"},
+{s:"t4",q:"Para nabi yang ditemui semasa Mikraj",type:"pairs",
+ a:[["Langit 1","Nabi Adam"],["Langit 2","Nabi Yahya dan Isa"],["Langit 3","Nabi Yusuf"],["Langit 4","Nabi Idris"],["Langit 5","Nabi Harun"],["Langit 6","Nabi Musa"],["Langit 7","Nabi Ibrahim"]]},
+{s:"t4",q:"Ibadah solat difardukan",type:"plain",
+ a:["Solat difardukan ketika peristiwa Israk & Mikraj","Pada awalnya 50 waktu sehari semalam","Nabi Musa meminta baginda memohon pengurangan demi umatnya","Dikurangkan sehingga menjadi 5 waktu sehari semalam","Nabi Musa minta kurangkan lagi, tetapi baginda malu untuk meminta lagi","Baginda menerima ketetapan solat fardu 5 waktu sebagai perintah Allah"],
+ note:"Solat ialah ibadah wajib pertama yang disyariatkan kepada umat Islam"},
+{s:"t4",q:"Peristiwa yang berlaku semasa Israk Mikraj",type:"points",
+ a:["Melihat wajah Malaikat Malik (penjaga neraka) yang tidak pernah senyum & menggerunkan","Pemakan harta anak yatim - mulut dibuka luas & dilontar api neraka, keluar melalui dubur","Seksaan lelaki penzina - memakan daging busuk, meninggalkan daging segar","Seksaan orang yang meninggalkan solat - sentiasa memecahkan kepala tanpa henti"]},
+{s:"t4",q:"Selepas Israk Mikraj",type:"plain",
+ a:["Baginda pulang ke Mekah sebelum waktu Subuh & bercerita kepada sahabat di hadapan Kaabah","Saidina Abu Bakar mempercayai; diberi gelaran As-Siddiq kerana membenarkan kata-kata Rasulullah","Kaum Musyrikin tidak percaya & tergolong golongan kufur dan sesat"]},
+{s:"t4",q:"Hikmah & kelebihan mukjizat Rasulullah",type:"points",
+ a:["Menunjukkan kepada semua manusia tentang kekuasaan Allah","Dapat membezakan antara Rasulullah dengan orang awam","Hanya dianugerahkan kepada nabi dan rasul sahaja","Dikurniakan mengikut kesesuaian sesuatu peristiwa","Meningkatkan keimanan kaum Muslimin kepada Allah dan Rasulullah","Menarik perhatian kaum Musyrikin terhadap kekuasaan Allah","Membuktikan Islam adalah agama yang benar dan patut dianuti"]},
+/* ========== TAHUN 5 ========== */
+{s:"t5",q:"Perang Badar - fakta asas",type:"pairs",
+ a:[["Peperangan","Pertama"],["Masa","17 Ramadan 2 Hijrah"],["Tempat","Lembah Badar (antara Mekah & Madinah)"],["Ketua Islam","Rasulullah SAW"],["Ketua Kafir","Abu Jahal bin Hisyam"],["Tentera Islam","313 (82 Muhajirin, 231 Ansor: 61 Aus, 170 Khazraj)"],["Tentera Musyrikin","1000"],["Terkorban Islam","14 (6 Muhajirin, 8 Ansar)"],["Terkorban Musyrikin","70 (termasuk Abu Jahal) + 70 ditawan"],["Keputusan","Islam Menang &middot; Musyrikin Kalah"]]},
+{s:"t5",q:"Sebab Perang Badar",type:"points",
+ a:["Melemahkan ekonomi musuh","Menggantikan harta orang Islam yang dirampas","Mengembangkan Islam"]},
+{s:"t5",q:"Strategi Perang Badar",type:"plain",
+ a:["<b>Al-Hubab bin Al-Munzir:</b> berkhemah dekat mata air terhampir dengan lawan; timbuskan mata air lain di belakang; bina kolam & penuhkan dengan air","<b>Saad bin Muaz:</b> bina pondok sebagai markas & perlindungan Rasulullah - jika tewas baginda boleh pulang ke Madinah & teruskan dakwah"]},
+{s:"t5",q:"Pertolongan Allah dalam Perang Badar",type:"points",
+ a:["Hujan sangat lebat di khemah Musyrikin - menyukarkan pergerakan mereka","Hujan renyai-renyai di khemah Islam - membersihkan tubuh, memadatkan tanah, mengeraskan pasir, menstabilkan pijakan","1000 Malaikat"]},
+{s:"t5",q:"Penyelesaian isu tawanan Perang Badar",type:"points",
+ a:["Tawanan kaya membayar tebusan bermula 4000 dirham (boleh kurang kepada 1000 dirham ikut kemampuan)","Tidak mampu tetapi pandai membaca & menulis - mengajar 10 kanak-kanak Madinah membaca & menulis sehingga pandai","Yang miskin & tidak pandai - dibebaskan dengan syarat berjanji tidak menyerang orang Islam lagi"]},
+{s:"t5",q:"Pengajaran Perang Badar",type:"points",
+ a:["Penyebaran agama Islam perlu diteruskan untuk membina kekuatan umat Islam","Merancang strategi sebelum peperangan penting dalam menegakkan kebenaran","Bermesyuarat sebelum membuat keputusan tindakan terbaik untuk mencapai kejayaan","Berdoa & bertawakal kepada Allah senjata berkesan menghadapi musuh","Kemenangan bukan bergantung kuantiti/senjata sahaja tetapi kekuatan iman & pertolongan Allah"]},
+{s:"t5",q:"Perang Uhud - fakta asas",type:"pairs",
+ a:[["Peperangan","Kedua"],["Masa","Syawal 3 Hijrah"],["Tempat","Bukit Uhud (3km dari Madinah)"],["Ketua Islam","Rasulullah SAW"],["Ketua Kafir","Abu Sufyan bin Harb"],["Tentera Islam","1000 (700 berperang, 300 berpatah balik)"],["Tentera Musyrikin","3000 (termasuk 200 tentera wanita diketuai Hindun binti Utbah)"],["Terkorban Islam","70 (termasuk Hamzah bin Abdul Muthalib)"],["Terkorban Musyrikin","32 (termasuk Ubai bin Khalaf)"],["Keputusan","Islam Kalah &middot; Musyrikin Menang"]]},
+{s:"t5",q:"Sebab Perang Uhud",type:"single",
+ a:"Musyrikin ingin membalas dendam terhadap kekalahan mereka dalam Perang Badar kerana ia merupakan keaiban yang tidak boleh dibiarkan tanpa pembelaan."},
+{s:"t5",q:"Strategi Perang Uhud",type:"plain",
+ a:["Rasulullah menerima berita serangan daripada utusan Al-Abbas bin Abdul Muthalib","Tentera Islam dibahagi 3: Muhajirin (Mus'ab bin Umair), Aus (Usaid bin Hudhair), Khazraj (Al-Hubab bin Al-Munzir)","50 pemanah di atas bukit diketuai Abdullah bin Jabir","Sayap kanan diketuai Munzir bin Amru","Sayap kiri diketuai Zubair bin Al-Awwam - lawan pasukan berkuda musyrikin diketuai Khalid bin Al-Walid"]},
+{s:"t5",q:"Halangan dalam Perang Uhud",type:"single",
+ a:"Pengkhianatan <b>Abdullah bin Ubai</b> (Ketua Orang Munafik). Beliau menghasut tentera Islam sehingga 300 orang berpatah balik ke Madinah dan tidak ikut berperang."},
+{s:"t5",q:"Siapakah Abu Dujanah?",type:"single",
+ a:"Dalam Perang Uhud, beliau menyahut cabaran Rasulullah untuk menghayunkan pedang tajam ke tubuh musuh sehingga bengkok. Seorang yang berani & tangkas; ikatan kepala merahnya menandakan dia akan berperang sampai mati."},
+{s:"t5",q:"Terkorban Perang Uhud - perincian",type:"plain",
+ a:["<b>Hamzah bin Abdul Muthalib</b> (bapa saudara Rasulullah) dibunuh oleh hamba Wahsyi bin Harb kepada Jubair bin Mut'im; Hindun binti Utbah menebuk perut & mengunyah hatinya lalu diluahkan","<b>Ubai bin Khalaf</b> dibunuh Rasulullah kerana hendak membunuh baginda - satu-satunya manusia yang dibunuh Rasulullah sepanjang hayat baginda"]},
+{s:"t5",q:"Faktor kekalahan tentera Islam dalam Perang Uhud",type:"plain",
+ a:["Pasukan pemanah dikuasai sifat cintakan harta melihat tentera lain mengumpul harta ghanimah","40 pemanah turun dari bukit walaupun Rasulullah melarang mereka turun walau apa terjadi","Benteng perlindungan menjadi lumpuh; hanya Abdullah bin Jabir & 9 pemanah teguh","Khalid bin Al-Walid berpatah balik, berada di belakang tentera Islam & membunuh Abdullah bin Jabir","Menyerang dari belakang; musyrikin yang kalah tadi berpatah balik menyerang - Rasulullah hampir terbunuh"]},
+{s:"t5",q:"Rasulullah panglima yang berani (Perang Uhud)",type:"plain",
+ a:["Ketika diserang Khalid bin Al-Walid, baginda ada 2 pilihan: (1) selamatkan diri bersama 9 sahabat, atau (2) bahayakan diri memanggil sahabat membentuk barisan hadapan","Baginda memilih pilihan kedua","Utbah bin Abi Waqas melempar batu - baginda jatuh & terluka; tersebar khabar angin Rasulullah terbunuh","Baginda bersama 30 sahabat berundur teratur ke jalan gunung; akhirnya semua berhimpun di atas gunung dengan selamat"],
+ note:"Ghanimah bermaksud harta rampasan perang"},
+{s:"t5",q:"Pengajaran Perang Uhud",type:"points",
+ a:["Orang yang bertaqwa akan dibantu Allah","Sabar dan redha merupakan kunci kejayaan","Hindari sifat tamak kerana ia merugikan","Berjuang kerana Allah adalah peluang keemasan bagi orang yang beriman","Patuh kepada arahan ketua selagi tidak bertentangan dengan ajaran Islam","Kebijaksanaan dan keberanian amat penting ketika berhadapan dengan ujian"]},
+{s:"t5",q:"Perang Khandak / Ahzab - fakta asas",type:"pairs",
+ a:[["Peperangan","Ketiga"],["Nama","Khandak (parit) @ Ahzab (bersekutu)"],["Masa","Syawal 5 Hijrah"],["Tempat","Madinah"],["Ketua Islam","Rasulullah SAW"],["Ketua Ahzab","Abu Sufyan bin Harb"],["Tentera Islam","3000"],["Tentera Ahzab","10000 (Quraisy, Yahudi & kabilah Arab)"],["Terkorban Islam","Tiada"],["Terkorban Ahzab","1 (Amru bin Abdu Wud, dibunuh Saidina Ali)"],["Keputusan","Islam Menang &middot; Musyrikin Kalah"]]},
+{s:"t5",q:"Sebab Perang Khandak",type:"single",
+ a:"Kaum Yahudi Bani Nadhir diusir dari Madinah selepas mengkhianati Piagam Madinah. Ketua Bani Nadhir berunding dengan Kaum Quraisy, Yahudi & kabilah Arab lain untuk menyerang Madinah."},
+{s:"t5",q:"Strategi Perang Khandak",type:"single",
+ a:"<b>Salman Al-Farisi</b> mencadangkan digali parit di sekeliling Kota Madinah sebagai benteng. 10 orang setiap kumpulan menggali. Parit digali dari arah utara Madinah kerana hanya kawasan utara bebas daripada tanah berbatu, pergunungan & kebun kurma."},
+{s:"t5",q:"Pertolongan Allah dalam Perang Khandak",type:"plain",
+ a:["Allah mengirim Nu'aim bin Mas'ud (memeluk Islam secara sulit) untuk memecah-belahkan tentera ahzab sehingga Yahudi, Musyrikin & kabilah Arab saling tidak percaya","Angin kencang memusnahkan semua khemah, kelengkapan perang & keperluan tentera ahzab","Malaikat menggoncang & melemparkan rasa takut ke dalam hati tentera ahzab sehingga mereka berundur"],
+ note:"Piagam Madinah ialah perjanjian bertulis pertama di dunia. Piagam bererti perlembagaan, peraturan & undang-undang"},
+{s:"t5",q:"Mukjizat Rasulullah semasa Perang Khandak",type:"plain",
+ a:["Jabir bin Abdullah melihat Rasulullah sangat lapar lalu menyembelih seekor biri-biri & isterinya menumbuk gandum","Jabir menjemput Rasulullah & beberapa sahabat makan secara senyap","Baginda meminta periuk tidak diangkat sehingga baginda datang","Rasulullah menjemput semua 1000 penggali parit untuk makan","Semua makan sehingga kenyang namun periuk daging & adunan roti masih penuh seperti sebelumnya"]},
+{s:"t5",q:"Kejayaan tentera Islam (Khandak)",type:"plain",
+ a:["Perang Khandak pertempuran paling kritikal dalam sejarah Islam","Yahudi Bani Quraizah secara terbuka memutuskan perjanjian dengan Rasulullah","Kedudukan Islam terancam: dikepung tentera ahzab di hadapan, terdedah serangan Bani Quraizah di belakang","Dengan kebijaksanaan Rasulullah & pertolongan Allah, kesukaran diatasi","Membuktikan gabungan kabilah Arab & Yahudi tidak mampu mengalahkan Islam Madinah"]},
+{s:"t5",q:"Pengajaran Perang Khandak",type:"points",
+ a:["Berkongsi rezeki membawa keberkatan","Kejayaan datang daripada usaha yang gigih","Berfikiran terbuka dalam menerima pendapat orang lain","Berhati-hati terhadap musuh yang tidak diketahui","Orang Islam akan menjadi kuat jika bersatu padu","Berpegang kepada janji asas kepada hubungan sesama manusia"]},
+{s:"t5",q:"Ringkasan formula 3 peperangan",type:"plain",
+ a:["<b>Badar:</b> Ramadan 2H &middot; 313 vs 1000 &middot; ketua kafir Abu Jahal &middot; korban 14 vs 70","<b>Uhud:</b> Syawal 3H &middot; 1000 vs 3000 &middot; ketua kafir Abu Sufyan &middot; korban 70 vs 32","<b>Khandak:</b> Syawal 5H &middot; 3000 vs 10000 &middot; ketua kafir Abu Sufyan &middot; korban 0 vs 1"],
+ formula:["BUK &middot; RSS &middot; 235H","Badar-Uhud-Khandak &middot; Ramadan-Syawal-Syawal &middot; 2H-3H-5H"]},
+{s:"t5",q:"Perjanjian Hudaibiyah - latar belakang",type:"plain",
+ a:["Berlaku Zulkaedah 6 Hijrah di Hudaibiyah - perjanjian damai antara Rasulullah dengan Musyrikin Mekah","Rasulullah bermimpi masuk Masjidil Haram, ambil kunci Baitullah & tunaikan umrah","Baginda bersama isteri Ummu Salamah & 1500 sahabat bertolak ke Mekah membawa binatang korban (tanda niat umrah bukan perang)","Berhenti di Zul Hulaifah untuk berniat umrah","Khalid bin Al-Walid & 200 tentera cuba menghalang di Kura' Al-Ghamim; rombongan masuk jalan lain"],
+ formula:["PDRM &middot; ZuHud6","P=Perjanjian D=Damai R=Rasulullah M=Musyrikin &middot; Zu=Zulkaedah Hud=Hudaibiyah 6=6H"]},
+{s:"t5",q:"Bai'ah Ar-Ridhwan",type:"plain",
+ a:["Perjanjian antara Rasulullah dengan orang Islam yang mengikut rombongan ke Mekah, di Hudaibiyah","Budail bin Warqaa menjadi pengantara antara baginda dengan Musyrikin Mekah","Musyrikin menghantar Urwah bin Mas'ud memastikan niat rombongan Islam","Rasulullah menghantar Saidina Uthman menerangkan tujuan - namun Uthman ditahan & tersebar berita kematiannya","Baginda mengajak orang Islam berjihad; mereka berbai'ah (sumpah setia) di bawah pokok, berjanji tidak lari dari medan perang - dinamakan Bai'ah Ar-Ridhwan"]},
+{s:"t5",q:"Termeterai Perjanjian Hudaibiyah",type:"plain",
+ a:["Musyrikin bimbang setelah tahu Bai'ah Ar-Ridhwan lalu membebaskan Saidina Uthman","Menghantar Suhail bin Amru membuat perjanjian dengan Rasulullah","Ramai sahabat tidak dapat menerima isi perjanjian terutama Saidina Umar Al-Khattab kerana dilihat tidak adil & memihak Musyrikin","Namun hakikatnya memberi faedah yang sangat besar kepada orang Islam"]},
+{s:"t5",q:"Isi kandungan Perjanjian Hudaibiyah",type:"points",
+ a:["Gencatan senjata 10 tahun","Tahun itu Islam tidak boleh umrah, umrah tahun berikutnya","Orang Quraisy yang lari ke Madinah perlu dipulangkan","Orang Islam lari ke Mekah tak perlu pulang","Bebas membuat perjanjian dengan sesiapa saja"],
+ note:"Isi Perjanjian Hudaibiyah ditulis oleh Saidina Ali bin Abi Thalib"},
+{s:"t5",q:"Hikmah Perjanjian Hudaibiyah",type:"points",
+ a:["Musyrikin Mekah tidak lagi mengganggu usaha dakwah","Islam tersebar luas di sepanjang tanah Arab","Mewujudkan suasana aman antara Kerajaan Islam Madinah & kawasan sekitarnya","Ramai pembesar Quraisy memeluk Islam terang-terangan (Amru bin Al-'As & Khalid bin Al-Walid)","Musyrikin menerima Kerajaan Islam Madinah & Rasulullah sebagai pemimpin","Rasulullah mengikat perjanjian dengan kabilah Arab sekitar termasuk Bani Khuza'ah"]},
+{s:"t5",q:"Pengajaran Perjanjian Hudaibiyah",type:"points",
+ a:["Kesepakatan penting dalam menegakkan kebenaran","Dakwah mesti dilaksanakan dengan cara berhemah","Islam menganjurkan perdamaian kepada semua pihak","Tolong-menolong sesama Islam tidak kira susah atau senang","Strategi perang yang baik juga faktor kemenangan"]},
+{s:"t5",q:"Bagaimana peristiwa Pembukaan Kota Mekah terjadi?",type:"points",
+ a:["Bani Bakar & Bani Khuza'ah bermusuhan sejak jahiliah; Khuza'ah berjanji dengan Rasulullah, Bakar dengan Musyrikin","Berdasarkan Perjanjian Hudaibiyah kedua kabilah tidak boleh berperang 10 tahun, tetapi Bani Bakar menyerang Bani Khuza'ah","Musyrikin Mekah membantu Bani Bakar dengan tentera & senjata secara sulit; beberapa Bani Khuza'ah terbunuh","Bani Khuza'ah menghantar Amru bin Salim Al-Khuzai memaklumkan Rasulullah - bermakna Musyrikin melanggar perjanjian","Rasulullah marah lalu menghantar utusan mengemukakan 3 pilihan"]},
+{s:"t5",q:"3 pilihan Rasulullah kepada Musyrikin (Pembukaan Mekah)",type:"points",
+ a:["Membayar diyah kepada waris Bani Khuza'ah","Batalkan perjanjian dengan Bani Bakar","Terbatal Perjanjian Hudaibiyah dan berperang dengan Islam"],
+ note:"Musyrikin memilih untuk berperang. Diyah = pampasan/ganti rugi atas kehilangan nyawa atau kecederaan"},
+{s:"t5",q:"Strategi Rasulullah (Pembukaan Kota Mekah)",type:"plain",
+ a:["10 Ramadan 8 Hijrah, Rasulullah & 10000 tentera bergerak ke Mekah, berhenti di Marru Zahran","10000 unggun api dinyalakan supaya musuh gerun & semangat mereka lemah","Abu Sufyan meninjau & rasa kekuatan tentera Islam luar biasa","Abu Sufyan terserempak Al-Abbas bin Abdul Muthalib (baru Islam) lalu terbuka hati memeluk Islam","Rasulullah memberi jaminan keselamatan kepada penduduk Mekah"]},
+{s:"t5",q:"Tempat penduduk Mekah selamat (Pembukaan Mekah)",type:"points",
+ a:["Sesiapa yang masuk rumah Abu Sufyan","Sesiapa yang masuk Masjidil Haram","Sesiapa yang masuk rumah sendiri dan tutup pintu rapat-rapat"]},
+{s:"t5",q:"Tindakan Rasulullah setelah memasuki Kota Mekah",type:"points",
+ a:["Memusnahkan 360 buah berhala di sekeliling Kaabah","Melakukan tawaf di Kaabah & mengucup Hajarul Aswad","Menunaikan solat sunat di Maqam Ibrahim sebanyak 8 rakaat","Mengarahkan Bilal bin Rabah melaungkan azan di atas bumbung Kaabah","Menyampaikan khutbah pertama kepada penduduk Mekah","Mengisytiharkan kemaafan kepada semua penduduk Mekah"]},
+{s:"t5",q:"Faktor kejayaan Pembukaan Kota Mekah",type:"points",
+ a:["Ramai pembesar & panglima Quraisy telah memeluk Islam","Kesatuan tentera di bawah panji Islam tanpa mengira suku kaum","Persaudaraan kukuh membolehkan mereka bekerjasama","Kepatuhan tentera kepada arahan Rasulullah tanpa bantahan (cth pasukan Zubair bin Al-Awwam berhenti di Al-Hujun)","Strategi bijak & teliti melemahkan Musyrikin","Kekuatan akidah menyebabkan mereka yakin kepada Allah","Sebahagian pembesar Mekah meninggal sebelum pembukaan (cth Abu Jahal)"]},
+{s:"t5",q:"Kesan Pembukaan Kota Mekah",type:"points",
+ a:["Ramai Musyrikin Mekah memeluk Islam","Umat Islam dapat menunaikan ibadah tanpa gangguan orang kafir","Tanah Haram Mekah menjadi kawasan larangan bagi orang bukan Islam","Masyarakat Arab saling bekerjasama & hidup aman damai","Dakwah Islam dijalankan secara meluas & berkembang pesat"]},
+{s:"t5",q:"Pengajaran Pembukaan Kota Mekah",type:"points",
+ a:["Kekuatan perlu ditonjolkan apabila diperlukan","Menjaga syiar Islam seperti melaungkan azan","Perbalahan akibat dendam amat merugikan kedua-dua pihak","Memaafkan kesalahan orang lain merupakan amalan terpuji","Memberi pilihan dalam membuat keputusan adalah perbuatan yang terbaik"],
+ formula:["Pembukaan = 8 Hijrah","Huruf Jawi 'pembukaan' ada 8 huruf. Juga dikenali Fathu Makkah"]},
+{s:"t5",q:"Peristiwa sebelum kewafatan Rasulullah",type:"plain",
+ a:["Menunaikan Haji Wida' (perpisahan) tahun ke-10 Hijrah; berkhutbah di Padang Arafah","Turun ayat 3 Surah Al-Maidah; Saidina Umar menangis - 'setelah kesempurnaan akan berlaku pengurangan'","Mulai sakit akhir Safar tahun ke-11 Hijrah; memilih tinggal di rumah Aishah","Abu Bakar menjadi imam 17 kali menggantikan baginda","Solat subuh terakhir berjemaah diimami Abu Bakar; baginda berkhutbah: halalkan yang halal, haramkan yang haram, berpegang teguh pada Al-Quran"]},
+{s:"t5",q:"Peristiwa semasa kewafatan Rasulullah",type:"plain",
+ a:["Badan baginda panas berlarutan beberapa hari; sahabat & keluarga bimbang","Saidatina Aishah & puteri baginda Fatimah meluru masuk; baginda memujuk Fatimah supaya jangan menangis","Baginda berpesan supaya 6 keping dinar disedekahkan","Baginda berdoa memohon ampun & dipertemukan dengan Kekasih Yang Maha Tinggi","Rasulullah wafat di atas pangkuan Saidatina Aishah"]},
+{s:"t5",q:"Rasulullah wafat pada",type:"pairs",
+ a:[["Waktu","Dhuha"],["Hari","Isnin"],["Tarikh","12 Rabiul Awwal 11 Hijrah"],["Usia","63 tahun"]]},
+{s:"t5",q:"Reaksi sahabat selepas kewafatan Rasulullah",type:"plain",
+ a:["Saidina Umar tidak dapat menerima; menghunus pedang mengancam sesiapa yang kata Rasulullah wafat","Abu Bakar memeluk & mencium jasad baginda sambil menangis","Abu Bakar berucap: sesiapa menyembah Muhammad, Muhammad telah mati; sesiapa menyembah Allah, Allah Maha Hidup - lalu membaca Surah Ali Imran ayat 144","Jenazah dimandi & dikafan dengan 3 lembar kain kapas; disemadikan dalam rumah Aishah di tempat baginda wafat","Ansar & Muhajirin bermesyuarat di Balai Bani Saidah; Umar mencadangkan Abu Bakar sebagai khalifah & semua bersetuju"]},
+{s:"t5",q:"Iktibar dari kewafatan Rasulullah",type:"points",
+ a:["Al-Quran dan As-Sunnah adalah sumber hukum","Sihat atau sakit adalah lumrah kehidupan","Menghargai pengorbanan dan perjuangan Rasulullah","Solat wajib ditunaikan dalam keadaan sihat atau sakit","Redha dengan ketentuan Allah kerana ada hikmah disebaliknya","Sistem Syuro diteruskan dalam pemerintahan","Meyakini Allah bersifat kekal, tiada permulaan @ pengakhiran"]},
+{s:"t5",q:"Ketokohan Rasulullah dalam keluarga",type:"plain",
+ a:["Lemah lembut, adil, pengasih, penyayang","Sabar dalam mendidik & memberi nasihat dengan hikmah","Membantu isteri dalam urusan rumah (menjahit baju & membaiki selipar sendiri)","Berlapang dada & memaafkan (tidak memarahi cucu Hassan & Hussin yang memanjat belakang baginda ketika sujud)"]},
+{s:"t5",q:"Ketokohan Rasulullah dalam bersosial",type:"points",
+ a:["Tawadhuk (merendah diri) dan tidak takbur","Bergaul dengan semua lapisan masyarakat tanpa mengira status","Selalu menziarahi golongan miskin","Menyayangi anak yatim"],
+ note:"Dengan akhlak terpuji ini, ramai tertarik memeluk Islam"},
+{s:"t5",q:"Ketokohan Rasulullah dalam perilaku seharian",type:"plain",
+ a:["Memiliki sifat pemaaf yang tiada tolok bandingnya","Dibuktikan melalui peristiwa Du'sur yang ingin membunuh baginda dalam Perang Ghatafan - baginda merampas pedang tetapi memaafkannya, lalu Du'sur memeluk Islam","Mengamalkan sifat toleransi - Anas bin Malik berkhidmat sebagai pembantu sejak kecil & dilayan dengan baik"]},
+{s:"t5",q:"Pengajaran ketokohan Rasulullah",type:"points",
+ a:["Sifat toleransi melahirkan masyarakat harmoni, bersatu padu & maju","Pemimpin keluarga menjadi contoh teladan yang baik","Sabar & berlapang dada apabila berlaku perkara yang tidak disenangi","Sifat berkasih sayang asas pembentukan keluarga yang harmoni","Mengasihi anak yatim amalan mulia di sisi Islam","Sifat takbur dan sombong dibenci Allah"]},
+/* ========== INFO TAMBAHAN ========== */
+{s:"info",q:"Kronologi sebelum hijrah (bahagian 1)",type:"points",
+ a:["Tentera bergajah dipimpin Abrahah datang ke Mekah untuk meruntuhkan Kaabah","Kewafatan ayahnya, Abdullah ketika baginda dalam kandungan","Kelahiran Rasulullah waktu subuh, Isnin, 12 Rabiul Awwal Tahun Gajah di rumah Abdul Muthalib","Dijaga ibu susuan sehingga berusia 5 tahun","Ibunya Aminah meninggal ketika baginda berusia 6 tahun","Datuknya Abdul Muthalib meninggal ketika baginda berusia 8 tahun","Mula berniaga bersama Abu Thalib ketika berusia 9 tahun"]},
+{s:"info",q:"Kronologi sebelum hijrah (bahagian 2)",type:"points",
+ a:["Mengikut Abu Thalib berniaga ke Syam ketika berusia 12 tahun","Mengetuai rombongan ke Syam & berkahwin dengan Khadijah ketika berusia 25 tahun","Mula berkhalwat di Gua Hira' ketika berusia 38 tahun","Menerima wahyu pertama ketika 40 tahun, 17 Ramadan bersamaan 6 Ogos 610 M","Berdakwah secara rahsia selama 3 tahun","Berdakwah secara terbuka di Bukit Safa","Umat Islam berhijrah ke Habsyah kali pertama"]},
+{s:"info",q:"Kronologi sebelum hijrah (bahagian 3)",type:"points",
+ a:["Umat Islam berhijrah ke Habsyah kali kedua","Kematian Abu Thalib dan Saidatina Khadijah","Berdakwah ke Taif pada Syawal tahun ke-10 kerasulan (619 M)","Israk Mikraj & pensyariatan solat pada 27 Rejab 621 M","Memulakan hijrah ke Madinah malam 27 Safar tahun ke-14 kerasulan ketika berusia 53 tahun","Tiba di Quba' pada 8 Rabiul Awwal tahun ke-14 kerasulan","Tiba di Madinah pada 12 Rabiul Awwal tahun ke-14 kerasulan"]},
+{s:"info",q:"Kronologi selepas hijrah",type:"points",
+ a:["Mewujudkan Piagam Madinah & mempersaudarakan Muhajirin-Ansor (1H)","Pembinaan Masjid An-Nabawi & pensyariatan azan (1H)","Perang Badar 17 Ramadan 2H","Pensyariatan Puasa & Zakat (2H)","Perang Uhud Syawal 3H","Perang Khandak Syawal 5H","Perjanjian Hudaibiyah Zulkaedah 6H","Pembukaan Kota Mekah 10 Ramadan 8H","Pensyariatan Haji (9H)","Haji Wida' & Khutbah terakhir di Padang Arafah (10H)","Mulai sakit akhir Safar 11H","Kewafatan waktu dhuha Isnin, 12 Rabiul Awwal 11H ketika berusia 63 tahun"],
+ note:"Rasulullah menunaikan haji hanya sekali seumur hidup; solat terakhir baginda ialah solat subuh"},
+{s:"info",q:"Perkongsian nombor: 23 TAHUN",type:"plain",
+ a:["Tempoh Al-Quran diturunkan (Mekah 13 tahun, Madinah 10 tahun)","Tempoh Rasulullah berdakwah (Mekah 13 tahun, Madinah 10 tahun)","Tempoh berdakwah ikut cara (Rahsia 3 tahun, Terbuka 20 tahun)"]},
+{s:"info",q:"Perkongsian nombor: 12 RABIUL AWWAL",type:"plain",
+ a:["Kelahiran Rasulullah (12 Rabiul Awwal Tahun Gajah)","Rasulullah tiba di Madinah (12 Rabiul Awwal tahun ke-14 kerasulan)","Kewafatan Rasulullah (12 Rabiul Awwal Tahun 11 Hijrah)"]},
+{s:"info",q:"Perkongsian nombor: 17 RAMADAN",type:"plain",
+ a:["Wahyu pertama","Nuzul Quran","Perang Badar"]},
+{s:"info",q:"Formula bulan RAMADAN",type:"plain",
+ a:["<b>Wahai</b> = Wahyu Pertama","<b>Nur</b> = Nuzul Quran","<b>Bak</b> = Badar (perang)","<b>Pemadam</b> = Pembukaan Kota Mekah"],
+ formula:["Wahai Nur, Bak Pemadam!","Peristiwa penting yang berlaku pada bulan Ramadan"]},
+{s:"info",q:"Formula bulan SYAWAL",type:"plain",
+ a:["<b>T</b> = Taif (hijrah & dakwah)","<b>U</b> = Uhud (perang)","<b>K</b> = Khandak (perang)"],
+ formula:["The United Kingdom","Peristiwa penting yang berlaku pada bulan Syawal"]},
+{s:"info",q:"Penduduk Mekah & Madinah",type:"plain",
+ a:["<b>Mekah:</b> Arab Quraisy -> Kafir Quraisy @ Musyrikin Mekah; Muhajirin (Islam yang berhijrah ke Madinah)","<b>Madinah:</b> Khazraj & Aus -> Ansor (penduduk asal Madinah yang Islam); Yahudi (Bani Qainuqa', Bani Nadhir, Bani Quraizah)"],
+ note:"Muhajirin & Ansor dipersaudarakan oleh Rasulullah ketika sampai ke Madinah dalam peristiwa hijrah"},
+{s:"info",q:"Keistimewaan Kota Mekah",type:"points",
+ a:["Kota suci umat Islam","Tempat kelahiran Rasulullah","Terdapat Kaabah Baitullah","Terdapat Masjidil Haram"]},
+{s:"info",q:"Keistimewaan Kota Madinah",type:"points",
+ a:["Kota suci umat Islam","Tempat penghijrahan Rasulullah","Terdapat Maqam Rasulullah","Terdapat Masjidin Nabawi"]},
+{s:"info",q:"6 orang 'Abdullah' yang perlu diingat",type:"pairs",
+ a:[["Abdullah bin Abdul Muthalib","Bapa Rasulullah"],["Abdullah bin Uraiqit","Penunjuk jalan hijrah ke Madinah"],["Abdullah bin Abu Bakar","Pemberi maklumat pergerakan musuh"],["Abdullah bin Jabir","Ketua pemanah Perang Uhud"],["Abdullah bin Ubai","Ketua orang munafik"],["Abdullah bin Zaid Al-Ansori","Bermimpi & mengajar Bilal laungan azan"]]},
+{s:"info",q:"Surah-surah tumpuan dalam Sirah",type:"pairs",
+ a:[["Al-Alaq (1-5)","Wahyu pertama di Gua Hira'"],["Al-Muddassir (1-7)","Perintah dakwah secara rahsia"],["As-Syuara' (214)","Dakwah terbuka - seruan keluarga terdekat"],["Al-Hijr (89)","Dakwah terbuka - seruan orang ramai di Bukit Safa"],["Al-Masad (1-5)","Allah mencela Abu Lahab & isterinya"],["Al-Qamar (1-5)","Mukjizat bulan terbelah dua"],["Al-Isra' (1)","Mukjizat Israk Mikraj"],["Yaasiin (9)","Dibaca ketika mencampak tanah ke musuh dalam hijrah"],["Al-Maidah (3)","Wahyu terakhir dalam khutbah terakhir di Padang Arafah"]]},
+{s:"info",q:"7 orang 'Abu' yang perlu diingat",type:"pairs",
+ a:[["Abu Thalib","Bapa saudara yang menjaga & menyokong Rasulullah"],["Abu Lahab","Bapa saudara yang menentang dakwah Rasulullah"],["Abu Bakar As-Siddiq","Sahabat karib & bapa mentua - khalifah pertama"],["Abu Ayub Al-Ansori","Pemilik rumah tempat Rasulullah tinggal sementara di Madinah"],["Abu Jahal","Ketua Musyrikin Perang Badar - terbunuh dalam Perang Badar"],["Abu Sufyan","Ketua Musyrikin Perang Uhud & Khandak - Islam pada malam Pembukaan Mekah"],["Abu Dujanah","Sahabat berani dengan ikatan kepala merah, berperang sampai mati"]]},
+{s:"info",q:"Formula sifat wajib bagi Rasulullah",type:"plain",
+ a:["<b>F</b> = Fathonah","<b>A</b> = Amanah","<b>S</b> = Sidiq","<b>T</b> = Tabligh"],
+ formula:["FAST","Fathonah, Amanah, Sidiq, Tabligh"]},
+{s:"info",q:"Kekeliruan tentang 'BANI'",type:"plain",
+ a:["<b>Bani</b> bermaksud suku kaum @ keturunan","<b>Perang Khandak:</b> Yahudi Bani Nadhir & Bani Quraizah (Yahudi yang mengkhianati Piagam Madinah)","<b>Pembukaan Mekah:</b> Bani Bakar (jahat, Musyrikin Mekah) & Bani Khuza'ah (baik, Rasulullah) - masyarakat Arab di kawasan Mekah"]},
+{s:"info",q:"Sumber hukum & panduan umat Islam",type:"points",
+ a:["Al-Quran","As-Sunnah @ Hadis"]},
+{s:"info",q:"Bapa saudara Rasulullah",type:"pairs",
+ a:[["Abu Thalib bin Abdul Muthalib","Menjaga baginda selepas kematian datuk & menyokong dakwah"],["Abu Lahab bin Abdul Muthalib","Sayang semasa kecil tetapi menentang & benci setelah baginda membawa Islam"],["Hamzah bin Abdul Muthalib","Digelar 'Asadullah' (singa Allah) - syahid dalam Perang Uhud"],["Al-Abbas bin Abdul Muthalib","Memberi maklumat tentang kafir Quraisy - memeluk Islam sebelum Pembukaan Mekah"]]},
+{s:"info",q:"Masjid yang dibina oleh Rasulullah",type:"points",
+ a:["Masjid Quba'","Masjid Nabawi"]},
+{s:"info",q:"Mukjizat terbahagi kepada 2 bahagian",type:"plain",
+ a:["<b>Hissi</b> (he see - dia nampak): mukjizat yang BOLEH dilihat. Contoh: Bulan terbelah dua","<b>Maknawi:</b> mukjizat yang TIDAK BOLEH dilihat. Contoh: Israk Mikraj"]},
+{s:"info",q:"Tujuan Rasulullah diutuskan",type:"points",
+ a:["Menyeru manusia beriman kepada Allah","Membaiki akhlak ummat manusia","Membawa rahmat ke seluruh alam"]},
+{s:"info",q:"Isi kandungan khutbah terakhir di Padang Arafah",type:"points",
+ a:["Beriman kepada Allah","Tunaikan solat","Tunaikan puasa","Tunaikan zakat","Tunaikan haji"],
+ formula:["1 IMAN 4 ISLAM","1 iman (beriman kepada Allah) + 4 rukun Islam (solat, puasa, zakat, haji)"]},
+];
+const LABEL={t3:"Tahun 3",t4:"Tahun 4",t5:"Tahun 5",info:"Info Tambahan",all:"Semua"};
+DECK.forEach((c,i)=>c.id=i);
+let filter="all",order=[],pos=0,flipped=false;
+let known=loadKnown();
+const el=id=>document.getElementById(id);
+const card=el("card"),fChip=el("fChip"),bChip=el("bChip"),fQuestion=el("fQuestion"),bAnswer=el("bAnswer"),bFormula=el("bFormula"),bNote=el("bNote");
+function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("sirahUpkk_known")||"[]"));}catch(e){return new Set();}}
+function saveKnown(){try{localStorage.setItem("sirahUpkk_known",JSON.stringify([...known]));}catch(e){}}
+function buildOrder(){order=DECK.filter(c=>filter==="all"||c.s===filter).map(c=>c.id);pos=0;}
+function setAccent(sec){
+  const map={t3:["--t3","--t3-bg"],t4:["--t4","--t4-bg"],t5:["--t5","--t5-bg"],info:["--info","--info-bg"]};
+  const [c,bg]=map[sec]||map.t3;
+  document.documentElement.style.setProperty("--accent",`var(${c})`);
+  document.documentElement.style.setProperty("--accent-bg",`var(${bg})`);
+}
+function render(){
+  const total=order.length;
+  if(!total){el("counter").textContent="Tiada kad";return;}
+  const c=DECK[order[pos]];
+  flipped=false;card.classList.remove("flip");
+  setAccent(c.s);
+  fChip.textContent=LABEL[c.s];bChip.textContent=LABEL[c.s];
+  fQuestion.textContent=c.q;
+  bAnswer.innerHTML="";
+  if(c.type==="single"){
+    const d=document.createElement("div");d.className="single";d.innerHTML=c.a;bAnswer.appendChild(d);
+  }else if(c.type==="plain"){
+    const ul=document.createElement("ul");ul.className="plain";
+    c.a.forEach(t=>{const li=document.createElement("li");li.innerHTML=t;ul.appendChild(li);});bAnswer.appendChild(ul);
+  }else if(c.type==="pairs"){
+    const dl=document.createElement("dl");dl.className="pairs";
+    c.a.forEach(p=>{const row=document.createElement("div");row.className="pair";
+      const k=document.createElement("span");k.className="pk";k.innerHTML=p[0];
+      const v=document.createElement("span");v.className="pv";v.innerHTML=p[1];
+      row.appendChild(k);row.appendChild(v);dl.appendChild(row);});bAnswer.appendChild(dl);
+  }else{
+    const ol=document.createElement("ol");ol.className="points";
+    c.a.forEach(t=>{const li=document.createElement("li");li.innerHTML=t;ol.appendChild(li);});bAnswer.appendChild(ol);
+  }
+  if(c.formula){bFormula.style.display="block";
+    bFormula.innerHTML='<div class="ft">Formula ingat: '+c.formula[0]+'</div><div class="fc">'+c.formula[1]+'</div>';
+  }else{bFormula.style.display="none";}
+  if(c.note){bNote.style.display="block";bNote.innerHTML=c.note;}else{bNote.style.display="none";}
+  el("counter").textContent=`Kad ${pos+1} / ${total}`;
+  el("barFill").style.width=((pos+1)/total*100)+"%";
+  const knownInView=order.filter(id=>known.has(id)).length;
+  el("knownCount").innerHTML=`&#10003; ${knownInView} sudah tahu`;
+  el("btnKnown").classList.toggle("on",known.has(c.id));
+}
+function flip(){flipped=!flipped;card.classList.toggle("flip",flipped);}
+function next(){if(!order.length)return;pos=(pos+1)%order.length;render();}
+function prev(){if(!order.length)return;pos=(pos-1+order.length)%order.length;render();}
+function shuffle(){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();}
+card.addEventListener("click",flip);
+el("btnFlip").addEventListener("click",e=>{e.stopPropagation();flip();});
+el("btnNext").addEventListener("click",next);
+el("btnPrev").addEventListener("click",prev);
+el("btnShuffle").addEventListener("click",shuffle);
+el("btnKnown").addEventListener("click",()=>{const id=DECK[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
+el("btnReview").addEventListener("click",()=>{const id=DECK[order[pos]].id;known.delete(id);saveKnown();next();});
+el("btnReset").addEventListener("click",()=>{if(confirm("Set semula semua progres 'sudah tahu'?")){known.clear();saveKnown();render();}});
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");filter=t.dataset.k;buildOrder();render();});
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();
+  else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}
+});
+buildOrder();render();
+</script>
+</body>
+</html>
