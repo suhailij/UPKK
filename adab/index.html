@@ -1,1 +1,489 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kad Imbas · Booster UPKK Adab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3E9; --paper-2:#FBF8F0; --ink:#2B2A26; --ink-soft:#5B574C;
+    --gold:#C9A227; --gold-deep:#A47F14; --line:#E4DBC5;
+    --buat:#2E7D5B; --buat-bg:#E7F3EC;
+    --jangan:#C0392B; --jangan-bg:#FBEAE7;
+    --hik:#B8860B; --hik-bg:#FBF3DE;
+    --aki:#2F6F9E; --aki-bg:#E6EFF5;
+    --accent:var(--buat); --accent-bg:var(--buat-bg);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{overflow-x:hidden}
+  ul.qlist li{overflow-wrap:anywhere}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #FDFBF4 0%, transparent 60%), var(--paper);
+    color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:20px 16px 40px;-webkit-tap-highlight-color:transparent}
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:14px}
+  header{text-align:center;padding-top:6px}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  h1{font-family:'Amiri',serif;font-weight:700;font-size:27px;line-height:1.2;margin:6px 0 2px}
+  .sub{font-size:12.5px;color:var(--ink-soft)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0;color:var(--gold)}
+  .divider::before,.divider::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .divider span{font-size:13px}
+  .filters{display:flex;flex-direction:column;gap:8px}
+  .frow{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+  .flabel{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;
+    align-self:center;margin-right:2px}
+  .tab{border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
+    font:inherit;font-weight:600;font-size:11.5px;padding:6px 10px;border-radius:999px;cursor:pointer;
+    transition:.16s;display:flex;align-items:center;gap:6px}
+  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}
+  .tab.active{color:#fff}
+  .tab.active .dot{opacity:1;background:#fff}
+  .sec.active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .asp[data-a="all"].active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .asp[data-a="buat"].active{background:var(--buat);border-color:var(--buat)}
+  .asp[data-a="jangan"].active{background:var(--jangan);border-color:var(--jangan)}
+  .asp[data-a="hik"].active{background:var(--hik);border-color:var(--hik)}
+  .asp[data-a="aki"].active{background:var(--aki);border-color:var(--aki)}
+  .asp[data-a="buat"] .dot{background:var(--buat);opacity:.7}
+  .asp[data-a="jangan"] .dot{background:var(--jangan);opacity:.7}
+  .asp[data-a="hik"] .dot{background:var(--hik);opacity:.7}
+  .asp[data-a="aki"] .dot{background:var(--aki);opacity:.7}
+  .asp.active .dot{background:#fff;opacity:1}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+  .meta .known{color:var(--buat)}
+  .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .stage{perspective:1600px;width:100%}
+  .card{position:relative;width:100%;cursor:pointer;display:grid;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+  .card.flip{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .face{grid-area:1/1;width:100%;min-height:300px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:18px;background:var(--paper-2);border:1px solid var(--line);
+    box-shadow:0 1px 0 #fff inset, 0 18px 40px -24px rgba(60,50,20,.5);
+    padding:22px 20px;display:flex;flex-direction:column;overflow:visible}
+  .face::before{content:"";position:absolute;inset:9px;border-radius:12px;pointer-events:none;
+    border:1.5px solid color-mix(in srgb, var(--accent) 32%, transparent)}
+  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--accent);opacity:.65}
+  .corner.tl{top:13px;left:13px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+  .corner.tr{top:13px;right:13px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+  .corner.bl{bottom:13px;left:13px;border-right:0;border-top:0;border-radius:0 0 0 4px}
+  .corner.br{bottom:13px;right:13px;border-left:0;border-top:0;border-radius:0 0 4px 0}
+  .back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1;margin-bottom:4px}
+  .chip{font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+  .side{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;position:relative;z-index:1;padding:8px 4px}
+  .a-icon{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-size:22px;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px var(--accent)}
+  .topic{font-family:'Amiri',serif;font-size:22px;font-weight:700;line-height:1.3;color:var(--ink)}
+  .aspill{font-weight:800;font-size:13px;letter-spacing:.04em;color:var(--accent);
+    background:var(--accent-bg);border:1.5px solid color-mix(in srgb,var(--accent) 35%,transparent);
+    padding:6px 14px;border-radius:999px}
+  .prompt{font-size:12.5px;color:var(--ink-soft);line-height:1.5;max-width:330px}
+  .prompt b{color:var(--accent)}
+  .hint{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;justify-content:center;margin-top:4px}
+  .hint .tapdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+  .a-head{display:flex;align-items:center;gap:9px;position:relative;z-index:1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .a-head .hi{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .a-head .ht{display:flex;flex-direction:column;line-height:1.2}
+  .a-head .ht .t1{font-family:'Amiri',serif;font-size:16px;font-weight:700;color:var(--ink)}
+  .a-head .ht .t2{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+  .a-body{flex:1;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+  ul.qlist{list-style:none;display:flex;flex-direction:column;gap:7px}
+  ul.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.45}
+  ul.qlist li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px}
+  .doa{margin-top:4px;border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:9px;padding:9px 10px;text-align:center}
+  .doa .ar{font-family:'Amiri',serif;direction:rtl;font-size:20px;line-height:1.9;color:#1a1a17}
+  .doa .mk{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:3px}
+  .note{position:relative;z-index:1;margin-top:8px;font-size:11px;color:var(--ink-soft);text-align:center;font-style:italic;line-height:1.5}
+  .note::before{content:"\203B  "}
+  .controls{display:flex;flex-direction:column;gap:12px}
+  .nav{display:flex;gap:10px}
+  .btn{flex:1;font:inherit;font-weight:700;font-size:14.5px;padding:13px;border-radius:13px;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .btn:active{transform:translateY(1px)}
+  .btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.solid:hover{filter:brightness(1.05);color:#fff}
+  .mark{display:flex;gap:10px}
+  .btn.known{color:var(--buat)} .btn.known:hover{border-color:var(--buat)}
+  .btn.review{color:var(--jangan)} .btn.review:hover{border-color:var(--jangan)}
+  .btn.known.on{background:var(--buat);border-color:var(--buat);color:#fff}
+  .util{display:flex;gap:10px}
+  .util .btn{font-size:13px;font-weight:600;padding:10px}
+  footer{text-align:center;font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:4px}
+  footer b{color:var(--gold-deep)}
+  @media (max-width:420px){h1{font-size:22px}.topic{font-size:19px}.face{padding:20px 15px}
+    ul.qlist li{font-size:13.5px}}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
 
+  /* iPhone/Safari compatibility: avoid 3D flip rendering that can mirror or overlap text */
+  .stage{perspective:none !important;-webkit-perspective:none !important;}
+  .card{transform:none !important;-webkit-transform:none !important;transform-style:flat !important;-webkit-transform-style:flat !important;}
+  .face{backface-visibility:visible !important;-webkit-backface-visibility:visible !important;opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  .back{transform:none !important;-webkit-transform:none !important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .front{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .back{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  @media (prefers-reduced-motion:reduce){.face,.back,.card.flip .front,.card.flip .back{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Booster UPKK · Kad Imbas</div>
+    <h1>Adab · 4 Poin Penting</h1>
+    <div class="sub">Setiap poin (Adab · Larangan · Hikmah · Akibat) = satu kad</div>
+    <div class="divider"><span>۞</span></div>
+  </header>
+
+  <div class="filters">
+    <div class="frow" id="tabsSec">
+      <span class="flabel">Topik</span>
+      <button class="tab sec active" data-k="all"><span class="dot"></span>Semua</button>
+      <button class="tab sec" data-k="asas"><span class="dot"></span>Asas</button>
+      <button class="tab sec" data-k="bersosial"><span class="dot"></span>Bersosial</button>
+      <button class="tab sec" data-k="masjid"><span class="dot"></span>Masjid</button>
+      <button class="tab sec" data-k="ziarah"><span class="dot"></span>Ziarah</button>
+      <button class="tab sec" data-k="ilmu"><span class="dot"></span>Ilmu</button>
+      <button class="tab sec" data-k="masyarakat"><span class="dot"></span>Masyarakat</button>
+    </div>
+    <div class="frow" id="tabsAsp">
+      <span class="flabel">Poin</span>
+      <button class="tab asp active" data-a="all"><span class="dot"></span>Semua</button>
+      <button class="tab asp" data-a="buat"><span class="dot"></span>Adab</button>
+      <button class="tab asp" data-a="jangan"><span class="dot"></span>Larangan</button>
+      <button class="tab asp" data-a="hik"><span class="dot"></span>Hikmah</button>
+      <button class="tab asp" data-a="aki"><span class="dot"></span>Akibat</button>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span id="counter">Kad 1 / 1</span>
+    <span class="known" id="knownCount">✓ 0 sudah tahu</span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="face front">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><span class="chip" id="fChip">—</span><span class="side">Soalan</span></div>
+        <div class="q-center">
+          <div class="a-icon" id="fIcon">✓</div>
+          <div class="topic" id="fTopic">—</div>
+          <div class="aspill" id="fAspill">—</div>
+          <div class="prompt" id="fPrompt">—</div>
+        </div>
+        <div class="hint"><span class="tapdot"></span> Ketik untuk lihat jawapan</div>
+      </div>
+      <div class="face back">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><span class="chip" id="bChip">—</span><span class="side">Jawapan</span></div>
+        <div class="a-head"><div class="hi" id="bIcon">✓</div><div class="ht"><span class="t1" id="bTopic">—</span><span class="t2" id="bAspect">—</span></div></div>
+        <div class="a-body"><ul class="qlist" id="bList"></ul><div id="bDoa"></div></div>
+        <div class="note" id="bNote" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="mark">
+      <button class="btn known" id="btnKnown">✓ Sudah tahu</button>
+      <button class="btn review" id="btnReview">↻ Ulang semula</button>
+    </div>
+    <div class="nav">
+      <button class="btn" id="btnPrev">‹ Sebelum</button>
+      <button class="btn solid" id="btnFlip">Selak kad</button>
+      <button class="btn" id="btnNext">Seterus ›</button>
+    </div>
+    <div class="util">
+      <button class="btn" id="btnShuffle">🔀 Kocok</button>
+      <button class="btn" id="btnReset">⟲ Set semula progres</button>
+    </div>
+  </div>
+
+  <footer>
+    <b>Booster UPKK Adab · 4 Poin Penting</b> · Teacher Collection<br>
+    Setiap topik dipecah kepada 4 kad: Adab · Larangan · Hikmah · Akibat
+  </footer>
+</div>
+
+<script>
+/* ===== DATA — diambil terus (perkataan penuh) dari nota Booster UPKK Adab; tiada tambahan/pengurangan/pemendekan =====
+   b = Adab (Buat) · l = Larangan (Jangan Buat) · h = Hikmah (Kesan Baik) · a = Akibat (Kesan Buruk) */
+const DECK = [
+/* ---------- PERKARA ASAS ADAB ---------- */
+{s:"asas",q:"Adab Dengan Allah",
+ b:["Sentiasa beriman dan yakin kepada Allah","Menunaikan solat lima waktu dengan sempurna","Membaca Al Quran setiap hari","Berdoa dan memohon kepada Allah","Bersyukur atas segala nikmat yang diberikan","Bertaubat dan memohon keampunan atas dosa"],
+ l:["Jangan syirik dan menyekutukan Allah","Jangan meninggalkan solat","Jangan berbohong atas nama Allah","Jangan sombong dan takbur","Jangan mengingkari nikmat Allah","Jangan berputus asa dari rahmat Allah"],
+ h:["Hati tenang dan tenteram","Dikasihi dan ditolong Allah","Diberi rezeki yang berkah","Dimurahkan rahmat dan keampunan Allah","Hidup bahagia di dunia dan akhirat"],
+ a:["Hati gelisah dan tidak tenang","Allah murka dan tidak dikasihi","Rezeki sempit dan tidak berkah","Dosa bertambah dan tidak diampunkan","Sengsara di dunia dan azab di akhirat"]},
+
+{s:"asas",q:"Adab Dengan Rasul",
+ b:["Cintai Rasulullah melebihi segala-galanya","Berselawat ke atas Rasulullah setiap hari","Mengikuti sunnah dan ajaran Rasulullah","Membaca sirah Rasulullah dan mengambil iktibar","Meneladani akhlak mulia Rasulullah"],
+ l:["Jangan menghina atau mencela Rasulullah","Jangan menentang atau meninggalkan sunnah baginda","Jangan membuat perkara yang dilarang oleh baginda","Jangan menyiarkan fitnah atau berita palsu tentang baginda","Jangan bersikap tidak peduli terhadap ajaran Rasulullah"],
+ h:["Mendapat cinta dan syafaat Rasulullah","Hidup diberkati dan dirahmati Allah","Menjadi umat yang berjaya di dunia dan akhirat","Akhlak menjadi mulia dan dihormati","Hati tenang dan hidup penuh kebahagiaan"],
+ a:["Dijauhkan daripada rahmat dan syafaat Rasulullah","Hidup tidak diberkati dan tidak tenang","Menjadi hamba yang rugi di dunia dan akhirat","Akhlak buruk dan tidak disukai masyarakat","Azab dan kemurkaan Allah di akhirat"]},
+
+{s:"asas",q:"Adab Dengan Ibubapa",
+ b:["Taati dan patuhi arahan ibubapa","Bercakap dengan sopan dan lembut","Membantu ibubapa dalam kerja rumah","Minta izin sebelum keluar rumah","Menjaga maruah dan nama baik keluarga","Mendoakan kebaikan untuk ibubapa setiap hari"],
+ l:["Jangan meninggikan suara kepada ibubapa","Jangan membantah atau melawan cakap ibubapa","Jangan bersikap marah atau biadab","Jangan mengabaikan atau membiarkan ibubapa","Jangan menyusahkan atau mengecewakan hati ibubapa"],
+ h:["Mendapat reda dan kasih sayang ibubapa","Diberi keberkatan dalam hidup","Dipermudahkan urusan di dunia dan akhirat","Menjadi anak yang berjaya dan bahagia","Disayangi dan dihormati oleh orang lain"],
+ a:["Tidak mendapat reda ibubapa","Hidup tidak diberkati dan sering susah","Dosa besar yang boleh memasukkan ke neraka","Hati ibubapa terluka dan kecewa","Dijauhi kasih sayang dan keberkatan Allah"]},
+
+{s:"asas",q:"Adab Dengan Keluarga",
+ b:["Bersikap baik dan berlemah lembut","Bercakap dengan sopan dan hormat","Membantu ahli keluarga tanpa disuruh","Menjaga nama baik keluarga","Bersabar dan bertolak ansur","Berkongsi dan bersyukur dengan keluarga"],
+ l:["Jangan membantah atau melawan kata","Jangan bergaduh atau bertengkar","Jangan mengata atau memfitnah ahli keluarga","Jangan pentingkan diri sendiri","Jangan mengabaikan tanggungjawab terhadap keluarga","Jangan membuat ahli keluarga bersedih"],
+ h:["Keluarga hidup harmoni dan bahagia","Dikasihi dan dihormati oleh semua","Mendapat keberkatan dan rahmat Allah","Menjadi contoh yang baik kepada orang lain","Memupuk kasih sayang dan perpaduan"],
+ a:["Keluarga tidak harmoni","Dibenci dan tidak dihormati","Hati menjadi keras dan tidak tenang","Hidup tidak diberkati dan susah","Hubungan kekeluargaan menjadi renggang"]},
+
+{s:"asas",q:"Adab Dengan Guru",
+ b:["Bersikap sopan dan berhemah kepada guru","Memberi salam apabila bertemu guru","Mendengar dan memberi perhatian ketika guru bercakap","Mematuhi arahan dan nasihat yang diberikan oleh guru","Mengucapkan terima kasih atas ilmu dan tunjuk ajar guru"],
+ l:["Jangan bercakap kasar atau meninggikan suara kepada guru","Jangan tidak mendengar arahan guru","Jangan bergurau atau membuat bising ketika guru mengajar","Jangan memotong percakapan guru","Jangan tidak menyiapkan tugasan yang diberikan"],
+ h:["Ilmu bertambah dan mudah difahami","Mendapat keberkatan ilmu","Dihormati dan disayangi guru","Berjaya dalam pelajaran dan kehidupan","Menjadi murid yang berjaya dunia dan akhirat"],
+ a:["Ilmu tidak berkat dan sukar difahami","Dimarahi dan ditegur guru","Tidak disayangi guru dan rakan-rakan","Prestasi pelajaran merosot","Masa depan menjadi sukar dan rugi"]},
+
+/* ---------- ADAB KETIKA BERSOSIAL ---------- */
+{s:"bersosial",q:"Adab Bermain, Bersukan & Gotong-Royong",
+ b:["Bermain dan bersukan dengan semangat kesukanan","Mematuhi peraturan permainan","Menghormati rakan dan lawan","Menjaga keselamatan diri sendiri dan orang lain","Bekerjasama dan tolong-menolong semasa gotong-royong","Menggunakan peralatan dengan berhemah dan bertanggungjawab"],
+ l:["Jangan curang atau tidak jujur ketika bermain atau bersukan","Jangan menghina, mengejek atau memaki rakan dan lawan","Jangan bergaduh atau bersikap kasar","Jangan merosakkan peralatan dan kemudahan","Jangan mengelak daripada tugasan semasa gotong-royong"],
+ h:["Mewujudkan hubungan yang harmoni dan mesra","Meningkatkan kesihatan dan kecergasan","Membentuk disiplin, tanggungjawab dan semangat berpasukan","Melatih sikap tolong-menolong dan prihatin","Persekitaran bersih, selamat dan selesa"],
+ a:["Menimbulkan pergaduhan dan permusuhan","Kecederaan diri sendiri atau orang lain","Peralatan rosak dan kemudahan terjejas","Kerja tidak selesai dan persekitaran menjadi kotor","Hilang kepercayaan dan dihormati rakan"]},
+
+{s:"bersosial",q:"Adab Menjaga Harta Benda Awam",
+ b:["Gunakan harta benda awam dengan betul dan berhemah","Menjaga kebersihan dan keadaan harta awam","Melaporkan kerosakan atau kecacatan harta awam kepada pihak yang bertanggungjawab","Memulangkan harta awam yang digunakan ke tempat asal"],
+ l:["Jangan merosakkan atau mengotorkan harta benda awam","Jangan mencuri atau mengambil harta awam tanpa izin","Jangan membazirkan kemudahan yang disediakan","Jangan mengonteng atau menampal poster pada tempat awam"],
+ h:["Harta awam tahan lama dan selamat digunakan","Menjimatkan perbelanjaan negara","Mewujudkan persekitaran yang bersih, selesa dan ceria","Membentuk sikap bertanggungjawab dan prihatin"],
+ a:["Harta awam cepat rosak dan tidak boleh digunakan","Pembaziran wang negara dan membebankan semua pihak","Persekitaran menjadi kotor, tidak selesa dan tidak selamat","Dikenakan tindakan disiplin atau undang-undang"]},
+
+{s:"bersosial",q:"Adab Terhadap Alam Sekitar",
+ b:["Buang sampah di tempat yang disediakan","Amalkan 3R: Kurangkan, Guna Semula, Kitar Semula","Jimatkan penggunaan air dan elektrik","Menanam dan menjaga pokok","Menjaga kebersihan dan keindahan persekitaran","Ajak dan galakkan orang lain menjaga alam sekitar"],
+ l:["Jangan membuang sampah merata-rata","Jangan mencemarkan sungai, longkang atau laut","Jangan merosakkan tumbuhan dan hidupan liar","Jangan membazirkan sumber seperti air dan elektrik","Jangan membakar sampah sesuka hati"],
+ h:["Persekitaran bersih, sihat dan selesa","Menjaga keseimbangan ekosistem","Sumber semula jadi terpelihara untuk generasi akan datang","Menjimatkan kos dan tenaga","Hidup lebih bahagia dan tenang dalam persekitaran yang indah"],
+ a:["Menyebabkan pencemaran udara, air dan tanah","Menjadi punca banjir dan wabak penyakit","Hidupan liar terancam dan habitat rosak","Suhu bumi meningkat dan cuaca menjadi tidak menentu","Kualiti hidup merosot dan kos rawatan meningkat"]},
+
+/* ---------- ADAB KETIKA DI MASJID ---------- */
+{s:"masjid",q:"Adab Keluar Masuk Masjid",
+ b:["Masuk masjid dengan kaki kanan dan membaca doa","Keluar masjid dengan kaki kiri dan membaca doa","Berpakaian sopan dan menutup aurat","Berjalan perlahan dan tidak berlari-lari","Menjaga kebersihan dan ketenangan di dalam masjid"],
+ l:["Jangan masuk dengan kaki kiri","Jangan keluar dengan kaki kanan","Jangan bercakap kuat atau mengganggu jemaah","Jangan berlari-lari atau membuat bising","Jangan membuang sampah merata-rata di kawasan masjid"],
+ h:["Mendapat keberkatan dan rahmat Allah","Masjid menjadi bersih, selesa dan terpelihara","Menunjukkan akhlak mulia dan disayangi Allah","Menghormati jemaah dan menjaga ketenangan beribadah","Hati menjadi tenang dan khusyuk beribadah"],
+ a:["Mengganggu jemaah dan mengurangkan pahala","Masjid menjadi kotor dan tidak selesa","Tidak disayangi Allah dan manusia","Hati menjadi lalai dan tidak khusyuk beribadah","Boleh dimarahi atau ditegur oleh pihak masjid"],
+ doa:{ar:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", mk:"Ya Allah, bukakanlah bagiku pintu-pintu rahmat-Mu. (Doa masuk masjid)"}},
+
+{s:"masjid",q:"Adab Ketika Beriktikaf",
+ b:["Niat iktikaf kerana Allah","Berada di dalam masjid sepanjang waktu iktikaf","Fokus beribadah seperti solat, zikir, al-Quran dan doa","Menjaga adab dan tutur kata yang baik","Menjaga kebersihan diri dan kawasan masjid","Mematuhi peraturan masjid","Keluar masjid hanya kerana keperluan seperti ke tandas"],
+ l:["Jangan keluar masjid tanpa sebab yang dibenarkan","Jangan berbual kosong atau gurau senda","Jangan tidur terlalu lama hingga mengabaikan ibadah","Jangan menggunakan telefon bimbit kecuali untuk urusan penting","Jangan membawa barang yang tidak perlu"],
+ h:["Mendekatkan diri kepada Allah","Meningkatkan keimanan dan ketakwaan","Melatih kesabaran dan pengendalian diri","Hati menjadi tenang dan jiwa lebih damai","Mendapat pahala yang berlipat ganda"],
+ a:["Iktikaf menjadi tidak sah","Pahala berkurang atau hilang","Membazir masa yang sepatutnya digunakan untuk beribadah","Mengganggu jemaah lain","Hati menjadi lalai dan tidak mendapat ketenangan"]},
+
+{s:"masjid",q:"Adab Ketika di Majlis Ilmu",
+ b:["Datang awal ke majlis ilmu","Berpakaian sopan dan menutup aurat","Duduk dengan tenang dan bersikap hormat","Dengar dengan penuh perhatian","Catat perkara penting","Bertanya dengan cara yang baik dan beradab","Mendoakan kebaikan untuk penceramah dan semua yang hadir"],
+ l:["Jangan datang lewat tanpa sebab","Jangan bercakap atau berbual ketika majlis ilmu","Jangan bermain telefon bimbit atau membuat bising","Jangan tidur atau mengantuk dengan sengaja","Jangan memotong percakapan penceramah atau orang lain","Jangan meremehkan atau menghina ilmu dan ulama"],
+ h:["Ilmu bertambah dan lebih mudah difahami","Hati menjadi tenang dan dekat dengan Allah","Dihormati oleh guru dan rakan-rakan","Menjadi insan yang berilmu dan beradab","Mendapat keberkatan dan pahala yang berpanjangan"],
+ a:["Ilmu tidak bermanfaat dan cepat lupa","Hati menjadi keras dan jauh dari kebaikan","Dikurniakan sikap tidak hormat dan sombong","Mengganggu orang lain yang ingin menuntut ilmu","Rugi di dunia dan akhirat kerana meninggalkan majlis ilmu"]},
+
+{s:"masjid",q:"Adab Solat Jumaat dan Solat Hari Raya",
+ b:["Mandi sunat, memakai pakaian bersih dan wangi","Berangkat awal ke masjid","Berjalan kaki dengan tenang dan memperbanyakkan zikir","Duduk dengan tertib dan tidak mengganggu jemaah lain","Dengar khutbah Jumaat dengan khusyuk dan tidak bercakap","Pada solat hari raya, bertakbir sepanjang perjalanan ke masjid"],
+ l:["Jangan lewat sehingga terlepas khutbah Jumaat","Jangan bercakap atau bergurau ketika khutbah","Jangan bermain telefon bimbit semasa di masjid","Jangan menolak atau berebut tempat","Jangan tidak mandi atau memakai pakaian kotor","Jangan keluar masuk masjid semasa khutbah berlangsung"],
+ h:["Solat Jumaat dan solat hari raya menyemai ukhuwah dan perpaduan","Mendapat pahala yang besar dan keberkatan","Membentuk disiplin, tertib dan rasa hormat sesama jemaah","Hati menjadi tenang dan dekat dengan Allah"],
+ a:["Terlepas pahala khutbah dan kelebihan solat Jumaat","Mengganggu tumpuan jemaah lain dan mengurangkan pahala","Timbulnya perasaan tidak selesa dan perpecahan","Hati menjadi lalai dan jauh daripada keberkatan"]},
+
+{s:"masjid",q:"Adab Solat Terawih",
+ b:["Datang awal ke masjid","Berwuduk dengan sempurna","Bertutup aurat dan berpakaian sopan","Duduk dengan tenang sebelum solat bermula","Fokus mendengar bacaan imam","Solat dengan khusyuk dan tertib","Bersedekap dan tidak bercakap semasa solat","Berdoa selepas solat"],
+ l:["Jangan lewat tanpa sebab","Jangan bercakap atau bergurau","Jangan bermain telefon bimbit","Jangan tidur atau mengantuk semasa solat","Jangan keluar masuk masjid ketika solat berlangsung","Jangan mengganggu jemaah lain"],
+ h:["Mendapat pahala yang berlipat ganda","Hati menjadi tenang dan dekat dengan Allah","Meningkatkan disiplin dan kesabaran","Membentuk ukhuwah dan kasih sayang antara muslim","Mendapat keberkatan di bulan Ramadan"],
+ a:["Pahala ibadah berkurang atau hilang","Hati menjadi lalai dan jauh dari Allah","Mengganggu jemaah lain","Tidak mendapat keberkatan malam Ramadan","Menyesal di kemudian hari"]},
+
+{s:"masjid",q:"Adab Menggunakan Kemudahan Masjid",
+ b:["Gunakan kemudahan masjid dengan sebaik-baiknya","Jaga kebersihan tandas, tempat wuduk dan surau","Padamkan suis dan tutup pili air selepas digunakan","Letakkan semula al-Quran, sejadah dan buku di tempat asal","Laporkan kepada AJK masjid jika ada kerosakan"],
+ l:["Jangan membazir air dan elektrik","Jangan kotor atau rosakkan kemudahan masjid","Jangan buang sampah merata-rata","Jangan mengonteng atau menampal stiker pada dinding dan peralatan","Jangan bising atau mengganggu orang lain semasa menggunakan kemudahan masjid"],
+ h:["Masjid sentiasa bersih, selesa dan terjaga","Menunjukkan sikap bertanggungjawab dan menghargai kemudahan","Mendapat ganjaran pahala kerana menjaga harta Allah","Orang ramai seronok dan selesa datang ke masjid"],
+ a:["Kemudahan cepat rosak dan tidak selesa digunakan","Masjid menjadi kotor dan tidak terurus","Menimbulkan kos pembaikan yang tinggi","Tidak mendapat pahala dan dosa kerana merosakkan harta Allah"]},
+
+/* ---------- ADAB ZIARAH ---------- */
+{s:"ziarah",q:"Adab Ziarah: Rakan Sebaya",
+ b:["Beri salam dan sapa dengan mesra","Bercakap dengan sopan dan lemah lembut","Dengar dan hormat pendapat rakan","Bantu rakan ketika mereka memerlukan","Jaga rahsia dan aib rakan"],
+ l:["Jangan mengejek atau memanggil nama buruk","Jangan memotong percakapan atau tidak sabar","Jangan menyebarkan cerita atau gambar rakan","Jangan bercakap kasar atau berbohong","Jangan abaikan rakan atau bersikap sombong"],
+ h:["Persahabatan menjadi erat dan berkekalan","Dihormati dan disayangi oleh rakan","Suasana gembira dan harmoni","Mudah mendapat bantuan dan sokongan","Diri lebih positif dan berdisiplin"],
+ a:["Rakan menjauhkan diri","Kehilangan kepercayaan dan penghargaan","Berlaku pergaduhan dan permusuhan","Diri tidak dihormati dan disukai","Suasana menjadi tidak aman dan tidak selesa"]},
+
+{s:"ziarah",q:"Adab Ziarah: Orang Dewasa",
+ b:["Memberi salam dengan sopan","Menundukkan sedikit badan semasa bersalaman atau mencium tangan","Menggunakan bahasa yang lemah lembut dan berguna","Mendengar dengan penuh perhatian apabila orang dewasa bercakap","Membantu jika ditawarkan bantuan"],
+ l:["Jangan memotong percakapan orang dewasa","Jangan bersikap kurang ajar atau meninggikan suara","Jangan bermain telefon bimbit semasa berbual","Jangan duduk dengan posisi tidak sopan","Jangan berpakaian tidak sopan atau menjolok mata"],
+ h:["Mendapat keberkatan dan doa daripada orang dewasa","Dihormati dan disayangi ramai","Menjadi pribadi yang beradab dan berakhlak mulia","Hubungan menjadi erat dan harmoni","Membawa imej positif diri dan keluarga"],
+ a:["Dikasihi dan dihormati orang lain","Sukar mendapat bantuan dan kerjasama","Menimbulkan rasa tidak senang dalam hubungan","Hilang peluang mendapat ilmu dan nasihat yang bermanfaat","Menjadi manusia yang sombong dan tidak disenangi"],
+ note:"Poin pertama Akibat ditulis sebegini dalam nota asal (nampaknya tersalah taip) — sila sahkan dengan cikgu"},
+
+{s:"ziarah",q:"Adab Ziarah: Saudara Mara",
+ b:["Beri salam dan sapa dengan mesra","Bercakap dengan sopan dan lemah lembut","Tunjukkan kasih sayang dan hormat","Bantu saudara mara jika mereka memerlukan","Jaga adab dan aurat semasa menziarahi"],
+ l:["Jangan bercakap kasar atau meninggi suara","Jangan bergaduh atau berbalah","Jangan mendedahkan aib atau rahsia keluarga","Jangan pentingkan diri sendiri","Jangan membanding-bandingkan antara ahli keluarga"],
+ h:["Silaturahim terjalin dengan erat","Keluarga hidup dalam harmoni dan bahagia","Mendapat keberkatan dan rezeki yang luas","Menjadi contoh akhlak mulia kepada orang lain","Hati gembira dan suasana keluarga lebih tenang"],
+ a:["Silaturahim menjadi renggang dan putus","Keluarga tidak harmoni dan sering berselisih faham","Hilang keberkatan dan rezeki menjadi sempit","Diri tidak disukai dan dijauhkan oleh keluarga","Hati tidak tenang dan hidup tidak bahagia"]},
+
+{s:"ziarah",q:"Adab Ziarah: Majlis Keramaian",
+ b:["Berpakaian sopan dan kemas","Memberi salam dan mengucapkan tahniah","Duduk dengan tertib dan menjaga adab","Menjaga percakapan dan bersikap ramah","Membantu tuan rumah jika diperlukan"],
+ l:["Jangan datang lewat tanpa sebab yang munasabah","Jangan bercakap kuat atau bising","Jangan bergurau kasar atau membuat lawak berlebihan","Jangan mengambil makanan atau barang tanpa izin","Jangan meninggalkan majlis dengan cara yang tidak sopan"],
+ h:["Mempereratkan silaturahim dan ukhuwah","Mendapat pahala dan rahmat daripada Allah","Menjadi insan yang disukai dan dihormati","Mewujudkan suasana yang harmoni dan gembira","Menambah keberkatan dalam hidup"],
+ a:["Diri tidak disukai dan dipandang negatif","Merosakkan suasana dan mengganggu orang lain","Menimbulkan salah faham dan permusuhan","Hilang peluang mendapat pahala dan keberkatan","Menjadi contoh yang tidak baik kepada orang lain"]},
+
+{s:"ziarah",q:"Adab Ziarah: Orang Sakit",
+ b:["Memberi salam dan mendoakan kesembuhan","Bercakap dengan lembut dan ringkas","Tunjukkan simpati dan perhatian","Bawa buah tangan atau hadiah jika sesuai","Menghulurkan bantuan yang diperlukan"],
+ l:["Jangan bercakap terlalu kuat atau ketawa berlebihan","Jangan bertanya soalan yang boleh membuatkan pesakit sedih","Jangan duduk terlalu lama sehingga membebankan pesakit","Jangan menakut-nakutkan pesakit dengan cerita seram atau buruk","Jangan melawat jika sedang sakit berjangkit"],
+ h:["Mengeratkan hubungan silaturahim","Memberi semangat dan kekuatan kepada pesakit","Mendapat pahala dan rahmat daripada Allah","Membentuk peribadi yang prihatin dan penyayang"],
+ a:["Pesakit menjadi tertekan dan bertambah lemah","Hubungan menjadi renggang dan tidak harmoni","Diri dianggap tidak beradab dan kurang prihatin","Hilang peluang mendapat pahala dan keberkatan"]},
+
+{s:"ziarah",q:"Adab Ziarah: Ziarah Kematian",
+ b:["Niat kerana Allah","Beri salam dan sampaikan ucapan takziah dengan sopan","Bacakan doa untuk si mati dan mendoakan keluarga yang ditinggalkan","Berpakaian sopan dan menutup aurat","Duduk dengan tenang dan bersikap empati","Tidak terlalu lama agar tidak mengganggu urusan keluarga"],
+ l:["Jangan bercakap kuat atau ketawa","Jangan bercerita tentang keburukan si mati","Jangan membanding-bandingkan kematian atau musibah","Jangan merakam gambar atau video tanpa izin","Jangan meminta atau menuntut sesuatu"],
+ h:["Menunjukkan rasa kasih sayang dan simpati","Mengeratkan hubungan sesama manusia","Mendapat pahala dan doa daripada orang yang diziarahi","Meningkatkan keimanan dan mengingati kematian"],
+ a:["Hati keluarga menjadi lebih sedih dan tidak selesa","Diri dipandang negatif kerana tidak beradab","Menghilangkan peluang mendapat pahala dan rahmat","Hubungan menjadi renggang dan tidak harmoni"]},
+
+{s:"ziarah",q:"Adab Ziarah: Ziarah Kubur",
+ b:["Niat kerana Allah","Masuk dan keluar dengan tenang","Beri salam kepada penghuni kubur","Baca doa dan tahlil untuk si mati","Mengingat kematian dan mengambil iktibar","Menjaga kebersihan dan kekemasan kawasan kubur","Berpakaian sopan dan menutup aurat"],
+ l:["Jangan bercakap kuat atau ketawa","Jangan bergurau atau membuat bising","Jangan memijak atau duduk atas kubur","Jangan membakar kemenyan atau menyalakan lilin","Jangan meminta-minta atau mengharap selain Allah"],
+ h:["Mengingatkan kita kepada kematian","Menambah keimanan dan ketakwaan kepada Allah","Menimbulkan rasa syukur atas nikmat kehidupan","Mendidik diri menjadi lebih sabar dan reda","Mengeratkan hubungan dengan keluarga dan mendoakan kebaikan"],
+ a:["Hati menjadi lalai dan jauh dari mengingati kematian","Doa tidak diterima dan amalan tidak bernilai","Mendapat dosa kerana menyakiti perasaan ahli keluarga si mati","Hilang keberkatan dan ketenangan","Tidak mendapat iktibar dan tetap lalai dalam kehidupan"]},
+
+/* ---------- ADAB MENUNTUT ILMU ---------- */
+{s:"ilmu",q:"Adab Dengan Al Quran, Kitab dan Buku",
+ b:["Bersih diri dan tempat sebelum membaca","Memegang dengan tangan bersih dan hati yang ikhlas","Membaca dengan tartil dan penuh perhatian","Menyimpan di tempat yang bersih dan tinggi","Menghormati dan menjaga keaslian buku"],
+ l:["Jangan letak di tempat kotor atau rendah","Jangan baca sambil berbaring atau dalam keadaan tidak sopan","Jangan mengonteng, mencoret atau merosakkan buku","Jangan melipat penjuru atau membiarkan buku berselerak","Jangan membaca tanpa wuduk bagi Al Quran"],
+ h:["Ilmu mudah difahami dan diingat","Mendapat keberkatan dan pahala","Menjadi insan yang beradab dan berilmu","Dihormati oleh guru dan rakan-rakan","Hati tenang dan dekat dengan Allah"],
+ a:["Ilmu sukar difahami dan mudah dilupakan","Dosa kerana tidak menghormati Al Quran dan buku","Buku cepat rosak dan hilang","Tidak mendapat keberkatan ilmu","Dijauhi guru dan tidak disenangi rakan"]},
+
+{s:"ilmu",q:"Adab Menuntut Ilmu: Dengan Guru",
+ b:["Bersikap hormat dan sopan kepada guru","Mendengar dengan penuh perhatian ketika guru mengajar","Mengucapkan salam dan berbudi bahasa ketika bertemu guru","Mematuhi arahan dan nasihat guru","Berterima kasih atas ilmu dan jasa guru","Menjaga guru di dalam dan di luar kelas"],
+ l:["Jangan bercakap kasar atau menaikkan suara kepada guru","Jangan memotong percakapan guru atau tidak sabar menunggu giliran","Jangan tidak menyiapkan tugasan yang diberi guru","Jangan membuat bising atau ganggu kawan ketika guru mengajar","Jangan mengkritik atau membantah guru dengan cara yang tidak sopan"],
+ h:["Ilmu lebih mudah difahami dan diingati","Mendapat keberkatan ilmu dan hidup","Hubungan baik dengan guru dan rakan-rakan","Dihormati dan disayangi oleh guru dan orang lain","Berjaya di dunia dan akhirat"],
+ a:["Ilmu sukar difahami dan cepat lupa","Tidak mendapat keberkatan ilmu dan hidup","Dimarahi guru dan tidak disayangi","Tidak dihormati oleh guru dan orang lain","Gagal dalam pelajaran dan merugikan diri sendiri"]},
+
+{s:"ilmu",q:"Adab Ketika Belajar",
+ b:["Niat belajar kerana Allah","Pilih tempat yang bersih, tenang dan selesa","Baca doa sebelum dan selepas belajar","Susun jadual dan urus masa dengan baik","Beri tumpuan penuh dan jangan menangguh kerja","Ulang kaji pelajaran secara berterusan","Jaga kebersihan dan kekemasan bahan pembelajaran"],
+ l:["Jangan belajar sambil menonton TV atau bermain gajet","Jangan berbual atau bergurau ketika belajar","Jangan meniru atau menyalin tanpa usaha sendiri","Jangan makan atau minum semasa belajar","Jangan malas dan menangguh tugasan","Jangan merosakkan atau membuang nota dan buku"],
+ h:["Ilmu mudah difahami dan diingati","Dapat meningkatkan kecemerlangan","Membentuk disiplin dan tanggungjawab","Mendapat keberkatan dan keredaan Allah","Menjadi insan yang berguna kepada agama, bangsa dan negara"],
+ a:["Ilmu sukar difahami dan cepat lupa","Prestasi merosot dan ketinggalan","Membazir masa dan peluang","Menjadi malas dan tidak bertanggungjawab","Mendapat kemurkaan Allah","Gagal dalam pelajaran dan merugikan diri sendiri"]},
+
+{s:"ilmu",q:"Adab Menjaga Kebersihan dan Peraturan Sekolah",
+ b:["Membuang sampah pada tempatnya","Menjaga kebersihan diri, pakaian dan persekitaran sekolah","Menggunakan kemudahan sekolah dengan betul","Mematuhi peraturan sekolah dengan penuh disiplin","Menjaga harta benda sekolah sebaiknya","Menegur rakan dengan cara yang baik jika melakukan kesalahan"],
+ l:["Jangan membuang sampah merata-rata","Jangan mencoret dinding, meja atau kemudahan sekolah","Jangan merosakkan harta benda sekolah","Jangan melanggar atau mengabaikan peraturan sekolah","Jangan berpakaian tidak kemas atau tidak bersih","Jangan membuat bising atau mengganggu ketenteraman sekolah"],
+ h:["Sekolah menjadi bersih, selesa dan indah","Diri menjadi sihat dan selesa","Dapat menumpukan perhatian kepada pelajaran","Disayangi guru dan rakan","Membentuk disiplin diri dan tanggungjawab","Menjadi contoh teladan kepada orang lain"],
+ a:["Sekolah menjadi kotor, tidak selesa dan tidak sihat","Mengganggu proses pembelajaran","Ditegur, dihukum atau dikenakan denda","Merosakkan harta benda dan perlu ganti rugi","Tidak dihormati dan dijauhi rakan","Masa depan terjejas kerana tidak berdisiplin"]},
+
+/* ---------- ADAB BERJIRAN & BERMASYARAKAT ---------- */
+{s:"masyarakat",q:"Adab Berjiran dan Bermasyarakat: Tetamu",
+ b:["Menyambut tetamu dengan salam dan senyuman","Menawarkan tempat duduk dan hidangan","Berbual dengan sopan dan mesra","Menjaga privasi dan keselesaan tetamu","Mengucapkan terima kasih apabila tetamu pulang"],
+ l:["Jangan mengabaikan tetamu","Jangan membiarkan tetamu berdiri tanpa tempat duduk","Jangan bercakap kasar atau menaikkan suara","Jangan terlalu banyak bertanya soalan peribadi","Jangan membiarkan tetamu terlalu lama sehingga mereka merasa tidak selesa"],
+ h:["Mengeratkan hubungan persaudaraan","Mendapat pahala dan keberkatan","Tetamu merasa dihargai dan dihormati","Melatih sikap ramah dan prihatin","Mewujudkan masyarakat yang harmoni"],
+ a:["Hubungan menjadi renggang","Tetamu merasa tidak dihargai","Menimbulkan rasa tidak selesa dan malu","Dosa kerana tidak beradab","Nama baik diri dan keluarga tercemar"]},
+
+{s:"masyarakat",q:"Adab Berjiran: Jiran Islam dan Bukan Islam",
+ b:["Bersikap baik, ramah dan sopan kepada semua jiran","Menghormati kepercayaan dan adat resam jiran","Membantu jiran dalam kesusahan tanpa mengira agama","Menjaga keselamatan dan ketenteraman jiran","Menjemput jiran ke majlis kebaikan seperti kenduri, gotong-royong dan program masyarakat"],
+ l:["Jangan menghina atau memperlekehkan kepercayaan jiran","Jangan mengganggu atau membuat bising","Jangan menghasut atau menyebarkan kebencian antara jiran","Jangan menceroboh privasi atau hal peribadi jiran","Jangan bersikap pilih kasih antara jiran"],
+ h:["Hubungan jiran harmoni dan mesra","Mewujudkan keharmonian dalam masyarakat","Mendapat pertolongan dan kerjasama apabila susah atau senang","Menjadi contoh baik kepada orang lain","Mendapat pahala dan keredaan Allah"],
+ a:["Hubungan jiran menjadi renggang dan permusuhan","Timbul salah faham dan permusuhan","Kehidupan tidak aman dan tidak tenteram","Susah mendapat pertolongan daripada jiran","Menimbulkan dosa dan dimurkai Allah"]},
+
+{s:"masyarakat",q:"Adab Berjiran: Orang Dewasa dan Orang Tua",
+ b:["Bercakap dengan sopan dan lemah lembut","Mendengar dengan hormat apabila mereka bercakap","Menghormati dan membantu mereka","Membantu membawa barang atau memberi laluan","Mengucapkan terima kasih atas jasa mereka"],
+ l:["Jangan bercakap kasar atau meninggikan suara","Jangan memotong percakapan","Jangan mengabaikan mereka","Jangan membuat muka seperti tidak suka","Jangan menyakiti hati mereka dengan kata-kata atau perbuatan"],
+ h:["Diberi keberkatan dan rahmat","Hubungan menjadi harmoni dan erat","Disayangi dan dihormati oleh semua","Menjadi insan yang beradab dan mulia","Mendapat pahala yang berterusan"],
+ a:["Tidak disayangi dan dihormati orang","Hubungan menjadi renggang dan bermusuh","Hati menjadi keras dan tidak berperikemanusiaan","Dijauhkan daripada rahmat dan keberkatan","Menanggung dosa dan penyesalan"]},
+
+{s:"masyarakat",q:"Adab Berjiran: Orang Kelainan Upaya (OKU)",
+ b:["Berlaku baik, ramah dan hormat kepada mereka","Tawarkan bantuan dengan ikhlas apabila mereka memerlukan","Beri laluan dan utamakan keperluan mereka","Gunakan bahasa yang sopan dan penuh kasih sayang","Hargai kebolehan dan bakat mereka"],
+ l:["Jangan mengejek atau membuat mereka merasa rendah diri","Jangan menganggap mereka tidak mampu melakukan apa-apa","Jangan mengganggu atau menghalang pergerakan mereka","Jangan mendedahkan kekurangan mereka kepada orang lain","Jangan bersikap kasihan yang berlebihan"],
+ h:["Mewujudkan masyarakat yang prihatin dan penyayang","Memupuk semangat tolong-menolong dan ukhwah","Mendapat keberkatan dan keredaan Allah","Mereka merasa dihargai dan diterima","Masyarakat lebih harmoni dan bahagia"],
+ a:["Mereka merasa sedih, malu dan tertekan","Hubungan antara jiran menjadi renggang","Masyarakat menjadi tidak prihatin dan tidak harmoni","Dosa kerana menyakiti hati orang lain","Kehidupan masyarakat tidak aman dan tidak bahagia"]},
+];
+
+const SECLABEL={asas:"Perkara Asas",bersosial:"Bersosial",masjid:"Di Masjid",ziarah:"Ziarah",ilmu:"Menuntut Ilmu",masyarakat:"Bermasyarakat"};
+const ASPECTS=[
+  {k:"buat",  field:"b", label:"Adab (Buat)",            icon:"✓", prompt:'Nyatakan <b>adab</b> — perkara yang perlu dibuat.'},
+  {k:"jangan",field:"l", label:"Larangan (Jangan Buat)", icon:"✗", prompt:'Nyatakan <b>larangan</b> — perkara yang tidak boleh dibuat.'},
+  {k:"hik",   field:"h", label:"Hikmah (Kesan Baik)",    icon:"★", prompt:'Nyatakan <b>hikmah</b> — kesan baik.'},
+  {k:"aki",   field:"a", label:"Akibat (Kesan Buruk)",   icon:"!", prompt:'Nyatakan <b>akibat</b> — kesan buruk jika tidak beradab.'},
+];
+/* Expand each topic into 4 aspect cards (topic's 4 cards kept together) */
+const CARDS=[];
+DECK.forEach(t=>{
+  ASPECTS.forEach(asp=>{
+    const c={s:t.s, topic:t.q, aspect:asp.k, aLabel:asp.label, aIcon:asp.icon, aPrompt:asp.prompt, items:t[asp.field]};
+    if(asp.k==="buat" && t.doa) c.doa=t.doa;
+    if(asp.k==="aki" && t.note) c.note=t.note;
+    CARDS.push(c);
+  });
+});
+CARDS.forEach((c,i)=>c.id=i);
+
+let filterSec="all",filterAsp="all",order=[],pos=0,flipped=false;
+let known=loadKnown();
+const el=id=>document.getElementById(id);
+const card=el("card");
+function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("adabUpkkSplit_known")||"[]"));}catch(e){return new Set();}}
+function saveKnown(){try{localStorage.setItem("adabUpkkSplit_known",JSON.stringify([...known]));}catch(e){}}
+function buildOrder(){order=CARDS.filter(c=>(filterSec==="all"||c.s===filterSec)&&(filterAsp==="all"||c.aspect===filterAsp)).map(c=>c.id);pos=0;}
+function setAccent(asp){
+  const map={buat:["--buat","--buat-bg"],jangan:["--jangan","--jangan-bg"],hik:["--hik","--hik-bg"],aki:["--aki","--aki-bg"]};
+  const [c,bg]=map[asp]||map.buat;
+  document.documentElement.style.setProperty("--accent",`var(${c})`);
+  document.documentElement.style.setProperty("--accent-bg",`var(${bg})`);
+}
+function render(){
+  const total=order.length;
+  if(!total){el("counter").textContent="Tiada kad";el("bList").innerHTML="";return;}
+  const c=CARDS[order[pos]];
+  flipped=false;card.classList.remove("flip");
+  setAccent(c.aspect);
+  el("fChip").textContent=SECLABEL[c.s];
+  el("bChip").textContent=SECLABEL[c.s];
+  el("fIcon").textContent=c.aIcon;
+  el("bIcon").textContent=c.aIcon;
+  el("fTopic").textContent=c.topic;
+  el("bTopic").textContent=c.topic;
+  el("fAspill").textContent=c.aLabel;
+  el("bAspect").textContent=c.aLabel;
+  el("fPrompt").innerHTML=c.aPrompt;
+  el("bList").innerHTML=c.items.map(t=>`<li>${t}</li>`).join("");
+  el("bDoa").innerHTML=c.doa?`<div class="doa"><div class="ar">${c.doa.ar}</div><div class="mk">${c.doa.mk}</div></div>`:"";
+  if(c.note){el("bNote").style.display="block";el("bNote").textContent=c.note;}else{el("bNote").style.display="none";}
+  el("counter").textContent=`Kad ${pos+1} / ${total}`;
+  el("barFill").style.width=((pos+1)/total*100)+"%";
+  const knownInView=order.filter(id=>known.has(id)).length;
+  el("knownCount").textContent=`✓ ${knownInView} sudah tahu`;
+  el("btnKnown").classList.toggle("on",known.has(c.id));
+}
+function flip(){flipped=!flipped;card.classList.toggle("flip",flipped);}
+function next(){if(!order.length)return;pos=(pos+1)%order.length;render();}
+function prev(){if(!order.length)return;pos=(pos-1+order.length)%order.length;render();}
+function shuffle(){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();}
+card.addEventListener("click",flip);
+el("btnFlip").addEventListener("click",e=>{e.stopPropagation();flip();});
+el("btnNext").addEventListener("click",next);
+el("btnPrev").addEventListener("click",prev);
+el("btnShuffle").addEventListener("click",shuffle);
+el("btnKnown").addEventListener("click",()=>{const id=CARDS[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
+el("btnReview").addEventListener("click",()=>{const id=CARDS[order[pos]].id;known.delete(id);saveKnown();next();});
+el("btnReset").addEventListener("click",()=>{if(confirm("Set semula semua progres 'sudah tahu'?")){known.clear();saveKnown();render();}});
+document.querySelectorAll("#tabsSec .sec").forEach(t=>{
+  t.addEventListener("click",()=>{document.querySelectorAll("#tabsSec .sec").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");filterSec=t.dataset.k;buildOrder();render();});
+});
+document.querySelectorAll("#tabsAsp .asp").forEach(t=>{
+  t.addEventListener("click",()=>{document.querySelectorAll("#tabsAsp .asp").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");filterAsp=t.dataset.a;buildOrder();render();});
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();
+  else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}
+});
+buildOrder();render();
+</script>
+</body>
+</html>
