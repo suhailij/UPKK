@@ -115,6 +115,50 @@
   @media (max-width:420px){h1{font-size:22px}.question{font-size:18px}.face{padding:22px 16px}
     ol.points li,ul.plain li,dl.pairs .pair{font-size:13.5px}.single{font-size:14.5px}}
   @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
+
+/* iPhone/Safari compatibility: avoid 3D flip rendering that can mirror or overlap text */
+.stage{
+  perspective:none !important;
+  -webkit-perspective:none !important;
+}
+.card{
+  transform:none !important;
+  -webkit-transform:none !important;
+  transform-style:flat !important;
+  -webkit-transform-style:flat !important;
+}
+.face{
+  backface-visibility:visible !important;
+  -webkit-backface-visibility:visible !important;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .22s ease, visibility 0s linear 0s !important;
+}
+.back{
+  transform:none !important;
+  -webkit-transform:none !important;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease, visibility 0s linear .22s !important;
+}
+.card.flip .front{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease, visibility 0s linear .22s !important;
+}
+.card.flip .back{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .22s ease, visibility 0s linear 0s !important;
+}
+@media (prefers-reduced-motion:reduce){
+  .face,.back,.card.flip .front,.card.flip .back{transition:none !important}
+}
+
 </style>
 </head>
 <body>
