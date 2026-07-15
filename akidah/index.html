@@ -1,1 +1,630 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kad Imbas · Akidah UPKK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3E9; --paper-2:#FBF8F0; --ink:#2B2A26; --ink-soft:#5B574C;
+    --gold:#C9A227; --gold-deep:#A47F14; --line:#E4DBC5;
+    --erti:#2A7D8C; --erti-bg:#E4F1F3;
+    --hukum:#4A5FA5; --hukum-bg:#E8ECF7;
+    --dalil:#7B4B94; --dalil-bg:#F1E9F5;
+    --lawan:#C2703D; --lawan-bg:#FBEDE3;
+    --hik:#2E7D5B; --hik-bg:#E7F3EC;
+    --aki:#C0392B; --aki-bg:#FBEAE7;
+    --lain:#8A6A3D; --lain-bg:#F4EDE1;
+    --accent:var(--erti); --accent-bg:var(--erti-bg);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{overflow-x:hidden}
+  ul.qlist li{overflow-wrap:anywhere}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #FDFBF4 0%, transparent 60%), var(--paper);
+    color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:18px 16px 40px;-webkit-tap-highlight-color:transparent}
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:12px}
+  header{text-align:center;padding-top:4px}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  h1{font-family:'Amiri',serif;font-weight:700;font-size:25px;line-height:1.2;margin:5px 0 2px}
+  .sub{font-size:12px;color:var(--ink-soft)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 0;color:var(--gold)}
+  .divider::before,.divider::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .divider span{font-size:13px}
+  .filters{display:flex;flex-direction:column;gap:6px}
+  .frow{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;align-items:center}
+  .flabel{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:800;margin-right:2px}
+  .tab{border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
+    font:inherit;font-weight:600;font-size:10.5px;padding:5px 9px;border-radius:999px;cursor:pointer;
+    transition:.16s;display:flex;align-items:center;gap:5px;line-height:1.2}
+  .tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.45}
+  .tab.active{color:#fff}
+  .tab.active .dot{opacity:1;background:#fff}
+  .yr.active,.tema.active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .asp[data-a="all"].active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .asp[data-a="erti"].active{background:var(--erti);border-color:var(--erti)}
+  .asp[data-a="hukum"].active{background:var(--hukum);border-color:var(--hukum)}
+  .asp[data-a="dalil"].active{background:var(--dalil);border-color:var(--dalil)}
+  .asp[data-a="lawan"].active{background:var(--lawan);border-color:var(--lawan)}
+  .asp[data-a="hik"].active{background:var(--hik);border-color:var(--hik)}
+  .asp[data-a="aki"].active{background:var(--aki);border-color:var(--aki)}
+  .asp[data-a="lain"].active{background:var(--lain);border-color:var(--lain)}
+  .asp[data-a="erti"] .dot{background:var(--erti);opacity:.7}
+  .asp[data-a="hukum"] .dot{background:var(--hukum);opacity:.7}
+  .asp[data-a="dalil"] .dot{background:var(--dalil);opacity:.7}
+  .asp[data-a="lawan"] .dot{background:var(--lawan);opacity:.7}
+  .asp[data-a="hik"] .dot{background:var(--hik);opacity:.7}
+  .asp[data-a="aki"] .dot{background:var(--aki);opacity:.7}
+  .asp[data-a="lain"] .dot{background:var(--lain);opacity:.7}
+  .asp.active .dot{background:#fff;opacity:1}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+  .meta .known{color:var(--hik)}
+  .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .stage{perspective:1600px;width:100%}
+  .card{position:relative;width:100%;cursor:pointer;display:grid;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+  .card.flip{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .face{grid-area:1/1;width:100%;min-height:300px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:18px;background:var(--paper-2);border:1px solid var(--line);
+    box-shadow:0 1px 0 #fff inset, 0 18px 40px -24px rgba(60,50,20,.5);
+    padding:22px 20px;display:flex;flex-direction:column;overflow:visible}
+  .face::before{content:"";position:absolute;inset:9px;border-radius:12px;pointer-events:none;
+    border:1.5px solid color-mix(in srgb, var(--accent) 32%, transparent)}
+  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--accent);opacity:.6}
+  .corner.tl{top:13px;left:13px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+  .corner.tr{top:13px;right:13px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+  .corner.bl{bottom:13px;left:13px;border-right:0;border-top:0;border-radius:0 0 0 4px}
+  .corner.br{bottom:13px;right:13px;border-left:0;border-top:0;border-radius:0 0 4px 0}
+  .back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1;margin-bottom:4px}
+  .chips{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);padding:4px 8px;border-radius:999px;white-space:nowrap}
+  .chip.yrchip{color:var(--accent);background:var(--accent-bg);border-color:color-mix(in srgb,var(--accent) 28%,transparent)}
+  .side{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:11px;position:relative;z-index:1;padding:8px 4px}
+  .a-icon{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px var(--accent)}
+  .topic{font-family:'Amiri',serif;font-size:21px;font-weight:700;line-height:1.3;color:var(--ink)}
+  .aspill{font-weight:800;font-size:12px;letter-spacing:.02em;color:var(--accent);
+    background:var(--accent-bg);border:1.5px solid color-mix(in srgb,var(--accent) 35%,transparent);
+    padding:6px 13px;border-radius:999px;line-height:1.35}
+  .prompt{font-size:12.5px;color:var(--ink-soft);line-height:1.5;max-width:330px}
+  .prompt b{color:var(--accent)}
+  .hint{font-size:11.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;justify-content:center;margin-top:4px}
+  .hint .tapdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+  .a-head{display:flex;align-items:flex-start;gap:9px;position:relative;z-index:1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .a-head .hi{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+  .a-head .ht{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .a-head .ht .t1{font-family:'Amiri',serif;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .a-head .ht .t2{font-size:10.5px;font-weight:800;letter-spacing:.02em;color:var(--accent);text-transform:uppercase}
+  .a-body{flex:1;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+  .pre{font-size:13px;line-height:1.5;color:var(--ink)}
+  .big{text-align:center;font-family:'Amiri',serif;font-size:30px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent);padding:12px 6px;line-height:1.2}
+  .grp{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+    margin-top:4px;padding-top:6px;border-top:1px dashed var(--line)}
+  ul.qlist{list-style:none;display:flex;flex-direction:column;gap:6px}
+  ul.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+  ul.qlist li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:6px}
+  ul.qlist.num{counter-reset:qn}
+  ul.qlist.num li{counter-increment:qn}
+  ul.qlist.num li::before{content:counter(qn);width:auto;height:auto;border-radius:0;background:none;color:var(--accent);font-weight:800;font-size:11.5px;margin-top:0;min-width:15px}
+  ul.qlist li b{color:var(--accent);font-weight:800}
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:2px}
+  table.tbl th{background:var(--accent);color:#fff;font-weight:800;font-size:10.5px;letter-spacing:.04em;
+    text-transform:uppercase;padding:7px 8px;border:1px solid var(--accent);text-align:center}
+  table.tbl td{border:1px solid var(--line);padding:7px 8px;text-align:center;line-height:1.4;background:#fff}
+  table.tbl tr:nth-child(even) td{background:var(--paper)}
+  .arb{border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:9px;padding:10px 11px;text-align:center}
+  .arb + .arb{margin-top:5px}
+  .arb .lb{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+  .arb .ar{font-family:'Amiri',serif;direction:rtl;font-size:20px;line-height:2;color:#1a1a17}
+  .arb .rf{font-size:11px;font-weight:800;color:var(--gold-deep);margin-top:4px}
+  .arb .mk{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:5px;line-height:1.55;text-align:left}
+  .note{position:relative;z-index:1;margin-top:8px;font-size:10.5px;color:var(--ink-soft);text-align:center;font-style:italic;line-height:1.5}
+  .note::before{content:"\203B  "}
+  .controls{display:flex;flex-direction:column;gap:10px}
+  .nav{display:flex;gap:9px}
+  .btn{flex:1;font:inherit;font-weight:700;font-size:14px;padding:12px;border-radius:13px;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px}
+  .btn:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .btn:active{transform:translateY(1px)}
+  .btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.solid:hover{filter:brightness(1.05);color:#fff}
+  .mark{display:flex;gap:9px}
+  .btn.known{color:var(--hik)} .btn.known:hover{border-color:var(--hik)}
+  .btn.review{color:var(--aki)} .btn.review:hover{border-color:var(--aki)}
+  .btn.known.on{background:var(--hik);border-color:var(--hik);color:#fff}
+  .util{display:flex;gap:9px}
+  .util .btn{font-size:12.5px;font-weight:600;padding:9px}
+  footer{text-align:center;font-size:10.5px;color:var(--ink-soft);line-height:1.6;margin-top:2px}
+  footer b{color:var(--gold-deep)}
+  @media (max-width:420px){h1{font-size:20px}.topic{font-size:18px}.face{padding:20px 15px}
+    ul.qlist li{font-size:13px}.arb .ar{font-size:18px}table.tbl{font-size:11.5px}
+    table.tbl th,table.tbl td{padding:6px 5px}.big{font-size:26px}}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
 
+  /* iPhone/Safari compatibility: avoid 3D flip rendering that can mirror or overlap text */
+  .stage{perspective:none !important;-webkit-perspective:none !important;}
+  .card{transform:none !important;-webkit-transform:none !important;transform-style:flat !important;-webkit-transform-style:flat !important;}
+  .face{backface-visibility:visible !important;-webkit-backface-visibility:visible !important;opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  .back{transform:none !important;-webkit-transform:none !important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .front{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .back{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  @media (prefers-reduced-motion:reduce){.face,.back,.card.flip .front,.card.flip .back{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kad Imbas UPKK 2025</div>
+    <h1>Akidah UPKK</h1>
+    <div class="sub">Tahun 3 · Tahun 4 · Tahun 5</div>
+    <div class="divider"><span>۞</span></div>
+  </header>
+
+  <div class="filters">
+    <div class="frow" id="tabsYr">
+      <span class="flabel">Tahun</span>
+      <button class="tab yr active" data-y="all"><span class="dot"></span>Semua</button>
+      <button class="tab yr" data-y="t3"><span class="dot"></span>Tahun 3</button>
+      <button class="tab yr" data-y="t4"><span class="dot"></span>Tahun 4</button>
+      <button class="tab yr" data-y="t5"><span class="dot"></span>Tahun 5</button>
+    </div>
+    <div class="frow" id="tabsTema">
+      <span class="flabel">Tema</span>
+      <button class="tab tema active" data-t="all"><span class="dot"></span>Semua</button>
+      <button class="tab tema" data-t="iman"><span class="dot"></span>Rukun Iman</button>
+      <button class="tab tema" data-t="sifat"><span class="dot"></span>Sifat Allah</button>
+      <button class="tab tema" data-t="sains"><span class="dot"></span>Islam &amp; Sains</button>
+    </div>
+    <div class="frow" id="tabsAsp">
+      <span class="flabel">Poin</span>
+      <button class="tab asp active" data-a="all"><span class="dot"></span>Semua</button>
+      <button class="tab asp" data-a="erti"><span class="dot"></span>Pengertian</button>
+      <button class="tab asp" data-a="hukum"><span class="dot"></span>Hukum</button>
+      <button class="tab asp" data-a="dalil"><span class="dot"></span>Dalil</button>
+      <button class="tab asp" data-a="lawan"><span class="dot"></span>Lawan Sifat</button>
+      <button class="tab asp" data-a="hik"><span class="dot"></span>Hikmah/Kesan</button>
+      <button class="tab asp" data-a="aki"><span class="dot"></span>Akibat</button>
+      <button class="tab asp" data-a="lain"><span class="dot"></span>Lain-lain</button>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span id="counter">Kad 1 / 1</span>
+    <span class="known" id="knownCount">✓ 0 sudah tahu</span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="face front">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><div class="chips"><span class="chip yrchip" id="fYr">—</span><span class="chip" id="fTema">—</span></div><span class="side">Soalan</span></div>
+        <div class="q-center">
+          <div class="a-icon" id="fIcon">i</div>
+          <div class="topic" id="fTopic">—</div>
+          <div class="aspill" id="fAspill">—</div>
+          <div class="prompt" id="fPrompt">—</div>
+        </div>
+        <div class="hint"><span class="tapdot"></span> Ketik untuk lihat jawapan</div>
+      </div>
+      <div class="face back">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><div class="chips"><span class="chip yrchip" id="bYr">—</span><span class="chip" id="bTema">—</span></div><span class="side">Jawapan</span></div>
+        <div class="a-head"><div class="hi" id="bIcon">i</div><div class="ht"><span class="t1" id="bTopic">—</span><span class="t2" id="bField">—</span></div></div>
+        <div class="a-body" id="bBody"></div>
+        <div class="note" id="bNote" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="mark">
+      <button class="btn known" id="btnKnown">✓ Sudah tahu</button>
+      <button class="btn review" id="btnReview">↻ Ulang semula</button>
+    </div>
+    <div class="nav">
+      <button class="btn" id="btnPrev">‹ Sebelum</button>
+      <button class="btn solid" id="btnFlip">Selak kad</button>
+      <button class="btn" id="btnNext">Seterus ›</button>
+    </div>
+    <div class="util">
+      <button class="btn" id="btnShuffle">🔀 Kocok</button>
+      <button class="btn" id="btnReset">⟲ Set semula progres</button>
+    </div>
+  </div>
+
+  <footer>
+    <b>Akidah UPKK 2025</b> · Peta Minda Tahun 3, 4 &amp; 5<br>
+    Kandungan dikekalkan seperti nota asal. Ayat Al-Quran guna versi berbaris standard — sila semak dengan cetakan asal.
+  </footer>
+</div>
+
+<script>
+const AKIDAH_T3 = [
+/* ============ T3.1 BERIMAN KEPADA KITAB ============ */
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"erti",f:"Pengertian Beriman",
+ items:["Percaya dan yakin iaitu tiada ragu-ragu atau was was"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"erti",f:"Pengertian Kitab",
+ items:["Kalam Allah yang diwahyukan kepada rasul.","Mengandungi syariat dan hukum sebagai panduan hidup manusia"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"erti",f:"Pengertian Beriman Kepada Kitab",
+ items:["Percaya dan yakin bahawa kitab adalah daripada Allah.","Mengakui kebenaran isi kandungan kitab."]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"hukum",f:"Hukum Beriman Kepada Kitab",
+ big:"WAJIB",items:[]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"lain",f:"Peranan Alquran Dalam Kehidupan",
+ items:["Sumber ilmu dan panduan.","Membantu kehidupan diberkati.","Mengikuti suruhan dan meninggalkan larangan."]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"lain",f:"Cara Mencintai Al-Quran",
+ items:["Membaca setiap hari.","Memahami makna dan pengertian.","Beramal dengan Al-Quran dan mengikuti segala suruhan serta meninggalkan larangan"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Kitab",k:"lain",f:"Nama Nabi Dan Kitab Yang Di Turunkan",
+ tbl:{head:["Nama Nabi","Nama Kitab"],rows:[["Nabi Musa AS","Kitab Taurat"],["Nabi Daud AS","Kitab Zabur"],["Nabi Isa AS","Kitab Injil"],["Nabi Muhammad SAW","Kitab Al-Quran"]]},items:[]},
+
+/* ============ T3.2 BERIMAN KEPADA HARI KIAMAT ============ */
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"erti",f:"Pengertian Hari Kiamat",
+ items:["Hari kebangkitan semula dan pembalasan"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"erti",f:"Pengertian Beriman Kepada Hari Kiamat",
+ items:["Percaya dan yakin bahawa semua makhluk akan binasa suatu hari nanti"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"hukum",f:"Hukum Beriman Kepada Hari Kiamat",
+ big:"WAJIB",items:[]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"hik",f:"Hikmah Beriman Kepada Hari Kiamat",
+ items:["Keimanan kepada Allah akan semakin bertambah.","Bertanggungjawab melaksanakan perintah Allah.","Sentiasa bertaubat.","Ketakwaan kepada Allah semakin kukuh"]},
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"lain",f:"Tanda-Tanda Kecil Hari Kiamat",
+ items:["Ramai wanita daripada lelaki.","Banyak berlaku pembunuhan.","Orang hina mendapat kedudukan terhormat.","Banyak berlaku gempa bumi.","Berlumba-lumba menghiasi masjid dan berbangga dengannya.","Hukum beriman kepada hari kiamat adalah wajib"],
+ note:"Poin terakhir ditulis dalam senarai Tanda-Tanda Kecil pada nota asal, walaupun ia kenyataan hukum. Dikekalkan verbatim — sila sahkan dengan cikgu"},
+{y:"t3",tm:"iman",t:"Beriman Kepada Hari Kiamat",k:"lain",f:"Tanda-Tanda Besar Hari Kiamat",
+ items:["Asap keluar memenuhi timur dan barat.","Matahari terbit di sebelah barat.","Munculnya Imam Mahdi.","Keluar Ya'juj dan Ma'juj.","Nabi Isa turun untuk menyelamatkan Islam."]},
+
+/* ============ T3.3 SIFAT WAJIB MUKHALAFATUHU LILHAWADITH ============ */
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"erti",f:"Maksud",
+ items:["Maksud berlawanan dan berbeza dengan semua makhluk ciptaan ialah tidak ada sesuatu makhluk yang serupa dengan Allah daripada dzat, sifat dan perbuatannya."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"lawan",f:"Lawan Sifat",
+ pre:"MUKHALAFATUHU LILHAWADITH",
+ items:["Allah berlainan dengan segala yang baharu","SIFAT WAJIB"],
+ grp2:"Mumathalatuhu Lilhawadith",
+ items2:["Allah bersamaan dengan segala yang baharu","SIFAT MUSTAHIL"]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"لَيْسَ كَمِثْلِهِ شَيْءٌ وَهُوَ السَّمِيْعُ الْبَصِيْرُ",r:"surat Asy-Syura' ayat 11"}],items:[]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"dalil",f:"Dalil Aqli",
+ items:["Allah tiada kelemahan, tidak seperti makhluk yang diciptakan-Nya yang bersifat baharu.","Allah tidak bersifat baharu kerana sifat baharu hanya ada pada makhluk yang diciptakan-Nya.","Allah tiada kelemahan seperti manusia yang mengharapkan pertolongan orang lain untuk kesejahteraan hidup."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"lain",f:"Dzat Allah",
+ items:["Allah tidak berjirim dan berjisim seperti makhluk iaitu manusia atau binatang.","Semua makhluk mempunyai jirim dan jisim yang boleh dilihat dan disentuh."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"lain",f:"Sifat Allah",
+ items:["Allah tidak mempunyai sifat seperti makhluk. Contoh: Allah tidak memerlukan mata untuk memandang","Allah tidak memerlukan ruang, waktu dan tempat."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"lain",f:"Perbuatan Allah",
+ items:["Allah tidak memerlukan sebarang pertolongan untuk melakukan sesuatu perbuatan."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Mukhalafatuhu Lilhawadith",k:"hik",f:"Kesan Beriman",
+ items:["Sentiasa mengakui kehebatan Allah.","Sentiasa mengharapkan pertolongan Allah.","Mengukuhkan keimanan dan ketakwaan.","Saling membantu sesama manusia.","Menjauhi sifat sombong dan takbur."]},
+
+/* ============ T3.4 SIFAT WAJIB QIYAMAHU BINAFSIHI ============ */
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"erti",f:"Pengertian",
+ items:["Berdiri dengan sendiri dan tidak memerlukan bantuan sesiapa pun"]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"lawan",f:"Sifat Mustahil",
+ big:"QIYAMUHU BIGHAIRI",items:["(Berdiri dengan yang lain)"]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ",r:"Surah Al Baqarah Ayat 255"}],items:[]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"dalil",f:"Dalil Aqli",
+ items:["Allah Berdiri dengan sendiri, tidak bergantung","Allah Tidak lemah, Maha Sempurna","Bukti kekuasaan & keagungan Allah"]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"hik",f:"Kesan Beriman",
+ items:["Mengharapkan pertolongan Allah.","Menyedari kelemahan diri sendiri.","Menjauhi sifat sombong","Sentiasa takut kepada Allah."]},
+{y:"t3",tm:"sifat",t:"Sifat Wajib Qiyamahu Binafsihi",k:"aki",f:"Akibat Tidak Mempercayai Sifat",
+ items:["Diri menjadi angkuh dan sombong","bangga diri","Jauh daripada sifat sombong"],
+ note:"Poin ketiga ditulis sebegini dalam nota asal — poin positif dalam senarai Akibat. Nampaknya tersalah taip; sila sahkan dengan cikgu"},
+
+/* ============ T3.5 ISLAM DAN SAINS (HAIWAN) ============ */
+{y:"t3",tm:"sains",t:"Islam Dan Sains (Haiwan)",k:"erti",f:"Haiwan Ternakan",
+ items:["Al-Quran menyebutkan haiwan ternakan seperti unta, lembu, dan kambing sebagai sumber rezeki dan kebajikan."]},
+{y:"t3",tm:"sains",t:"Islam Dan Sains (Haiwan)",k:"dalil",f:"Dalil",
+ ar:[{a:"أَمَدَّكُم بِأَنْعَامٍ وَبَنِينَ",r:"الشعراء: 133",m:"Dia telah menganugerahkan kepadamu binatang-binatang ternak, dan anak-anak,"}],items:[]},
+{y:"t3",tm:"sains",t:"Islam Dan Sains (Haiwan)",k:"lain",f:"Kepentingan Haiwan Ternakan",
+ items:["Orang Islam wajib meyakini bahawa semua penciptaan haiwan adalah tanda kewujudan Allah dan kekuasaan-Nya.","Orang Islam dituntut supaya berbuat baik kepada haiwan sebagai tanda bersyukur kepada Allah."]},
+{y:"t3",tm:"sains",t:"Islam Dan Sains (Haiwan)",k:"lain",f:"Haiwan Yang Disebut Di Dalam Al-Quran",
+ tbl:{head:["Surah","Haiwan"],rows:[["Surah Al-Ghasyiah: 17","UNTA"],["Surah Al-Maidah: 31","BURUNG GAGAK"],["Surah Al-Hajj: 73","LALAT"],["Surah Al-A'raf: 176","ANJING"],["Surah An-Nahl: 68-69","LEBAH"],["Surah Al-Ankabut: 41","KELDAI"]]},items:[]},
+];
+const AKIDAH_T4 = [
+/* ============ T4.1 BERIMAN KEPADA QADA DAN QADAR ============ */
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"erti",f:"Pengertian Kepada Qada dan Qadar",
+ items:["Qada ialah ketentuan Allah sejak azali, manakala qadar ialah pelaksanaan ketentuan itu terhadap makhluk."]},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"erti",f:"Maksud Beriman Kepada Qada dan Qadar",
+ items:["Beriman kepada Qada dan Qadar bermaksud yakin bahawa segala yang berlaku, baik atau buruk, telah ditentukan oleh Allah."]},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"lain",f:"Jenis Qada",
+ items:["Qada Mubram: ketentuan mutlak yang pasti berlaku. Contoh: jodoh, kematian.","Qada Muallag: tidak semestinya berlaku., boleh berubah dengan usaha dan doa. Contoh: rezeki."],
+ note:"Nota asal mengeja 'Qada Muallag' dan menulis 'berlaku.,' — dikekalkan verbatim; sila sahkan dengan cikgu"},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"erti",f:"Maksud Usaha dan Tawakal",
+ items:["Usaha ialah ikhtiar manusia mencapai tujuan,","tawakal ialah berserah kepada Allah setelah berusaha."]},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"hukum",f:"Hukum Beriman Kepada Qada dan Qadar",
+ big:"WAJIB",items:[]},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"hik",f:"Hikmah Beriman Kepada Qada Qadar",
+ items:["Tabah menghadapi ujan","Ikhlas dalam perbuatan","Bertambah usaha"],
+ note:"Nota asal menulis 'ujan' — dikekalkan verbatim (berkemungkinan 'ujian'); sila sahkan dengan cikgu"},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"aki",f:"Akibat Tidak Beriman Kepada Qada dan Qadar",
+ items:["Mudah berputus asa","Jauh dari rahmat Allah","Suka menyalahkan orang lain"]},
+{y:"t4",tm:"iman",t:"Beriman Kepada Qada Dan Qadar",k:"lain",f:"Ciri-ciri Beriman Kepada Qada dan Qadar",
+ items:["<b>Tabah:</b> Tabah menghadapi ketentuan Allah.","<b>Redha:</b> Hendaklah redha dengan takdir Allah.","<b>Tenang:</b> Membentuk hati menjadi tenteram.","<b>Sabar:</b> Sentiasa sabar menghadapi ketentuan Allah.","<b>Berusaha:</b> Hendaklah berusaha bersungguh-sungguh.","<b>Tidak Mudah Berputus Asa:</b> Hendaklah tidak mudah berputus asa."]},
+
+/* ============ T4.2 SIFAT WAHDANIAH ============ */
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"erti",f:"Maksud Wahdaniah",
+ big:"WAHDANIAH",items:["(esa atau tunggal.)"]},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"lawan",f:"Sifat Berlawanan",
+ big:"SIFAT TA'ADDUD",items:["(BERBILANG-BILANG)"]},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"lain",f:"Allah Maha Esa",
+ items:["<b>PADA ZAT:</b> Zat Allah tidak dapat disamakan dengan makhluk, kerana Allah tidak berbentuk, tidak berjirim, dan tidak tersusun seperti makhluk.","<b>PADA SIFAT:</b> Allah memiliki sifat-sifat kesempurnaan yang tidak ada pada makhluk.","<b>PADA PERBUATAN:</b> Semua urusan di alam ini dilaksanakan oleh Allah tanpa bantuan makhluk dan tiada sesiapa yang dapat menghalang-Nya seperti rezeki, ajal, maut, siang, malam"]},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"dalil",f:"Dalil Naqli Sifat Wahdaniah",
+ ar:[{a:"قُلْ هُوَ ٱللَّهُ أَحَدٌ (١) ٱللَّهُ ٱلصَّمَدُ (٢) لَمْ يَلِدْ وَلَمْ يُولَدْ (٣) وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ (٤)",r:"Surah Al-Ikhlas (112:1)"},{a:"وَإِلَٰهُكُمْ إِلَٰهٌ وَٰحِدٌ ۖ لَّآ إِلَٰهَ إِلَّا هُوَ ٱلرَّحْمَٰنُ ٱلرَّحِيمُ (١٦٣)",r:"Surah Al-Baqarah (2:163)"}],items:[]},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"dalil",f:"Dalil Adli Sifat Wahdaniah",
+ items:["Jika ada lebih dari satu tuhan, ia menunjukkan tuhan itu lemah.","Jika ada lebih dari satu tuhan, sudah tentu akan berlaku huru-hara dalam pentadbiran alam ini."],
+ note:"Nota asal menulis 'Dalil Adli' (di tempat lain 'Dalil Aqli') — dikekalkan verbatim"},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"hik",f:"Kesan Beriman Kepada Sifat Wahdaniah",
+ items:["Menjadikan Allah sandaran dalam setiap keadaan.","Menjauhi sebarang bentuk syirik terhadap Allah.","Berhati-hati agar tidak melanggar larangan-Nya.","Mengharap redha Allah dalam setiap amal.","Melaksanakan perintah-Nya dengan penuh ketaatan."]},
+{y:"t4",tm:"sifat",t:"Sifat Wahdaniah",k:"aki",f:"Akibat Tidak Beriman Dengan Sifat Wahdaniah",
+ items:["Sombong","Bangga diri","Sesat Jalan"]},
+
+/* ============ T4.3 SIFAT QUDRAT ============ */
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"erti",f:"Maksud Sifat Qudrat",
+ items:["Sifat Qudrat bermaksud berkuasa. Allah Maha Berkuasa di seluruh alam, mencipta, mengatur, dan mentadbir langit dan bumi."]},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"lawan",f:"Lawan Sifat",
+ pre:"QUDRAT (BERKUASA)  —  LAWAN  —  AJZUN (LEMAH)",
+ big:"AJZUN",items:["LEMAH"]},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"dalil",f:"Dalil Aqli",
+ items:["Allah berkuasa mencipta dan mentadbir sesuatu mengikut ketentuan-Nya.","Allah berkuasa merosakkan, memusnahkan, dan melenyapkan sesuatu yang diinginkan-Nya."]},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"لَهُۥ مُلْكُ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۖ يُحْىِۦ وَيُمِيتُ ۖ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ",r:"SURAH AL BAQARAH - AYAT 20",m:"Dia lah sahaja yang menguasai dan memiliki langit dan bumi; Ia menghidupkan dan mematikan; dan Ia Maha Kuasa atas tiap-tiap sesuatu."},{a:"إِنَّ ٱللَّهَ عَلَىٰ كُلِّ شَىْءٍ قَدِيرٌ",r:"SURAH AL BAQARAH - AYAT 20",m:"Sesungguhnya Allah Maha Kuasa atas tiap-tiap sesuatu."}],items:[],
+ note:"Kedua-dua dalil dirujuk sebagai 'Ayat 20' dalam nota asal walaupun ayatnya berbeza — dikekalkan verbatim; sila sahkan dengan cikgu"},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"lain",f:"Ciri-ciri",
+ items:["Allah memiliki kekuasaan yang tidak terbatas.","Tidak memerlukan bantuan atau sokongan daripada makhluk.","Mengatur dan menentukan segala sesuatu di alam ini sesuai dengan kehendak-Nya"]},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"hik",f:"Kesan Beriman",
+ items:["Memperkuat keyakinan terhadap kekuasaan Allah.","Menumbuhkan rasa kebergantungan dan kepercayaan kepada Allah dalam segala situasi.","Mendorong umat untuk sentiasa memohon pertolongan dan berdoa kepada Allah."]},
+{y:"t4",tm:"sifat",t:"Sifat Qudrat",k:"aki",f:"Akibat Tidak Beriman",
+ items:["Sentiasa melakukan dosa","Tidak memohon keampunan daripada Allah"]},
+
+/* ============ T4.4 PROSES KEJADIAN MANUSIA MENURUT ISLAM ============ */
+{y:"t4",tm:"sains",t:"Proses Kejadian Manusia Menurut Islam",k:"erti",f:"Nuthfah (Air Mani)",
+ pre:"bermula wujud selepas persenyawaan. Proses ini bermula apabila air mani bercampur lelaki dan perempuan.",
+ ar:[{a:"إِنَّا خَلَقْنَا ٱلْإِنسَٰنَ مِن نُّطْفَةٍ أَمْشَاجٍ نَّبْتَلِيهِ فَجَعَلْنَٰهُ سَمِيعًۢا بَصِيرًا",r:"Surah Al insan - ayat 2"}],items:[]},
+{y:"t4",tm:"sains",t:"Proses Kejadian Manusia Menurut Islam",k:"erti",f:"Alaqah (Sekumpulan Darah)",
+ pre:"Peringkat kedua ialah telur yang telah disenyawakan dan tertanam dalam rahim perempuan, membentuk segumpal darah.",
+ ar:[{a:"ثُمَّ خَلَقْنَا ٱلنُّطْفَةَ",r:"AYAT 14 - Al Muminoonl"}],items:[]},
+{y:"t4",tm:"sains",t:"Proses Kejadian Manusia Menurut Islam",k:"lain",f:"Lima Fasa Kehidupan Manusia",
+ num:true,
+ items:["<b>Fasa Kanak-Kanak:</b> Pada fasa ini, kanak-kanak belajar bercakap, berjalan, bermain, dan bergaul dengan persekitaran.","<b>Fasa Remaja:</b> Remaja mula ditaklifkan (dipertanggungjawabkan) dengan peraturan syariah seperti solat, puasa, dan sebagainya.","<b>Fasa Dewasa:</b> Pada tahap ini, individu mempunyai pemikiran akal yang matang, berkahwin, bekerja untuk mencari rezeki, dan menjalani kehidupan yang penuh tanggungjawab.","<b>Fasa Tua:</b> Pada fasa tua, tenaga semakin lemah. Namun, pengalaman yang diperoleh menjadi panduan berharga untuk generasi berikutnya.","<b>Fasa Mati:</b> Kematian memberikan kesedaran untuk melakukan kebaikan kepada diri sendiri dan orang lain, serta menjaga hubungan dengan Allah dan hubungan sesama manusia."]},
+{y:"t4",tm:"sains",t:"Proses Kejadian Manusia Menurut Islam",k:"lain",f:"Penciptaan Manusia Dan Kewujudan Allah",
+ num:true,
+ items:["<b>Kehidupan Manusia di Alam Rahim Ibu:</b> Janin menerima makanan daripada ibunya melalui tali pusat yang bersambung dengan ibunya.","<b>Cap Jari:</b> Kepelbagaian cap jari yang dimiliki oleh manusia sejak zaman Nabi Adam menunjukkan kewujudan dan kekuasaan Allah, kerana manusia tidak mampu mencipta sesuatu yang begitu sempurna.","<b>Wajah Manusia yang Pelbagai:</b> Kepelbagaian wajah manusia, termasuk kembar seiras, membuktikan kewujudan dan kehebatan Allah dalam penciptaan yang terperinci dan sempurna.","<b>Penciptaan Bulu Mata dan Bulu Kening:</b> Perbezaan panjang bulu mata, kening dan rambut menunjukkan kekuasaan serta kebijaksanaan Allah dalam penciptaan."]},
+];
+const AKIDAH_T5 = [
+/* ============ T5.1 SIFAT IRADAH ============ */
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"erti",f:"Maksud Iradah",
+ items:["Iradah = Berkehendak","Allah menentukan segala sesuatu, sama ada berlaku atau tidak."]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"lawan",f:"Lawan Sifat",
+ pre:"IRADAH (Berkehendak)  —  LAWAN SIFAT  —  KARAHAH (Terpaksa)",
+ big:"KARAHAH",items:["(Terpaksa)"]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"إِنَّمَآ أَمْرُهُۥ إِذَآ أَرَادَ شَيْـًٔا أَن يَقُولَ لَهُۥ كُن فَيَكُونُ",r:"Surah Yasin: Ayat 82"},{a:"فَعَّالٌ لِّمَا يُرِيدُ",r:"Surah Al-Buruj: 16"}],items:[]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"dalil",f:"Dalil Aqli",
+ items:["Jika manusia melakukan sesuatu tanpa kehendak, mereka dianggap tidak berakal.","Mustahil Allah bersifat begitu kerana Allah Maha Bijaksana & Sempurna"]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"hik",f:"Kesan Beriman",
+ items:["Meningkatkan keimanan.","Berusaha, berikhtiar dan bertawakal.","Mempunyai keyakinan diri.","Redha atas ketentuan Allah.","Sabar menghadapi cabaran."]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"aki",f:"Kesan Tidak Beriman",
+ items:["Malas berusaha.","Merosakkan iman.","Suka menyalahkan orang lain.","Kurang keyakinan diri.","Sombong."]},
+{y:"t5",tm:"sifat",t:"Sifat Iradah (Berkehendak)",k:"lain",f:"Perbezaan Sifat Iradah & Kehendak Manusia",
+ tbl:{head:["Iradah Allah","Kehendak Manusia"],rows:[["Tidak terbatas","Terbatas"],["Pasti Berlaku","Mungkin Berlaku"]]},items:[]},
+
+/* ============ T5.2 SIFAT ILMU ============ */
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"erti",f:"Maksud",
+ items:["Sifat Allah SWT yang menunjukkan bahawa Allah Maha Mengetahui segala sesuatu."]},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"lawan",f:"Lawan Sifat",
+ pre:"ILMUN (Mengetahui)  —  LAWAN SIFAT  —  JAHLUN (Jahil)",
+ big:"JAHLUN",items:["(Jahil)"]},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"إِنَّ ٱللَّهَ بِكُلِّ شَىْءٍ عَلِيمٌ",r:"Surah Al-Anfaal: 75"},{a:"وَٱللَّهُ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ",r:"Surah At-Taghaabun: 4"}],items:[]},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"dalil",f:"Dalil Aqli",
+ items:["Jika Allah tidak bersifat ilmu, mustahil Allah dapat mencipta dan mentadbir alam ini"]},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"hik",f:"Hikmah",
+ items:["Meningkatkan ketaatan kepada Allah.","Bersikap jujur.","Suka menuntut ilmu."]},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"aki",f:"Akibat Dengan Sifat Ilmu",
+ items:["Sombong dan angkuh","Malas belajar","Merosakkan iman","Tidak takut melakukan dosa"],
+ note:"Tajuk dalam nota asal ialah 'Akibat Dengan Sifat Ilmu' — dikekalkan verbatim (isinya akibat tidak beriman dengan sifat ini)"},
+{y:"t5",tm:"sifat",t:"Sifat Ilmu ('Ilmun)",k:"lain",f:"Perbezaan Ilmu Allah & Ilmu Manusin",
+ tbl:{head:["Ilmu Allah","Ilmu Manusia"],rows:[["Tiada Pemulaan","Ada Pemulaan"],["Tidak terbatas","Terbatas"]]},items:[],
+ note:"Nota asal menulis 'Manusin' dan 'Pemulaan' — dikekalkan verbatim"},
+
+/* ============ T5.3 SIFAT SAMA' ============ */
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"erti",f:"Pengertian",
+ items:["Allah Maha Mendengar segala sesuatu.","Pendengaran Allah tidak terbatas.","Tidak perlukan alat seperti telinga."]},
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"lawan",f:"Lawan Sifat",
+ big:"SUMMUN = TULI",items:["MUSTAHIL BAGI ALLAH KERANA IA SIFAT KEKURANGAN."]},
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"dalil",f:"Dalil Akli",
+ items:["Akal: Tuhan mesti mendengar semua.","Jika tuli = lemah = mustahil bagi Allah."]},
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"وَٱللَّهُ سَمِيعٌ عَلِيمٌ",r:"Surah Al-Baqarah: 224"}],items:[]},
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"hik",f:"Hikmah",
+ items:["Dikasihi Allah.","Jaga percakapan.","Tawaduk.","Elak maksiat lidah.","Bersyukur."]},
+{y:"t5",tm:"sifat",t:"Sifat Sama' (Allah Maha Mendengar)",k:"aki",f:"Akibat",
+ items:["Mementingkan diri.","Cari aib orang.","Mengumpat.","Dimurkai Allah."]},
+
+/* ============ T5.4 SIFAT BASAR ============ */
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"erti",f:"Pengertian",
+ items:["Allah Maha Melihat semua perkara.","Tidak perlukan mata.","Pandangan Allah sempurna & tidak terbatas."]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"lawan",f:"Lawan Sifat",
+ big:"UMYUN = BUTA",items:["Mustahil bagi Allah, kerana buta ialah sifat kekurangan."]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"dalil",f:"Dalil Aqli",
+ items:["Tuhan mesti melihat makhluk.","Buta = lemah = tidak layak bagi Allah."]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"إِنَّ ٱللَّهَ يَعْلَمُ غَيْبَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ ۚ وَٱللَّهُ بَصِيرٌۢ بِمَا تَعْمَلُونَ",r:"Surah Al-Hujurat: 18"}],items:[]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"lain",f:"Perbezaan Dengan Manusia",
+ items:["<b>Allah:</b> Lihat semua, siang & malam, dekat & jauh.","<b>Manusia:</b> Terhad, perlukan mata & cahaya."]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"hik",f:"Hikmah",
+ items:["Amal makin baik.","Takut buat dosa.","Akhlak terjaga.","Hidup dirahmati."]},
+{y:"t5",tm:"sifat",t:"Sifat Basar (Allah Maha Melihat)",k:"aki",f:"Akibat",
+ items:["Ibadah tidak ikhlas.","Berani buat maksiat.","Malas berusaha."]},
+
+/* ============ T5.5 SIFAT HAYYAT ============ */
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"erti",f:"Pengertian",
+ items:["Hayat Allah: Kekal, tidak bernyawa, dan tidak memerlukan perantaraan untuk hidup."],
+ note:"Nota asal menulis 'tidak bernyawa' — dikekalkan verbatim; sila sahkan dengan cikgu"},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"lawan",f:"Sifat Lawan",
+ pre:"HAYYAT (HIDUP)  —  SIFAT LAWAN  —  AL-MAUT (MATI)",
+ big:"AL-MAUT",items:["(MATI)"]},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"dalil",f:"Dalil Aqli",
+ items:["Jika Allah tidak bersifat Hayyat, maka Allah bersifat mati (Al-Maut), yang merupakan sifat yang lemah."]},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ",r:"Surah Al-Baqarah 2:255"}],
+ items:["Kewujudan alam dan makhluk di muka bumi adalah bukti Allah bersifat Hayyat."]},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"lain",f:"Perbezaan Hayyat Allah Dan Hayat Manusia",
+ tbl:{head:["Hayyat Allah","Hayyat Allah"],rows:[["Tidak bernafas","bernafas"],["Kekal, tiada tempoh","Ada tempoh, pasti mati"],["Tidak perlukan sebab","Perlukan sebab untuk hidup"],["Tidak dihidupkan","Dihidupkan oleh Allah"]]},items:[],
+ note:"Kedua-dua tajuk lajur ditulis 'HAYYAT ALLAH' dalam nota asal — dikekalkan verbatim (lajur kanan sepatutnya Hayat Manusia); sila sahkan dengan cikgu"},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"hik",f:"Hikmah",
+ items:["Mengagungkan Allah setiap masa.","Menyedari kelemahan diri sebagai makhluk.","Bersedia menghadapi kematian.","Yakin bahawa semua makhluk akan mati."]},
+{y:"t5",tm:"sifat",t:"Sifat Hayyat",k:"aki",f:"Akibat",
+ items:["Leka dengan kehidupan dunia.","Merasa diri hebat dan tidak perlu bergantung pada Allah.","Berani melakukan dosa tanpa rasa takut."]},
+
+/* ============ T5.6 RASUL ============ */
+{y:"t5",tm:"iman",t:"Rasul",k:"erti",f:"Pengertian",
+ items:["Lelaki merdeka yang dipilih Allah.","Terima wahyu untuk diri sendiri dan wajib sampaikan kepada umat.","Mukallaf wajib beriman dengan rasul."]},
+{y:"t5",tm:"iman",t:"Rasul",k:"hukum",f:"Hukum Beriman Pada Rasul",
+ big:"WAJIB",items:[]},
+{y:"t5",tm:"iman",t:"Rasul",k:"lain",f:"Rasul Ulul Azmi",
+ items:["Nabi Nuh a.s","Nabi Ibrahim a.s.","Nabi Musa a.s.","Nabi Isa a.s.","Nabi Muhammad SAW"]},
+{y:"t5",tm:"iman",t:"Rasul",k:"lain",f:"Sifat Harus",
+ items:["Sifat kemanusiaan yang tidak mengurangkan darjat kenabian.","Lapar, dahaga, tidur, sakit, sihat, berniaga, menggembala."]},
+{y:"t5",tm:"iman",t:"Rasul",k:"lain",f:"Sifat-Sifat Rasul (Wajib & Mustahil)",
+ tbl:{head:["Wajib","Mustahil"],rows:[["As-Siddiq<br>Benar","Al-Kazib<br>Dusta"],["Al-Fathonah<br>Bijaksana","Al-Baladah<br>Bodoh"],["At-Tabligh<br>Menyampaikan","Al-Kitman<br>Menyembunyikan"],["Al-Amanah<br>Jujur","Al-Khianat<br>Khianat"]]},items:[]},
+{y:"t5",tm:"iman",t:"Rasul",k:"hik",f:"Hikmah",
+ items:["Menambah iman dan takwa","Mencontohi akhlak rasul","Membentuk peribadi mulia"]},
+{y:"t5",tm:"iman",t:"Rasul",k:"aki",f:"Akibat",
+ items:["Lemah iman","Akhlak tercela","Masyarakat mundur"]},
+
+/* ============ T5.7 SAMIYYAT ============ */
+{y:"t5",tm:"iman",t:"Samiyyat",k:"erti",f:"Pengertian",
+ items:["Perkara-perkara ghaib yang berlaku di luar batas pemikiran manusia dan wajib dipercayai oleh semua umat Islam."]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"hukum",f:"Hukum Beriman",
+ big:"WAJIB",items:[]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"dalil",f:"Dalil Naqli",
+ ar:[{a:"وَقَالَ يَٰٓـَٔادَمُ أَنۢبِئْهُم بِأَسْمَآئِهِمْ ۖ فَلَمَّآ أَنۢبَأَهُم بِأَسْمَآئِهِمْ قَالَ أَلَمْ أَقُل لَّكُمْ إِنِّىٓ أَعْلَمُ غَيْبَ ٱلسَّمَٰوَٰتِ وَٱلْأَرْضِ وَأَعْلَمُ مَا تُبْدُونَ وَمَا كُنتُمْ تَكْتُمُونَ",r:"Surah Al-Baqarah: Ayat 33"}],items:[]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"dalil",f:"Dalil Aqli",
+ items:["Akal manusia terbatas","Kewujudan sistem akhirat","Ajaran agama sempurna"]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"hik",f:"Hikmah",
+ items:["Kuat iman & takwa","Hati tenang","Rajin buat amal soleh","Takut buat dosa","Ingat akhirat"]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"aki",f:"Akibat",
+ items:["Berdosa besar","Iman tak sempurna","Lalai & buat maksiat","Tak bersedia untuk akhirat"]},
+{y:"t5",tm:"iman",t:"Samiyyat",k:"lain",f:"Contoh-Contoh Samiyyat",
+ items:["Soalan kubur","Azab dan nikmat kubur","Padang Mahsyar","Hisab (perhitungan amal)","Titian Sirat","Syurga dan neraka","Hari Kiamat","Malaikat","Alam Barzakh"]},
+];
+
+/* ================= BINA KAD ================= */
+const YRLABEL={t3:"Tahun 3",t4:"Tahun 4",t5:"Tahun 5"};
+const TEMALABEL={iman:"Rukun Iman",sifat:"Sifat Allah",sains:"Islam & Sains"};
+const KIND={
+  erti: {label:"Pengertian / Maksud", icon:"i", prompt:'Nyatakan <b>pengertian / maksudnya</b>.'},
+  hukum:{label:"Hukum",               icon:"⚖", prompt:'Apakah <b>hukumnya</b>?'},
+  dalil:{label:"Dalil",               icon:"۞", prompt:'Nyatakan <b>dalilnya</b>.'},
+  lawan:{label:"Lawan Sifat",         icon:"⇄", prompt:'Nyatakan <b>lawan sifat</b> bagi sifat ini.'},
+  hik:  {label:"Hikmah / Kesan Beriman", icon:"★", prompt:'Nyatakan <b>hikmah / kesan beriman</b>.'},
+  aki:  {label:"Akibat",              icon:"!", prompt:'Nyatakan <b>akibat</b>-nya.'},
+  lain: {label:"Lain-lain",           icon:"•", prompt:'Nyatakan jawapannya.'}
+};
+
+const CARDS=[].concat(AKIDAH_T3,AKIDAH_T4,AKIDAH_T5);
+CARDS.forEach((c,i)=>c.id=i);
+
+/* ================= UI ================= */
+let filterYr="all",filterTema="all",filterAsp="all",order=[],pos=0,flipped=false;
+let known=loadKnown();
+const el=id=>document.getElementById(id);
+const card=el("card");
+function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("akidahUpkk_known")||"[]"));}catch(e){return new Set();}}
+function saveKnown(){try{localStorage.setItem("akidahUpkk_known",JSON.stringify([...known]));}catch(e){}}
+function buildOrder(){
+  order=CARDS.filter(c=>(filterYr==="all"||c.y===filterYr)&&(filterTema==="all"||c.tm===filterTema)&&(filterAsp==="all"||c.k===filterAsp)).map(c=>c.id);
+  pos=0;
+}
+function setAccent(k){
+  const map={erti:["--erti","--erti-bg"],hukum:["--hukum","--hukum-bg"],dalil:["--dalil","--dalil-bg"],lawan:["--lawan","--lawan-bg"],hik:["--hik","--hik-bg"],aki:["--aki","--aki-bg"],lain:["--lain","--lain-bg"]};
+  const [c,bg]=map[k]||map.lain;
+  document.documentElement.style.setProperty("--accent","var("+c+")");
+  document.documentElement.style.setProperty("--accent-bg","var("+bg+")");
+}
+function arBlocks(list){
+  return (list||[]).map(x=>'<div class="arb">'
+    +(x.l?'<div class="lb">'+x.l+'</div>':'')
+    +'<div class="ar">'+x.a+'</div>'
+    +(x.r?'<div class="rf">'+x.r+'</div>':'')
+    +(x.m?'<div class="mk">'+x.m+'</div>':'')
+    +'</div>').join("");
+}
+function listHtml(items,num){
+  if(!items||!items.length)return "";
+  return '<ul class="qlist'+(num?' num':'')+'">'+items.map(t=>'<li>'+t+'</li>').join("")+'</ul>';
+}
+function tblHtml(t){
+  if(!t)return "";
+  return '<table class="tbl"><thead><tr>'+t.head.map(h=>'<th>'+h+'</th>').join("")+'</tr></thead><tbody>'
+    +t.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join("")+'</tr>').join("")+'</tbody></table>';
+}
+function render(){
+  const total=order.length;
+  if(!total){
+    el("counter").textContent="Tiada kad";el("bBody").innerHTML="";el("barFill").style.width="0%";
+    el("fTopic").textContent="Tiada kad untuk tapisan ini";el("fAspill").textContent="—";
+    el("fPrompt").textContent="Cuba tukar tapisan Tahun / Tema / Poin.";return;
+  }
+  const c=CARDS[order[pos]];
+  flipped=false;card.classList.remove("flip");
+  setAccent(c.k);
+  const kd=KIND[c.k]||KIND.lain;
+  el("fYr").textContent=YRLABEL[c.y];
+  el("bYr").textContent=YRLABEL[c.y];
+  el("fTema").textContent=TEMALABEL[c.tm];
+  el("bTema").textContent=TEMALABEL[c.tm];
+  el("fIcon").textContent=kd.icon;
+  el("bIcon").textContent=kd.icon;
+  el("fTopic").textContent=c.t;
+  el("bTopic").textContent=c.t;
+  el("fAspill").textContent=c.f;
+  el("bField").textContent=c.f;
+  el("fPrompt").innerHTML=kd.prompt;
+  let html="";
+  if(c.pre)html+='<div class="pre">'+c.pre+'</div>';
+  if(c.big)html+='<div class="big">'+c.big+'</div>';
+  if(c.ar)html+=arBlocks(c.ar);
+  html+=listHtml(c.items,c.num);
+  if(c.tbl)html+=tblHtml(c.tbl);
+  if(c.grp2)html+='<div class="grp">'+c.grp2+'</div>';
+  if(c.items2)html+=listHtml(c.items2,c.num);
+  el("bBody").innerHTML=html;
+  if(c.note){el("bNote").style.display="block";el("bNote").textContent=c.note;}else{el("bNote").style.display="none";}
+  el("counter").textContent="Kad "+(pos+1)+" / "+total;
+  el("barFill").style.width=((pos+1)/total*100)+"%";
+  const knownInView=order.filter(id=>known.has(id)).length;
+  el("knownCount").textContent="✓ "+knownInView+" sudah tahu";
+  el("btnKnown").classList.toggle("on",known.has(c.id));
+}
+function flip(){flipped=!flipped;card.classList.toggle("flip",flipped);}
+function next(){if(!order.length)return;pos=(pos+1)%order.length;render();}
+function prev(){if(!order.length)return;pos=(pos-1+order.length)%order.length;render();}
+function shuffle(){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();}
+card.addEventListener("click",flip);
+el("btnFlip").addEventListener("click",e=>{e.stopPropagation();flip();});
+el("btnNext").addEventListener("click",next);
+el("btnPrev").addEventListener("click",prev);
+el("btnShuffle").addEventListener("click",shuffle);
+el("btnKnown").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
+el("btnReview").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.delete(id);saveKnown();next();});
+el("btnReset").addEventListener("click",()=>{if(confirm("Set semula semua progres 'sudah tahu'?")){known.clear();saveKnown();render();}});
+document.querySelectorAll("#tabsYr .yr").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsYr .yr").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterYr=t.dataset.y;buildOrder();render();});});
+document.querySelectorAll("#tabsTema .tema").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsTema .tema").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterTema=t.dataset.t;buildOrder();render();});});
+document.querySelectorAll("#tabsAsp .asp").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsAsp .asp").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterAsp=t.dataset.a;buildOrder();render();});});
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}});
+buildOrder();render();
+</script>
+</body>
+</html>
