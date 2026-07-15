@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kad Imbas · Booster UPKK Adab</title>
+<title>Kad Imbas · Adab UPKK (Gabungan)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,6 +15,9 @@
     --jangan:#C0392B; --jangan-bg:#FBEAE7;
     --hik:#B8860B; --hik-bg:#FBF3DE;
     --aki:#2F6F9E; --aki-bg:#E6EFF5;
+    --erti:#2A7D8C; --erti-bg:#E4F1F3;
+    --dalil:#7B4B94; --dalil-bg:#F1E9F5;
+    --lain:#8A6A3D; --lain-bg:#F4EDE1;
     --accent:var(--buat); --accent-bg:var(--buat-bg);
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -24,38 +27,43 @@
   body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;
     background:radial-gradient(1200px 600px at 50% -10%, #FDFBF4 0%, transparent 60%), var(--paper);
     color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
-    padding:20px 16px 40px;-webkit-tap-highlight-color:transparent}
-  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:14px}
-  header{text-align:center;padding-top:6px}
-  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
-  h1{font-family:'Amiri',serif;font-weight:700;font-size:27px;line-height:1.2;margin:6px 0 2px}
-  .sub{font-size:12.5px;color:var(--ink-soft)}
-  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0;color:var(--gold)}
+    padding:18px 16px 40px;-webkit-tap-highlight-color:transparent}
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:12px}
+  header{text-align:center;padding-top:4px}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  h1{font-family:'Amiri',serif;font-weight:700;font-size:25px;line-height:1.2;margin:5px 0 2px}
+  .sub{font-size:12px;color:var(--ink-soft)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 0;color:var(--gold)}
   .divider::before,.divider::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold))}
   .divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
   .divider span{font-size:13px}
-  .filters{display:flex;flex-direction:column;gap:8px}
-  .frow{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
-  .flabel{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;
-    align-self:center;margin-right:2px}
+  .filters{display:flex;flex-direction:column;gap:6px}
+  .frow{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;align-items:center}
+  .flabel{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:800;margin-right:2px}
   .tab{border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
-    font:inherit;font-weight:600;font-size:11.5px;padding:6px 10px;border-radius:999px;cursor:pointer;
-    transition:.16s;display:flex;align-items:center;gap:6px}
-  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}
+    font:inherit;font-weight:600;font-size:10.5px;padding:5px 9px;border-radius:999px;cursor:pointer;
+    transition:.16s;display:flex;align-items:center;gap:5px;line-height:1.2}
+  .tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.45}
   .tab.active{color:#fff}
   .tab.active .dot{opacity:1;background:#fff}
-  .sec.active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .sec.active,.src.active{background:var(--gold-deep);border-color:var(--gold-deep)}
   .asp[data-a="all"].active{background:var(--gold-deep);border-color:var(--gold-deep)}
   .asp[data-a="buat"].active{background:var(--buat);border-color:var(--buat)}
   .asp[data-a="jangan"].active{background:var(--jangan);border-color:var(--jangan)}
   .asp[data-a="hik"].active{background:var(--hik);border-color:var(--hik)}
   .asp[data-a="aki"].active{background:var(--aki);border-color:var(--aki)}
+  .asp[data-a="erti"].active{background:var(--erti);border-color:var(--erti)}
+  .asp[data-a="dalil"].active{background:var(--dalil);border-color:var(--dalil)}
+  .asp[data-a="lain"].active{background:var(--lain);border-color:var(--lain)}
   .asp[data-a="buat"] .dot{background:var(--buat);opacity:.7}
   .asp[data-a="jangan"] .dot{background:var(--jangan);opacity:.7}
   .asp[data-a="hik"] .dot{background:var(--hik);opacity:.7}
   .asp[data-a="aki"] .dot{background:var(--aki);opacity:.7}
+  .asp[data-a="erti"] .dot{background:var(--erti);opacity:.7}
+  .asp[data-a="dalil"] .dot{background:var(--dalil);opacity:.7}
+  .asp[data-a="lain"] .dot{background:var(--lain);opacity:.7}
   .asp.active .dot{background:#fff;opacity:1}
-  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-soft);font-weight:600;margin-top:2px}
   .meta .known{color:var(--buat)}
   .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
   .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
@@ -69,60 +77,70 @@
     padding:22px 20px;display:flex;flex-direction:column;overflow:visible}
   .face::before{content:"";position:absolute;inset:9px;border-radius:12px;pointer-events:none;
     border:1.5px solid color-mix(in srgb, var(--accent) 32%, transparent)}
-  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--accent);opacity:.65}
+  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--accent);opacity:.6}
   .corner.tl{top:13px;left:13px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
   .corner.tr{top:13px;right:13px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
   .corner.bl{bottom:13px;left:13px;border-right:0;border-top:0;border-radius:0 0 0 4px}
   .corner.br{bottom:13px;right:13px;border-left:0;border-top:0;border-radius:0 0 4px 0}
   .back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
-  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:1;margin-bottom:4px}
-  .chip{font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);
-    background:var(--paper);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
-  .side{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
-  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;position:relative;z-index:1;padding:8px 4px}
-  .a-icon{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-size:22px;
+  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1;margin-bottom:4px}
+  .chips{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);padding:4px 8px;border-radius:999px;white-space:nowrap}
+  .chip.srcchip{color:var(--accent);background:var(--accent-bg);border-color:color-mix(in srgb,var(--accent) 28%,transparent)}
+  .side{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:11px;position:relative;z-index:1;padding:8px 4px}
+  .a-icon{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-size:21px;font-weight:700;
     display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px var(--accent)}
-  .topic{font-family:'Amiri',serif;font-size:22px;font-weight:700;line-height:1.3;color:var(--ink)}
-  .aspill{font-weight:800;font-size:13px;letter-spacing:.04em;color:var(--accent);
+  .topic{font-family:'Amiri',serif;font-size:21px;font-weight:700;line-height:1.3;color:var(--ink)}
+  .aspill{font-weight:800;font-size:12px;letter-spacing:.02em;color:var(--accent);
     background:var(--accent-bg);border:1.5px solid color-mix(in srgb,var(--accent) 35%,transparent);
-    padding:6px 14px;border-radius:999px}
+    padding:6px 13px;border-radius:999px;line-height:1.35}
   .prompt{font-size:12.5px;color:var(--ink-soft);line-height:1.5;max-width:330px}
   .prompt b{color:var(--accent)}
-  .hint{font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;justify-content:center;margin-top:4px}
+  .hint{font-size:11.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;justify-content:center;margin-top:4px}
   .hint .tapdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
   @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
-  .a-head{display:flex;align-items:center;gap:9px;position:relative;z-index:1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-  .a-head .hi{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .a-head .ht{display:flex;flex-direction:column;line-height:1.2}
-  .a-head .ht .t1{font-family:'Amiri',serif;font-size:16px;font-weight:700;color:var(--ink)}
-  .a-head .ht .t2{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--accent);text-transform:uppercase}
+  .a-head{display:flex;align-items:flex-start;gap:9px;position:relative;z-index:1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .a-head .hi{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+  .a-head .ht{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .a-head .ht .t1{font-family:'Amiri',serif;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .a-head .ht .t2{font-size:10.5px;font-weight:800;letter-spacing:.02em;color:var(--accent);text-transform:uppercase}
   .a-body{flex:1;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
-  ul.qlist{list-style:none;display:flex;flex-direction:column;gap:7px}
-  ul.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.45}
-  ul.qlist li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px}
-  .doa{margin-top:4px;border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:9px;padding:9px 10px;text-align:center}
-  .doa .ar{font-family:'Amiri',serif;direction:rtl;font-size:20px;line-height:1.9;color:#1a1a17}
-  .doa .mk{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:3px}
-  .note{position:relative;z-index:1;margin-top:8px;font-size:11px;color:var(--ink-soft);text-align:center;font-style:italic;line-height:1.5}
+  .pre{font-size:13px;line-height:1.5;color:var(--ink)}
+  .grp{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+    margin-top:4px;padding-top:6px;border-top:1px dashed var(--line)}
+  ul.qlist{list-style:none;display:flex;flex-direction:column;gap:6px}
+  ul.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+  ul.qlist li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:6px}
+  ul.qlist.num{counter-reset:qn}
+  ul.qlist.num li{counter-increment:qn}
+  ul.qlist.num li::before{content:counter(qn);width:auto;height:auto;border-radius:0;background:none;color:var(--accent);font-weight:800;font-size:11.5px;margin-top:0;min-width:15px}
+  .arb{border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:9px;padding:10px 11px;text-align:center}
+  .arb + .arb{margin-top:5px}
+  .arb .lb{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+  .arb .ar{font-family:'Amiri',serif;direction:rtl;font-size:20px;line-height:2;color:#1a1a17}
+  .arb .mk{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:5px;line-height:1.55;text-align:left}
+  .note{position:relative;z-index:1;margin-top:8px;font-size:10.5px;color:var(--ink-soft);text-align:center;font-style:italic;line-height:1.5}
   .note::before{content:"\203B  "}
-  .controls{display:flex;flex-direction:column;gap:12px}
-  .nav{display:flex;gap:10px}
-  .btn{flex:1;font:inherit;font-weight:700;font-size:14.5px;padding:13px;border-radius:13px;cursor:pointer;
-    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .controls{display:flex;flex-direction:column;gap:10px}
+  .nav{display:flex;gap:9px}
+  .btn{flex:1;font:inherit;font-weight:700;font-size:14px;padding:12px;border-radius:13px;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px}
   .btn:hover{border-color:var(--gold);color:var(--gold-deep)}
   .btn:active{transform:translateY(1px)}
   .btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
   .btn.solid:hover{filter:brightness(1.05);color:#fff}
-  .mark{display:flex;gap:10px}
+  .mark{display:flex;gap:9px}
   .btn.known{color:var(--buat)} .btn.known:hover{border-color:var(--buat)}
   .btn.review{color:var(--jangan)} .btn.review:hover{border-color:var(--jangan)}
   .btn.known.on{background:var(--buat);border-color:var(--buat);color:#fff}
-  .util{display:flex;gap:10px}
-  .util .btn{font-size:13px;font-weight:600;padding:10px}
-  footer{text-align:center;font-size:11px;color:var(--ink-soft);line-height:1.6;margin-top:4px}
+  .util{display:flex;gap:9px}
+  .util .btn{font-size:12.5px;font-weight:600;padding:9px}
+  footer{text-align:center;font-size:10.5px;color:var(--ink-soft);line-height:1.6;margin-top:2px}
   footer b{color:var(--gold-deep)}
-  @media (max-width:420px){h1{font-size:22px}.topic{font-size:19px}.face{padding:20px 15px}
-    ul.qlist li{font-size:13.5px}}
+  @media (max-width:420px){h1{font-size:20px}.topic{font-size:18px}.face{padding:20px 15px}
+    ul.qlist li{font-size:13px}.arb .ar{font-size:18px}}
   @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
 
   /* iPhone/Safari compatibility: avoid 3D flip rendering that can mirror or overlap text */
@@ -138,13 +156,21 @@
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Booster UPKK · Kad Imbas</div>
-    <h1>Adab · 4 Poin Penting</h1>
-    <div class="sub">Setiap poin (Adab · Larangan · Hikmah · Akibat) = satu kad</div>
+    <div class="eyebrow">Kad Imbas UPKK · Gabungan</div>
+    <h1>Adab UPKK</h1>
+    <div class="sub">Booster 4 Poin + Peta Minda Tahun 3 · 4 · 5</div>
     <div class="divider"><span>۞</span></div>
   </header>
 
   <div class="filters">
+    <div class="frow" id="tabsSrc">
+      <span class="flabel">Sumber</span>
+      <button class="tab src active" data-r="all"><span class="dot"></span>Semua</button>
+      <button class="tab src" data-r="booster"><span class="dot"></span>Booster</button>
+      <button class="tab src" data-r="t3"><span class="dot"></span>Tahun 3</button>
+      <button class="tab src" data-r="t4"><span class="dot"></span>Tahun 4</button>
+      <button class="tab src" data-r="t5"><span class="dot"></span>Tahun 5</button>
+    </div>
     <div class="frow" id="tabsSec">
       <span class="flabel">Topik</span>
       <button class="tab sec active" data-k="all"><span class="dot"></span>Semua</button>
@@ -154,14 +180,18 @@
       <button class="tab sec" data-k="ziarah"><span class="dot"></span>Ziarah</button>
       <button class="tab sec" data-k="ilmu"><span class="dot"></span>Ilmu</button>
       <button class="tab sec" data-k="masyarakat"><span class="dot"></span>Masyarakat</button>
+      <button class="tab sec" data-k="nilai"><span class="dot"></span>Nilai Murni</button>
     </div>
     <div class="frow" id="tabsAsp">
       <span class="flabel">Poin</span>
       <button class="tab asp active" data-a="all"><span class="dot"></span>Semua</button>
+      <button class="tab asp" data-a="erti"><span class="dot"></span>Pengertian</button>
       <button class="tab asp" data-a="buat"><span class="dot"></span>Adab</button>
       <button class="tab asp" data-a="jangan"><span class="dot"></span>Larangan</button>
       <button class="tab asp" data-a="hik"><span class="dot"></span>Hikmah</button>
       <button class="tab asp" data-a="aki"><span class="dot"></span>Akibat</button>
+      <button class="tab asp" data-a="dalil"><span class="dot"></span>Dalil &amp; Doa</button>
+      <button class="tab asp" data-a="lain"><span class="dot"></span>Lain-lain</button>
     </div>
   </div>
 
@@ -175,7 +205,7 @@
     <div class="card" id="card">
       <div class="face front">
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <div class="tagrow"><span class="chip" id="fChip">—</span><span class="side">Soalan</span></div>
+        <div class="tagrow"><div class="chips"><span class="chip" id="fChip">—</span><span class="chip srcchip" id="fSrc">—</span></div><span class="side">Soalan</span></div>
         <div class="q-center">
           <div class="a-icon" id="fIcon">✓</div>
           <div class="topic" id="fTopic">—</div>
@@ -186,9 +216,9 @@
       </div>
       <div class="face back">
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <div class="tagrow"><span class="chip" id="bChip">—</span><span class="side">Jawapan</span></div>
-        <div class="a-head"><div class="hi" id="bIcon">✓</div><div class="ht"><span class="t1" id="bTopic">—</span><span class="t2" id="bAspect">—</span></div></div>
-        <div class="a-body"><ul class="qlist" id="bList"></ul><div id="bDoa"></div></div>
+        <div class="tagrow"><div class="chips"><span class="chip" id="bChip">—</span><span class="chip srcchip" id="bSrc">—</span></div><span class="side">Jawapan</span></div>
+        <div class="a-head"><div class="hi" id="bIcon">✓</div><div class="ht"><span class="t1" id="bTopic">—</span><span class="t2" id="bField">—</span></div></div>
+        <div class="a-body" id="bBody"></div>
         <div class="note" id="bNote" style="display:none"></div>
       </div>
     </div>
@@ -211,15 +241,14 @@
   </div>
 
   <footer>
-    <b>Booster UPKK Adab · 4 Poin Penting</b> · Teacher Collection<br>
-    Setiap topik dipecah kepada 4 kad: Adab · Larangan · Hikmah · Akibat
+    <b>Adab UPKK · Deck Gabungan</b><br>
+    Sumber: Booster UPKK Adab (4 Poin Penting) + Peta Minda UPKK Adab Tahun 3/4/5 (Titipan Ustazah Azizah)<br>
+    Perkataan dikekalkan seperti nota asal. Kad dua sumber tidak dicampur.
   </footer>
 </div>
 
 <script>
-/* ===== DATA — diambil terus (perkataan penuh) dari nota Booster UPKK Adab; tiada tambahan/pengurangan/pemendekan =====
-   b = Adab (Buat) · l = Larangan (Jangan Buat) · h = Hikmah (Kesan Baik) · a = Akibat (Kesan Buruk) */
-const DECK = [
+const BOOSTER = [
 /* ---------- PERKARA ASAS ADAB ---------- */
 {s:"asas",q:"Adab Dengan Allah",
  b:["Sentiasa beriman dan yakin kepada Allah","Menunaikan solat lima waktu dengan sempurna","Membaca Al Quran setiap hari","Berdoa dan memohon kepada Allah","Bersyukur atas segala nikmat yang diberikan","Bertaubat dan memohon keampunan atas dosa"],
@@ -402,61 +431,487 @@ const DECK = [
  h:["Mewujudkan masyarakat yang prihatin dan penyayang","Memupuk semangat tolong-menolong dan ukhwah","Mendapat keberkatan dan keredaan Allah","Mereka merasa dihargai dan diterima","Masyarakat lebih harmoni dan bahagia"],
  a:["Mereka merasa sedih, malu dan tertekan","Hubungan antara jiran menjadi renggang","Masyarakat menjadi tidak prihatin dan tidak harmoni","Dosa kerana menyakiti hati orang lain","Kehidupan masyarakat tidak aman dan tidak bahagia"]},
 ];
+const PETA_T3 = [
+/* ---- T3.1 ADAB DENGAN ORANG DEWASA DAN ORANG TUA ---- */
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"erti",f:"Pengertian Orang Dewasa Dan Orang Tua",
+ items:["Orang yang lebih tua daripada kita. Contoh: Abang dan Kakak.","Orang yang seusia dengan ibu bapa kita. Contoh: Pak Cik dan Mak Cik.","Orang yang lebih tua daripada ibu bapa kita. Contoh: Datuk dan Nenek."]},
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"lain",f:"Siapakah Orang Dewasa Dan Orang Tua?",
+ items:["Dalam Sekolah: Guru, Kerani, Tukang Kebun","Dalam Keluarga: Ibu, Bapa, Nenek","Dalam Masyarakat: Polis, Bomba, Jiran"]},
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"dalil",f:"Tanggungjawab Seorang Anak Kepada Kedua-Dua Ibu Bapa",
+ ar:[{l:"Doa Untuk Kedua-dua Ibu Bapa",a:"اَللّٰهُمَّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",m:"Maksud: Ya Tuhanku! Ampunilah dosa ku dan dosa kedua-dua ibu bapa ku dan kasihanilah mereka seperti mereka mengasihaniku sejak aku masih kecil."}],items:[]},
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"buat",f:"Adab Dengan Orang Dewasa Dan Orang Tua",
+ items:["Mendahului memberi salam","Mengutamakan mereka dalam setiap perkara","Memanggil dengan nama dan gelaran yang baik","Merendahkan suara dan bercakap dengan sopan","Berlemah lembut dalam pergaulan"]},
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"hik",f:"Faedah Beradab Dengan Orang Dewasa Dan Orang Tua",
+ items:["Menjadi anak yang soleh","Hidup Diberkati","Dikasihi Allah dan Rasul","Disayangi Manusia","Jiwa Menjadi Tenang"]},
+{src:"t3",s:"asas",t:"Adab Dengan Orang Dewasa Dan Orang Tua",k:"aki",f:"Akibat Tidak Beradab Dengan Orang Dewasa Dan Orang Tua",
+ items:["Dimurkai Allah","Hidup Tidak Diberkati Allah","Hidup Tidak Bahagia","Menjadi Anak Derhaka","Dipandang Rendah Dan Dibenci Masyarakat","Tidak Dihormati Oleh Orang Lain","Mendapat Dosa"]},
 
-const SECLABEL={asas:"Perkara Asas",bersosial:"Bersosial",masjid:"Di Masjid",ziarah:"Ziarah",ilmu:"Menuntut Ilmu",masyarakat:"Bermasyarakat"};
-const ASPECTS=[
-  {k:"buat",  field:"b", label:"Adab (Buat)",            icon:"✓", prompt:'Nyatakan <b>adab</b> — perkara yang perlu dibuat.'},
-  {k:"jangan",field:"l", label:"Larangan (Jangan Buat)", icon:"✗", prompt:'Nyatakan <b>larangan</b> — perkara yang tidak boleh dibuat.'},
-  {k:"hik",   field:"h", label:"Hikmah (Kesan Baik)",    icon:"★", prompt:'Nyatakan <b>hikmah</b> — kesan baik.'},
-  {k:"aki",   field:"a", label:"Akibat (Kesan Buruk)",   icon:"!", prompt:'Nyatakan <b>akibat</b> — kesan buruk jika tidak beradab.'},
+/* ---- T3.2 ADAB DENGAN JIRAN ISLAM DAN BUKAN ISLAM ---- */
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"erti",f:"Pengertian Jiran",
+ items:["Jiran Islam: Semua orang islam tidak kira tua atau muda, lelaki atau perempuan yang tinggal berhampiran dengan rumah kita dalam jarak 40 buah rumah dari kiri atau kanan, depan atau belakang ataupun dari tingkat atas atau bawah.","Jiran Bukan Islam: Jiran yang menganut agama selain agama islam seperti agama Buddha, Hindu dan Kristian."]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"dalil",f:"Dalil: Hadis Adab Berjiran",
+ pre:"Sabda Rasulullah SAW:",
+ ar:[{a:"مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الْآخِرِ فَلْيُحْسِنْ إِلَى جَارِهِ",m:"Maksudnya: Sesiapa yang beriman kepada Allah SWT dan hari akhirat, hendaklah berbuat baik kepada jirannya. (Riwayat Al-Bukhari)"}],items:[]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"buat",f:"Adab Dengan Jiran Islam Dan Bukan Islam",
+ items:["Memberi salam atau ucapan selamat","Sedia memberi bantuan","Hormat menghormati sesama jiran","Bertolak ansur","Bersangka baik","Menutup keaiban jiran"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"lain",f:"Hak Jiran Yang Perlu Dipelihara",
+ items:["Tidak menyakiti jiran","Menjaga harta benda jiran","Berbuat baik terhadap jiran","Menghormati jiran serta ahli keluarganya","Memberi kasih sayang dan layanan yang baik"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"hik",f:"Faedah Beradab Dengan Jiran Islam Dan Bukan Islam",
+ items:["Hidup harmoni dan aman damai","Menguatkan persepakatan dan perpaduan","Saling menjaga keselamatan diri dan harta","Menunjukkan keindahan hidup islam","Wujud semangat bekerjasama"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Jiran Islam Dan Bukan Islam",k:"aki",f:"Akibat Tidak Beradab Dengan Jiran Islam Dan Bukan Islam",
+ items:["Sukar mendapat pertolongan","Selalu Bermusuh","Merosakkan perpaduan","Memutuskan Persahabatan","Membawa pergaduhan dan perpecahan dalam masyarakat","Disisih oleh masyarakat"]},
+
+/* ---- T3.3 ADAB DENGAN TETAMU ---- */
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"erti",f:"Pengertian Tetamu",
+ items:["Tetamu ialah orang yang datang bertandang atau menziarahi ke rumah kita sama ada seorang atau ramai bagi tujuan merapatkan silaturahim, mengadakan perbincangan, berhajatkan pertolongan dan sebagainya."]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"dalil",f:"Dalil: Hadis Adab Memuliakan Tetamu",
+ pre:"Sabda Rasulullah SAW:",
+ ar:[{a:"مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ",m:"Maksudnya: Sesiapa yang beriman kepada Allah SWT dan hari akhirat, hendaklah memuliakan tetamu. (Riwayat Al-Bukhari)"}],items:[]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"buat",f:"Adab Dengan Tetamu",
+ items:["Menghidang makanan dan minuman yang sesuai","Memberi layanan yang baik","Sentiasa mengalu-alukan kedatangan tetamu","Bertanya khabar dan bercakap perkara yang baik","Menunjukkan rasa gembira dengan kedatangan tetamu"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"buat",f:"Adab Sebagai Tetamu",
+ items:["Berkunjung pada masa yang sesuai","Masuk ke dalam rumah setelah di jemput","Menjamah makanan dan minuman dengan sopan","Ucap terima kasih terhadap layanan diberi","Memberi salam semasa datang dan sebelum pulang"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"lain",f:"Batas Pergaulan Dengan Tetamu",
+ items:["Menjaga tutur kata dan tingkah laku","Menjaga pandangan mata","Menjaga maruah tetamu","Memakai pakaian yang bersih dan menutup aurat"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"hik",f:"Faedah Beradab Dengan Tetamu",
+ items:["Dimurahkan rezeki","Merapatkan ikatan ukhwah islamiyah","Dilimpahi rahmat Allah","Diampunkan dosa","Dikasihi masyarakat"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Tetamu",k:"aki",f:"Akibat Tidak Beradab Dengan Tetamu",
+ items:["Kehidupan tidak tenang","Dipulau oleh masyarakat","Merosakkan perpaduan dan menimbulkan permusuhan dalam masyarakat","Sukar mendapat pertolongan ketika dalam kesusahan","Dibenci oleh sanak saudara dan rakan taulan"]},
+
+/* ---- T3.4 ADAB DENGAN ORANG KELAINAN UPAYA (OKU) ---- */
+{src:"t3",s:"masyarakat",t:"Adab Dengan Orang Kelainan Upaya (OKU)",k:"erti",f:"Pengertian Orang Kelainan Upaya",
+ items:["Kelainan upaya atau kurang upaya merupakan sesuatu keadaan yang di anggap mengurangkan fungsi atau keupayaan seseorang jika dibandingkan dengan ukuran biasa masyarakat."]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Orang Kelainan Upaya (OKU)",k:"lain",f:"Kategori Golongan Orang Kelainan Upaya",
+ items:["Kurang Upaya Penglihatan","Kurang Upaya Pendengaran","Kurang Upaya Akal","Kurang Upaya Anggota"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Orang Kelainan Upaya (OKU)",k:"buat",f:"Adab Dengan Orang Kelainan Upaya",
+ items:["Mendoakan kesejahteraan mereka","Jangan guna kemudahan khas yang disediakan","Jangan panggil atau gelar dengan sesuatu yang keji dan hina","Mengutamakan mereka dan jangan pentingkan diri sendiri","Elak sebarang gerak geri yang boleh menyinggung perasaan mereka","Segera hulurkan bantuan jika diperlukan"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Orang Kelainan Upaya (OKU)",k:"hik",f:"Faedah Beradab Dengan Orang Kelainan Upaya",
+ items:["Dikasihi Allah","Dipuji Masyarakat","Merapatkan Ukhwah","Mendapat Pahala","Hidup masyarakat lebih harmoni"]},
+{src:"t3",s:"masyarakat",t:"Adab Dengan Orang Kelainan Upaya (OKU)",k:"aki",f:"Akibat Tidak Menghormati Orang Kelainan Upaya",
+ items:["Kehidupan tidak tenang","Dipulau oleh masyarakat","Merosakkan perpaduan dan menimbulkan permusuhan dalam masyarakat","Sukar mendapat pertolongan ketika dalam kesusahan","Dibenci oleh sanak saudara dan rakan taulan"]},
+
+/* ---- T3.5 ADAB DENGAN AL-QURAN, KITAB DAN BUKU ---- */
+{src:"t3",s:"ilmu",t:"Adab Dengan Al-Quran, Kitab Dan Buku",k:"erti",f:"Pengertian Al-Quran, Kitab Dan Buku",
+ items:["AL-QURAN: Kalam Allah yang diturunkan hanya kepada Nabi Muhammad melalui perantaraan malaikat Jibril di dalam bahasa arab dan menjadi ibadah jika membacanya.","KITAB: Kalam yang diwahyukan kepada para Nabi dan Rasul sebagai panduan hidup.","BUKU: Himpunan kertas yang dijilid menjadi satu yang mengandungi tulisan dan gambar sebagai sumber ilmu."]},
+{src:"t3",s:"ilmu",t:"Adab Dengan Al-Quran, Kitab Dan Buku",k:"buat",f:"Adab Dengan Al-Quran",
+ items:["Menghormati Al-Quran sebagai sumber ilmu dan sentiasa memeliharanya dengan baik","Hendaklah berwuduk sebelum memegang dan membaca Al-Quran","Al-Quran mestilah disusun dan diletakkan di tempat yang sesuai","Membaca Al-Quran dengan bacaan yang betul mengikut hukum tajwid","Duduk dengan sopan dan menghadap ke arah kiblat"]},
+{src:"t3",s:"ilmu",t:"Adab Dengan Al-Quran, Kitab Dan Buku",k:"hik",f:"Faedah Beradab Dengan Al-Quran",
+ items:["Mendapat ganjaran pahala","Hidup diberkati","Rasa tenang dan tenteram","Mendapat syafaat Al-Quran di akhirat","Kesucian Al-Quran terpelihara"]},
+{src:"t3",s:"ilmu",t:"Adab Dengan Al-Quran, Kitab Dan Buku",k:"aki",f:"Orang Yang Tidak Menjaga Adab Dengan Al-Quran Akan",
+ items:["Mendapat dosa","Dimurkai Allah","Allah tidak memberkati hidupnya","Hidupnya tidak tenteram"]},
+
+/* ---- T3.6 ADAB DENGAN GURU ---- */
+{src:"t3",s:"asas",t:"Adab Dengan Guru (Peta Minda)",k:"erti",f:"Pengertian Guru",
+ items:["Guru adalah orang yang mengajar, mendidik dan menyampaikan sesuatu ilmu."]},
+{src:"t3",s:"asas",t:"Adab Dengan Guru (Peta Minda)",k:"buat",f:"Adab Dengan Guru",
+ items:["Sentiasa hormat kepada guru","Jangan berbisik di hadapan guru","Jangan duduk di tempat guru","Sentiasa mendoakan kesejahteraan guru","Tidak meninggikan suara terhadap guru","Memberi perhatian ketika guru mengajar","Meminta izin terlebih dahulu sebelum bertanya","Dengar nasihat dan tunjuk ajar guru"]},
+{src:"t3",s:"asas",t:"Adab Dengan Guru (Peta Minda)",k:"aki",f:"Akibat Tidak Beradab Dengan Guru",
+ items:["Mendapat dosa","Ilmu tidak bertambah","Tidak mendapat keberkatan","Hidup tidak akan berjaya"]},
+
+/* ---- T3.7 ADAB BELAJAR ---- */
+{src:"t3",s:"ilmu",t:"Adab Belajar",k:"buat",f:"Adab Belajar",
+ items:["Niat yang ikhlas untuk belajar","Membaca doa sebelum belajar","Duduk dengan sopan","Menghormati guru atau orang yang memberikan ilmu","Sabar dan bersungguh-sungguh semasa belajar","Mendengar dan memberi tumpuan ketika belajar"]},
+{src:"t3",s:"ilmu",t:"Adab Belajar",k:"dalil",f:"Doa Sebelum Belajar",
+ ar:[{a:"اَللّٰهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلًا مُتَقَبَّلًا",m:"Maksudnya: Ya Allah, sesungguhnya aku memohon kepadamu ilmu yang bermanfaat, rezeki yang baik dan amalan yang diterima. (Hadis Riwayat Ahmad dan Ibnu Majah)"}],items:[]},
+{src:"t3",s:"ilmu",t:"Adab Belajar",k:"jangan",f:"Perkara Yang Perlu Di Hindari Ketika Belajar",
+ items:["Tidur","Bermain","Bersembang","Mengganggu rakan lain belajar","Tidak memberi perhatian ketika guru mengajar","Tidak menyiapkan kerja yang diberi oleh guru"]},
+{src:"t3",s:"ilmu",t:"Adab Belajar",k:"hik",f:"Faedah Beradab Ketika Belajar",
+ items:["Membentuk peribadi dan akhlak mulia","Memperoleh kejayaan di dunia dan di akhirat","Dipandang mulia oleh masyarakat","Ilmu di berkati Allah","Mudah ingat dan faham pengajaran guru"]},
+{src:"t3",s:"ilmu",t:"Adab Belajar",k:"aki",f:"Akibat Tidak Beradab Ketika Belajar",
+ items:["Bosan dan mudah berputus asa","Tidak dapat menjawab soalan guru","Tidak memahami pelajaran","Tidak diredai Allah","Susah mengingati pelajaran","Tidak disukai oleh rakan."]},
+
+/* ---- T3.8 KEBERSIHAN DAN PERATURAN SEKOLAH ---- */
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"erti",f:"Pengertian Sekolah",
+ items:["Suatu tempat yang digunakan untuk belajar dan mengajar."]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"buat",f:"Adab Di Sekolah",
+ items:["Sentiasa mematuhi peraturan sekolah","Sentiasa menjaga kebersihan sekolah dan kelas","Menghormati warga sekolah","Menjaga nama baik sekolah","Menghargai harta benda sekolah"]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"dalil",f:"Dalil: Hadis Kebersihan",
+ ar:[{a:"اَلطُّهُورُ شَطْرُ الإِيمَانِ",m:"Kebersihan itu sebahagian daripada iman. (Hadis Riwayat Muslim)"}],items:[]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"hik",f:"Kepentingan Menjaga Kebersihan Sekolah",
+ items:["Menjaga nama baik sekolah","Menjamin kesihatan dan terhindar daripada penyakit","Mewujudkan suasana pembelajaran yang selesa","Menimbulkan minat untuk hadir ke sekolah","Membentuk disiplin murid-murid"]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"hik",f:"Kepentingan Mematuhi Peraturan Sekolah",
+ pre:"Setiap murid diwajibkan mematuhi peraturan di sekolah untuk:",
+ items:["Melahirkan murid yang berdisiplin","Mengelakkan gejala ponteng sekolah","Mengelakkan berlaku perkara buruk seperti buli dan mencuri","Membentuk tingkah laku yang baik","Mewujudkan suasana yang harmoni di sekolah","Mengeratkan silaturahim","Disayangi guru dan kawan-kawan","Keselamatan diri dan orang lain terjamin"]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"aki",f:"Akibat Tidak Mematuhi Peraturan Sekolah",
+ items:["Berlaku gejala buli","Meregangkan ukhwah","Menyebabkan kerosakan harta benda sekolah","Tidak disukai guru dan rakan-rakan","Masalah ponteng dan salah laku pelajar","Tidak diberkati Allah","Dikenakan tindakan disiplin","Sukar menerima ilmu"]},
+{src:"t3",s:"ilmu",t:"Kebersihan Dan Peraturan Sekolah",k:"aki",f:"Akibat Tidak Menjaga Kebersihan Sekolah",
+ items:["Mencemar nama baik sekolah","Murid tidak berminat hadir ke sekolah","Sekolah menjadi kotor dan mengundang penyakit","Kemudahan tidak dapat digunakan sepenuhnya","Tidak dapat menjawab soalan guru"]},
 ];
-/* Expand each topic into 4 aspect cards (topic's 4 cards kept together) */
+const PETA_T4 = [
+/* ---- T4.1 ADAB ZIARAH ---- */
+{src:"t4",s:"ziarah",t:"Adab Ziarah (Pengenalan)",k:"erti",f:"Pengertian Ziarah",
+ items:["Ziarah: Lawatan atau kunjungan ke sesuatu tempat.","INFO: Ziarah juga bermaksud Kunjung / Lawat / Tengok / Jenguk / Jengah."]},
+{src:"t4",s:"ziarah",t:"Adab Ziarah (Pengenalan)",k:"dalil",f:"Dalil 1: Kepentingan Ziarah",
+ ar:[{a:"إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُرْحَمُونَ",m:"Sesungguhnya orang-orang beriman itu adalah bersaudara, maka damaikanlah di antara kedua saudara kamu (yang bertelingkah) dan bertakwalah kepada Allah supaya kamu beroleh rahmat. (Surah Al-Hujurat: ayat 10)"}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Ziarah (Pengenalan)",k:"dalil",f:"Dalil 2: Kelebihan Menziarahi",
+ ar:[{a:"عَنْ ثَوْبَانَ، عَنِ النَّبِيِّ، قَالَ: إِنَّ الْمُسْلِمَ إِذَا عَادَ أَخَاهُ الْمُسْلِمَ لَمْ يَزَلْ فِي خُرْفَةِ الْجَنَّةِ حَتَّى يَرْجِعَ",m:"Daripada sauban, daripada Nabi SAW berkata: 'Sesungguhnya seorang muslim apabila menziarahi sesama muslim, maka dia (seolah-olah) sedang memetik buah-buahan di taman syurga sehingga dia pulang' (Sahih Muslim, Hadis Nombor 2558)"}],items:[]},
+
+/* ---- T4.2 ADAB MENZIARAHI RAKAN SEBAYA ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Rakan Sebaya",k:"erti",f:"Pengertian Rakan Sebaya",
+ items:["Rakan sebaya bermaksud ialah kawan atau sahabat yang sama umur."]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Rakan Sebaya",k:"buat",f:"Adab-Adab Ketika Menziarahi Rakan Sebaya",
+ items:["Menjaga tingkah laku, maruah diri dan keluarga.","Berbual tentang perkara yang baik dan berfaedah.","Memberi salam dan bersalaman dengan ahli keluarga rakan.","Menghormati ibu bapa serta ahli keluarga rakan.","Meminta izin untuk masuk ke rumah.","Merendahkan suara ketika bercakap.","Duduk ditempat yang di sediakan dengan sopan.","Bertanya khabar rakan dan ahli keluarganya."]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Rakan Sebaya",k:"jangan",f:"Larangan Ketika Menziarahi Rakan Sebaya",
+ items:["Berada di rumah rakan terlalu lama","Ahli keluarga rakan tidak dihormati","Melawat rakan tanpa memberitahu terlebih dahulu","Bercakap dengan kasar dan kuat","Menziarahi rakan pada waktu yang tidak sesuai","Membuat bising di rumah rakan","Pergaulan dengan ahli keluarga rakan tidak dijaga","Masuk ke rumah rakan tanpa memberi salam dan meminta izin"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Rakan Sebaya",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Menziarahi Rakan Sebaya",
+ items:["Membentuk sikap tolong-menolong dan kerjasama","Dapat berkongsi ilmu dan maklumat bersama rakan","Dapat mengetahui khabar berita rakan serta ahli keluarganya","Mengeratkan silaturahim sesama rakan","Dapat mencontohi kebaikan rakan","Bersama-sama melakukan perkara baik","Nasihat menasihati sesama rakan","Mendapat keredaan Allah"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Rakan Sebaya",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Rakan Sebaya",
+ items:["Jauh daripada rahmat Allah","Kehadiran kita tidak disenangi rakan","Memutuskan silaturahim dengan rakan","Mengguris hati rakan dan ahli keluarganya","Dibenci oleh rakan dan ahli keluarganya","Rakan-rakan tidak menghargai dan menyayangi kita","Kurang sifat tolong-menolong sesama rakan"]},
+
+/* ---- T4.3 ADAB MENZIARAHI ORANG DEWASA ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Dewasa",k:"buat",f:"Adab-Adab Ketika Menziarahi Orang Dewasa",
+ items:["Memberi salam apabila berjumpa","Bersalaman dengan mahram (مَحْرَم)","Membawa buah tangan ketika menziarahi orang dewasa","Menggunakan bahasa yang sopan ketika berkata-kata","Memberi perhatian kepada nasihat yang diberikan","Menjaga tingkah laku di hadapan orang dewasa","Memanggil orang dewasa dengan panggilan hormat","Menjaga pandangan semasa berada di rumah mereka"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Dewasa",k:"lain",f:"Contoh-Contoh Panggilan Hormat",
+ items:["Tuan","Cik","Encik","Puan","Datuk","Nenek","Kakak","Mak Cik","Pak Cik","Abang"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Dewasa",k:"jangan",f:"Larangan Ketika Menziarahi Orang Dewasa",
+ items:["Mengabaikan kata-kata dan nasihat orang dewasa","Bermasam muka ketika bersama orang dewasa","Berkata-kata dengan tidak sopan","Menyampuk perbualan orang dewasa","Meninggikan suara terhadap orang dewasa","Berjalan dengan menghentak kaki","Menutup pintu dengan kuat","Melakukan perbuatan yang boleh mengguris hati"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Dewasa",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Menziarahi Orang Dewasa",
+ items:["Mengeratkan silaturahim","Mudah menerima bantuan semasa dalam kesusahan","Akan menerima jemputan ke rumah mereka di masa hadapan","Orang dewasa rasa dihargai dan di hormati","Mendapat banyak nasihat daripada orang dewasa","Disayangi oleh orang dewasa yang di ziarahi","Dipandang baik dan dihormati orang lain"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Dewasa",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Orang Dewasa",
+ items:["Memutuskan silaturahim","Memalukan diri di khalayak ramai","Dimarahi ibu bapa serta orang lain","Orang yang diziarahi merasa tidak dihormati","Sukar mendapat pertolongan daripada orang dewasa","Mengguris perasaan orang dewasa yang diziarahi","Kita tidak dapat nasihat yang berguna daripada mereka","Kehadiran kita tidak dialu-alukan"]},
+
+/* ---- T4.4 ADAB MENZIARAHI SAUDARA-MARA ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"erti",f:"Pengertian Saudara-Mara",
+ items:["Saudara-mara bermaksud semua kaum keluarga yang jauh atau dekat."]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"lain",f:"Contoh Saudara-Mara",
+ items:["Nenek & Datuk","Ibu Saudara + Suami","Bapa Saudara + Isteri","Sepupu"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"erti",f:"Maksud Mahram (مَحْرَم)",
+ pre:"Mahram bermaksud lelaki atau perempuan yang haram dikahwini kerana hubungan kekeluargaan yang rapat ataupun hubungan susuan.",
+ items:["Contoh: Datuk dan nenek","Ibu bapa","Adik-beradik susuan","Ibu susuan dan suaminya","Adik-beradik ibu atau bapa","Adik-beradik kandung","Anak Kandung"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"buat",f:"Adab-Adab Ketika Menziarahi Saudara-Mara",
+ items:["Menziarahi pada waktu yang sesuai","Menjaga sikap semasa berziarah","Meminta izin sebelum menziarahi saudara-mara","Beramah mesra dengan baik dan sopan","Mengucap salam dan berjabat tangan dengan saudara-mara yang mahram (مَحْرَم)","Bercerita tentang perkara yang baik semasa berbual","Menggembirakan hati saudara-mara ketika bergurau","Mengucapkan terima kasih dan meminta izin sebelum pulang"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"jangan",f:"Larangan Ketika Menziarahi Saudara-Mara",
+ items:["Memasuki rumah saudara-mara sebelum diberi keizinan","Memasuki rumah sebelum mengucapkan salam terlebih dahulu","Menyinggung perasaan saudara-mara","Bermasam muka sesama saudara-mara","Berbual dan menziarahi terlalu lama sehingga menyusahkan mereka","Mengabaikan saudara di hadapan saudara yang lain","Tidak berterima kasih di atas layanan yang diberikan","Pulang tanpa meminta izin terlebih dahulu"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Menziarahi Saudara-Mara",
+ items:["Mengukuhkan hubungan silaturahim sesama saudara-mara","Mengelakkan perpecahan hubungan saudara-mara","Mengeratkan kasih sayang sesama saudara-mara","Mudah menerima bantuan dari saudara-mara","Kerjasama antara saudara-mara makin erat","Dihormati dan disayangi oleh saudara-mara","Sering dijemput ke rumah mereka","Jiwa menjadi tenang dan tenteram"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Saudara-Mara",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Saudara-Mara",
+ items:["Kehadiran kita kurang disenangi","Menimbulkan pergaduhan antara saudara-mara","Semangat dan kerjasama antara saudara-mara akan hilang","Memutuskan hubungan sesama saudara-mara","Hidup dalam kesusahan dan tersisih dari saudara-mara","Hubungan sesama saudara-mara porak-peranda","Perasaan iri hati terhadap saudara-mara","Jiwa tidak tenang dan tenteram"]},
+
+/* ---- T4.5 ADAB MENZIARAHI ORANG SAKIT ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"dalil",f:"Dalil Galakan Menziarahi Orang Sakit",
+ ar:[{a:"عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللهِ ﷺ قَالَ: حَقُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ خَمْسٌ رَدُّ السَّلَامِ وَعِيَادَةُ الْمَرِيضِ وَاتِّبَاعُ الْجَنَائِزِ وَإِجَابَةُ الدَّعْوَةِ وَتَشْمِيتُ الْعَاطِسِ",m:"Maksudnya: Dari Abu Hurairah berkata bahawa Rasulullah bersabda, 'Hak seorang muslim terhadap muslim yang lain ada lima iaitu menjawab salam, mengunjungi yang sakit, mengikuti pengebumian, memenuhi undangan dan mendoakan orang yang bersin. (Sahih Bukhari dan Muslim)"}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"dalil",f:"Doa Untuk Orang Sakit",
+ ar:[{a:"اَللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اِشْفِهِ وَأَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا",m:"Maksudnya: Ya Allah, tuhan semua manusia. Hilangkanlah kesusahan dan berilah dia kesembuhan, Engkau Yang Maha menyembuhkan, tiada kesembuhan melainkan dariMu. kesembuhan yang tidak meninggalkan penyakit lain. (Sahih Bukhari, Hadis Nombor 5743)"}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"buat",f:"Adab Menziarahi Orang Sakit",
+ items:["Pilih masa yang sesuai","Mendoakan pesakit agar cepat sembuh","Membantu memenuhi keperluan pesakit dan keluarga pesakit","Membawa buah tangan untuk pesakit","Memperlihat kasih sayang kepada pesakit","Memberi kata-kata semangat kepada pesakit","Menjaga tingkah laku ketika menziarahi pesakit"],
+ grp2:"Di Hospital",
+ items2:["Mengikut masa yang ditetapkan","Mematuhi peraturan yang ditetapkan","Berbual dengan suara yang perlahan agar pesakit-pesakit lain tidak terganggu"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"lain",f:"Contoh Buah Tangan Yang Tidak Sesuai Diberikan Kepada Orang Sakit",
+ items:["Makanan ringan","Makanan segera","Air bergas","Makanan yang terlalu pedas","Makanan yang berbau kuat seperti durian dilarang dibawa ke hospital"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"jangan",f:"Larangan Ketika Menziarahi Orang Sakit",
+ items:["Menziarah orang sakit pada masa yang tidak sesuai","Ziarah orang sakit terlalu lama","Berbual perkara yang tidak berfaedah dan tidak baik","Membuat bising sehingga menggangu orang sakit","Menimbulkan kerisauan kepada pesakit dan keluarga pesakit","Memakan makanan pesakit yang dihadiahkan orang kepadanya","Berkelakuan tidak sopan ketika menziarahi orang sakit"],
+ grp2:"Di Hospital",
+ items2:["Melakukan perbuatan yang boleh menganggu pesakit-pesakit lain","Menghalang atau mengganggu doktor dan jururawat yang bertugas","Membawa buah tangan yang tidak sesuai kepada pesakit"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Menziarahi Orang Sakit",
+ items:["Mensyukuri nikmat sihat","Menggembirakan hati orang yang sakit","Dapat mengurangkan penderitaan orang sakit","Melahirkan sifat prihatin kepada orang sakit","Memumpuk sifat saling tolong-menolong satu sama lain","Hubungan silaturahim bertambah erat diantara satu sama lain","Mendapat rahmat daripada Allah"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Orang Sakit",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Orang Sakit",
+ items:["Nikmat sihat tidak disyukuri.","Pesakit berasa tidak dihormati dan dihargai","Mengguris perasaan pesakit dan keluarga pesakit","Menyebabkan keadaan orang sakit tidak selesa","Membentuk sikap pentingkan diri sendiri.","Dipandang hina oleh orang lain.","Menjatuhkan maruah diri sendiri."]},
+
+/* ---- T4.6 ADAB MENZIARAHI KEMATIAN ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"dalil",f:"Lafaz Ketika Mendengar Kematian",
+ pre:"Mengucapkan lafaz dibawah ketika mendengar kematian atau musibah.",
+ ar:[{a:"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ",m:"Maksudnya: sesungguhnya daripada Allah kami datang dan kepadanya jualah dikembalikan. (Surah Al-Baqarah: ayat 156)"}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"dalil",f:"Doa Untuk Jenazah",
+ ar:[{l:"Doa untuk Jenazah Lelaki",a:"اَللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ",m:"Maksudnya: Ya Allah, ampunilah dia, rahmatilah dia, sejahtera dan maafkanlah dia."},{l:"Doa untuk Jenazah Perempuan",a:"اَللَّهُمَّ اغْفِرْ لَهَا وَارْحَمْهَا وَعَافِهَا وَاعْفُ عَنْهَا",m:"Maksudnya: Ya Allah, ampunilah dia, rahmatilah dia, sejahtera dan maafkanlah dia."}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"buat",f:"Adab-Adab Ketika Menziarahi Kematian",
+ items:["Mengucapkan takziah kepada keluarga si mati","Menghormati kesedihan keluarga si mati","Menghadiahkan pahala bacaan Al-Quran untuk jenazah","Membantu menyediakan makanan kepada keluarga si mati","Membantu keluarga si mati menguruskan jenazah","Menunaikan solat jenazah berjemaah","Mendoakan Jenazah","Mengiringi jenazah ke tanah perkuburan bagi orang lelaki"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"jangan",f:"Larangan Ketika Menziarahi Kematian",
+ items:["Meratapi kematian","Berbuat bising dan bermain-main","Memalukan ahli keluarga si mati","Berbual-bual tentang perkara yang tidak berfaedah","Batas pergaulan tidak dijaga","Bercakap tentang perkara yang mengaibkan jenazah","Meminta keluarga si mati menyediakan makanan","Duduk ditempat yang menghalang orang lain menguruskan jenazah"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Menziarahi Kematian",
+ items:["Tanda penghormatan terakhir kepada jenazah","Mengeratkan silaturahim dengan keluarga si mati","Melahirkan rasa prihatin kepada keluarga yang sedang bersedih","Membentuk sifat saling bantu-membantu","Menimbulkan rasa insaf kepada diri sendiri","Mendorong diri melakukan kebaikan dan ibadat","Menguatkan ketakwaan kepada Allah","Mensyukuri nikmat kehidupan"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kematian",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Kematian",
+ items:["Mengaibkan Jenazah","Dibenci oleh keluarga si mati","Keluarga si mati rasa tidak dihormati","Memutuskan silaturahim dengan keluarga si mati","Maruah diri dipandang rendah oleh orang lain","Rasa keinsafan tiada dalam diri","Nikmat kehidupan yang Allah kurniakan tidak disyukuri","Meninggalkan sunnah Rasulullah yang menggalakkan menziarahi kematian"]},
+
+/* ---- T4.7 ADAB MENZIARAHI KUBUR ---- */
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"dalil",f:"Dalil Galakan Menziarahi Kubur",
+ ar:[{a:"عَنِ ابْنِ مَسْعُودٍ، أَنَّ رَسُولَ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: كُنْتُ نَهَيْتُكُمْ عَنْ زِيَارَةِ الْقُبُورِ، فَزُورُوهَا فَإِنَّهَا تُزَهِّدُ فِي الدُّنْيَا، وَتُذَكِّرُ الْآخِرَةَ",m:"Maksudnya: Aku dahulu melarang kamu menziarahi kubur, maka ziarahilah kerana ia boleh menjadikan kamu zuhud terhadap dunia dan mengingati akhirat."}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"dalil",f:"Ucapan Salam Kepada Ahli Kubur",
+ ar:[{a:"السَّلَامُ عَلَيْكُمْ يَا أَهْلَ الْقُبُورِ، يَغْفِرُ اللهُ لَنَا وَلَكُمْ، أَنْتُمْ سَلَفُنَا وَنَحْنُ بِالْأَثَرِ",m:"Maksudnya: Salam sejahtera wahai penghuni kubur, semoga Allah mengampuni kami dan kamu semua, kamu telah mendahului kami dan kami akan menyusul."}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"lain",f:"Kepentingan Menziarahi Kubur",
+ items:["Menziarahi tanah perkuburan merupakan satu amalan yang dituntut dalam islam. Ini adalah salah satu cara untuk menimbulkan rasa zuhud iaitu meninggalkan keseronokan dunia dan mengingati kematian.","Menziarahi kubur dapat mengingatkan kita tentang orang yang telah meninggal dunia dan mendoakan mereka agar sentiasa dilimpahi rahmat dan keampunan daripada Allah."]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"buat",f:"Adab-Adab Ketika Menziarahi Kubur",
+ items:["Disunatkan dalam keadaan berwuduk","Memberi salam ketika memasuki kawasan perkuburan","Mendoakan keampunan kepada ahli kubur","Bercakap perkara yang tidak sia-sia","Menghormati keluarga si mati","Menjaga kebersihan tanah perkuburan","Melakukan perkara yang tidak melanggar syarak","Membantu sekiranya diperlukan semasa pengebumian jenazah"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"jangan",f:"Larangan Ketika Menziarahi Kubur",
+ items:["Melangkah kubur melainkan terpaksa","Melakukan perkara syirik seperti menggosok batu penanda bagi tujuan pemujaan","Berniat atau mengambil keberkatan daripada kubur","Bersuka ria dan bergelak tawa dikawasan perkuburan","Menggangu majlis pengebumian","Meratap kerana terlalu sedih","Duduk diatas kubur"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Menziarahi Kubur",
+ items:["Menunaikan hak sesama muslim","Mendorong membuat persiapan menghadapi kematian","Mengurangkan tekanan emosi ahli keluarga si mati","Mengambil ikhtibar dalam kehidupan","Hubungan dengan keluarga si mati bertambah erat","Mengurangkan sifat tamak terhadap dunia","Memberi keinsafan bahawa semua yang hidup akan mati","Menimbulkan rasa cintakan akhirat"]},
+{src:"t4",s:"ziarah",t:"Adab Menziarahi Kubur",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Menziarahi Kubur",
+ items:["Mengabaikan hak muslim yang lain","Menambah kesedihan kepada keluarga si mati","Tiada perasaan cintakan akhirat","Merenggangkan hubungan silaturahim dengan keluarga si mati","Pengajaran dan iktibar berkaitan kematian tidak diperolehi","Masih tidak melakukan amal untuk bekalan akhirat","Rasa insaf tidak timbul selepas melihat kematian"]},
+
+/* ---- T4.8 ADAB DI MAJLIS KERAMAIAN ---- */
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"erti",f:"Maksud Keramaian",
+ items:["Sesuatu majlis yang diadakan untuk menyambut sesuatu peristiwa."]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"dalil",f:"Dalil Galakan Memenuhi Undangan",
+ ar:[{a:"عَنْ أَبِي هُرَيْرَةَ، أَنَّ رَسُولَ اللهِ ﷺ قَالَ: حَقُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ خَمْسٌ رَدُّ السَّلَامِ وَعِيَادَةُ الْمَرِيضِ وَاتِّبَاعُ الْجَنَائِزِ وَإِجَابَةُ الدَّعْوَةِ وَتَشْمِيتُ الْعَاطِسِ",m:"Maksudnya: Dari Abu Hurairah berkata bahawa Rasulullah SAW bersabda, 'Hak seorang muslim terhadap muslim yang lain ada lima iaitu, menjawab salam, mengunjungi yang sakit, mengikuti pengebumian, memenuhi undangan dan mendoakan orang yang bersin'. (Sahih Bukhari dan Muslim)"}],items:[]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"lain",f:"Contoh Majlis Keramaian",
+ items:["Majlis Aqiqah","Majlis Perkahwinan","Rumah Terbuka Hari Raya","Kenduri Doa Selamat","Sambutan Hari Lahir","Gotong-Royong"]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"buat",f:"Adab-Adab Ketika Di Majlis Keramaian",
+ items:["Memberi salam semasa tiba di majlis","Berjabat tangan sesama mahram","Duduk dengan tertib dan sopan","Berkenalan dengan tetamu lain di dalam majlis","Memenuhi tempat di barisan hadapan terlebih dahulu","Menjaga pandangan dan memberi perhatian dalam majlis","Berbual perkara yang berfaedah dan nada suara yang sesuai","Memberi tempat duduk kepada orang yang lebih memerlukan","Mendahulukan orang yang lebih tua daripada kita"]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"buat",f:"Adab Makan Dan Minum Di Majlis Keramaian",
+ items:["Duduk di tempat yang disediakan dengan sopan dan tertib","Membasuh tangan sebelum makan","Beratur mengikut giliran dan tidak berebut","Ambil makanan sekadar yang perlu dan tidak membazir","Mendoakan kesejahteraan kepada tuan rumah","Guna peralatan yang disediakan dengan cermat"]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"jangan",f:"Larangan Ketika Di Majlis Keramaian",
+ items:["Masuk ke majlis tanpa memberi salam","Melakukan perbuatan yang tidak sopan","Mencelah percakapan orang lain","Berbisik-bisik","Membuka keaiban orang lain","Duduk atau berdiri di tengah-tengah laluan","Menghina dan menyinggung perasaan orang lain","Berkata-kata tentang perkara yang tidak berfaedah"]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"hik",f:"Kelebihan Mengamalkan Adab-Adab Ketika Di Majlis Keramaian",
+ items:["Pihak majlis rasa dihargai","Dapat berkenalan dengan rakan baharu","Mengeratkan silaturahim sesama tetamu yang datang","Dihormati oleh tuan rumah dan tetamu lain","Menjadi contoh ikutan kepada tetamu yang lain","Dijemput lagi ke majlis di masa akan datang","Menimbulkan suasana yang ceria di dalam majlis","Terhindar daripada permusuhan","Hidup bermasyarakat lebih harmoni"]},
+{src:"t4",s:"ziarah",t:"Adab Di Majlis Keramaian",k:"aki",f:"Akibat Tidak Mengamalkan Adab-Adab Ketika Di Majlis Keramaian",
+ items:["Pihak penganjur majlis tidak merasa dihormati","Tetamu yang lain merasa terganggu dan tidak selesa","Dijauhi tetamu yang lain","Menjadi buah mulut orang ramai","Menjadi ikutan yang buruk kepada tetamu lain","Memalukan dan menjatuhkan maruah diri sendiri","Boleh merenggangkan hubungan silaturahim dengan tuan rumah","Sukar mendapat jemputan ke majlis keramaian di masa akan datang"]},
+
+/* ---- T4.9 NILAI-NILAI MURNI ---- */
+{src:"t4",s:"nilai",t:"Nilai-Nilai Murni Didalam Mengamalkan Adab",k:"lain",f:"Kumpulan 1",
+ items:["Adil","Amanah","Baik hati","Bekerjasama","Berani","Berazam","Berdikari","Berdisiplin"]},
+{src:"t4",s:"nilai",t:"Nilai-Nilai Murni Didalam Mengamalkan Adab",k:"lain",f:"Kumpulan 2",
+ items:["Berhati-hati","Berhemah tinggi","Berjimat-cermat","Bersatu padu","Bersimpati","Bersopan-santun","Bersyukur","Bertanggungjawab"]},
+{src:"t4",s:"nilai",t:"Nilai-Nilai Murni Didalam Mengamalkan Adab",k:"lain",f:"Kumpulan 3",
+ items:["Berterima kasih","Bertoleransi","Ikhlas","Jujur","Kasih Sayang","Kebebasan","Kesederhanaan","Mematuhi undang-undang."]},
+{src:"t4",s:"nilai",t:"Nilai-Nilai Murni Didalam Mengamalkan Adab",k:"lain",f:"Kumpulan 4",
+ items:["Mencintai alam sekitar","Menepati masa","Menghormati","Menjaga kebersihan","Memelihara maruah diri","Patriotik","Pemurah","Peramah"]},
+{src:"t4",s:"nilai",t:"Nilai-Nilai Murni Didalam Mengamalkan Adab",k:"lain",f:"Kumpulan 5",
+ items:["Prihatin","Rajin/Tekun","Rasional","Sabar","Taat/Patuh","Tabah/cekal","Tolong-Menolong","Yakin"]},
+];
+const PETA_T5 = [
+/* ---- T5.1 ADAB KETIKA BERSOSIAL ---- */
+{src:"t5",s:"bersosial",t:"Adab Ketika Bersosial (Pengenalan)",k:"erti",f:"Pengertian Sosial",
+ items:["Sosial ialah perkara yang berkaitan masyarakat, perihal masyarakat serta kemasyarakatan. Sosial juga dikaitkan dengan hubungan persahabatan dan pergaulan dalam kehidupan seharian."]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bersosial (Pengenalan)",k:"dalil",f:"Dalil: Surah An-Nisa Ayat 36",
+ ar:[{a:"وَاعْبُدُوا اللَّهَ وَلَا تُشْرِكُوا بِهِ شَيْئًا ۖ وَبِالْوَالِدَيْنِ إِحْسَانًا وَبِذِي الْقُرْبَىٰ وَالْيَتَامَىٰ وَالْمَسَاكِينِ وَالْجَارِ ذِي الْقُرْبَىٰ وَالْجَارِ الْجُنُبِ وَالصَّاحِبِ بِالْجَنبِ وَابْنِ السَّبِيلِ وَمَا مَلَكَتْ أَيْمَانُكُمْ ۗ إِنَّ اللَّهَ لَا يُحِبُّ مَن كَانَ مُخْتَالًا فَخُورًا",m:"Terjemahan: Dan hendaklah kamu beribadah kepada Allah dan janganlah kamu sekutukan dia dengan sesuatu apa jua, dan berbuat baiklah kepada kedua-dua ibu bapa dan kaum keluargan dan anak-anak yatim dan orang-orang miskin dan jiran tetangga yang dekat dan jiran tetangga yang jauh dan rakan sejawat dan orang musafir yang terlantar dan juga hamba yang kamu miliki. Sesungguhnya Allah tidak suka kepada orang-orang yang sombong takabur dan membangga diri."}],items:[]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bersosial (Pengenalan)",k:"lain",f:"Kepentingan Adab",
+ items:["Setiap muslim hendaklah sentiasa menjaga adab dalam perhubungan sosial sama ada secara tingkah laku ataupun perbuatan agar tidak berlaku salah faham antara satu sama lain serta dapat memelihara hubungan silaturahim terhadap individu yang dikenali ataupun tidak."]},
+
+/* ---- T5.2 ADAB DAN LARANGAN KETIKA BERMESYUARAT ---- */
+{src:"t5",s:"bersosial",t:"Adab Dan Larangan Ketika Bermesyuarat",k:"erti",f:"Pengertian Mesyuarat",
+ items:["Mesyuarat bermaksud satu perundingan yang dilakukan untuk membincangkan sesuatu perkara atau mencapai satu keputusan."]},
+{src:"t5",s:"bersosial",t:"Adab Dan Larangan Ketika Bermesyuarat",k:"buat",f:"Adab Ketika Bermesyuarat",
+ items:["Menjadi pendengar yang baik","Memberikan pandangan bernas","Menumpukan perhatian","Menerima teguran dengan baiknya"]},
+{src:"t5",s:"bersosial",t:"Adab Dan Larangan Ketika Bermesyuarat",k:"jangan",f:"Larangan Ketika Bermesyuarat",
+ items:["Menimbulkan suasana tegang","Tidak memberikan tumpuan","Tidak menepati masa","Menggunakan telefon dan alat komunikasi lain"]},
+{src:"t5",s:"bersosial",t:"Adab Dan Larangan Ketika Bermesyuarat",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Bermesyuarat",
+ items:["Menyelesaikan masalah","Dapat berjalan dengan lancarnya","Mewujudkan suasana harmoni","Memberikan kesenangan kepada semua pihak","Menjaga hubungan baik sesama ahli mesyuarat","Mencapai keputusan yang dipersetujui semua"]},
+{src:"t5",s:"bersosial",t:"Adab Dan Larangan Ketika Bermesyuarat",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Bermesyuarat",
+ items:["Menyusahkan banyak orang","Hilang kepercayaan antara ahli","Tidak mencapai keputusan yang baik","Menghuru-harakan mesyuarat","Tidak dapat menilai pendapat orang lain dengan baiknya","Melemahkan organisasi"]},
+
+/* ---- T5.3 ADAB BERKOMUNIKASI MELALUI MEDIA SOSIAL ---- */
+{src:"t5",s:"bersosial",t:"Adab Berkomunikasi Melalui Media Sosial",k:"erti",f:"Pengertian Media Sosial",
+ pre:"Media sosial ialah aplikasi-aplikasi dalam talian yang membolehkan penggunanya berhubung dengan individu lain sama ada yang dikenali ataupun tidak.",
+ items:["Contoh: Facebook","YouTube","WhatsApp","TikTok","Instagram"]},
+{src:"t5",s:"bersosial",t:"Adab Berkomunikasi Melalui Media Sosial",k:"buat",f:"Adab Ketika Berkomunikasi Melalui Media Sosial",
+ items:["Menjaga batas pergaulan","Menyampaikan perkara-perkara yang baik","Kesesuaian masa dan tempat","Menjadi pendengar yang baik","Memastikan kesahihan maklumat","Menggunakan bahasa yang sopan","Tidak melalaikan diri daripada ibadah dan tanggungjawab","Tidak menyebarkan fitnah dan membuka aib"]},
+{src:"t5",s:"bersosial",t:"Adab Berkomunikasi Melalui Media Sosial",k:"jangan",f:"Larangan Ketika Berkomunikasi Melalui Media Sosial",
+ items:["Menyampaikan maklumat yang tidak benar","Bermain sehingga melalaikan diri daripada ibadah dan tanggungjawab","Berkongsi sesuatu semata-mata hanya mahu pujian","Mengeluarkan kata-kata yang tidak sopan","Membuat tafsiran yang buruk terhadap seseorang","Bergaduh sehingga tidak bertegur sapa","Menghantar atau berkongsi gambar yang tidak sopan"]},
+{src:"t5",s:"bersosial",t:"Adab Berkomunikasi Melalui Media Sosial",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Berkomunikasi Melalui Media Sosial",
+ items:["Dapat bertukar pandangan","Mempermudah hubungan komunikasi","Mewujudkan kehidupan yang aman dan harmoni","Menjalin kemesraan","Memperkukuh perpaduan","Memperoleh banyak kenalan","Mengeratkan silaturahim"]},
+{src:"t5",s:"bersosial",t:"Adab Berkomunikasi Melalui Media Sosial",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Berkomunikasi Melalui Media Sosial",
+ items:["Berlaku perselisihan faham","Dibenci orang lain","Menjadikan hidup kesunyian dan tidak tenteram","Memecahbelahkan keluarga dan rakan-rakan","Dijauhi rakan-rakan","Memutuskan silaturahim","Melahirkan perasaan hasad dan dendam"]},
+
+/* ---- T5.4 ADAB KETIKA BERMAIN, BERSUKAN DAN BERGOTONG-ROYONG ---- */
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"buat",f:"Adab Ketika Bermain",
+ items:["Memilih kawasan yang sesuai dan selamat","Bertolak ansur","Berpakaian yang sesuai","Mematuhi masa yang ditetapkan","Mengikut peraturan yang ditetapkan","Menggunakan peralatan dengan baiknya"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"buat",f:"Adab Ketika Bersukan",
+ items:["Memilih kawasan yang sesuai dan selamat","Bertolak ansur","Berpakaian yang sesuai","Mematuhi masa yang ditetapkan","Mengikut peraturan yang ditetapkan","Menggunakan peralatan dengan baiknya"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"buat",f:"Adab Ketika Bergotong-Royong",
+ items:["Membantu orang lain apabila diperlukan","Saling berbahagi tugas dengan adilnya","Mengutamakan keselamatan","Bertolak ansur","Berpakaian yang sesuai","Mematuhi masa yang ditetapkan","Mengikut peraturan yang ditetapkan","Menggunakan peralatan dengan baiknya"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"jangan",f:"Larangan Ketika Bermain, Bersukan Dan Bergotong-Royong",
+ items:["Bergaduh","Mengabaikan kepentingan masa","Tingkah laku yang tidak sopan","Melanggar arahan yang diberikan","Mengabaikan keselamatan"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"jangan",f:"Larangan Ketika Bergotong-Royong",
+ items:["Menyebabkan tugas tidak disempurnakan dengan baiknya","Mengharapkan balasan selepas bergotong-royong","Berebut peralatan gotong-royong","Bergaduh","Mengabaikan kepentingan masa","Tingkah laku yang tidak sopan","Melanggar arahan yang diberikan","Mengabaikan keselamatan"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Bermain & Bersukan",
+ items:["Menjadikan badan cergas","Membina stamina dan kekuatan","Memperkuat otot, tulang dan sendi","Mengelakkan tekanan mental","Memperkukuh semangat berpasukan"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Bergotong-Royong",
+ items:["Melahirkan sikap prihatin dalam kehidupan bermasyarakat","Menjamin kebersihan persekitaran","Memupuk semangat perpaduan dalam masyarakat","Memudahkan tugas atau kerja"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Bermain & Bersukan",
+ items:["Menimbulkan suasana tegang","Melemahkan semangat kesukanan","Hilang tumpuan semasa permainan berlangsung","Menganggu proses perlawanan yang sedang berlangsung","Menjejaskan maruah pasukan"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Bermain, Bersukan Dan Bergotong-Royong",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Bergotong-Royong",
+ items:["Tidak dapat menyelesaikan kerja dengan baik","Tidak mencapai objektif kerja","Persekitaran menjadi kotor","Mendatangkan kecederaan kepada diri dan orang lain","Merosakkan hubungan silaturahim dalam kalangan masyarakat setempat"]},
+
+/* ---- T5.5 ADAB KETIKA MENJAGA HARTA BENDA AWAM ---- */
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"erti",f:"Pengertian Harta Benda Awam",
+ items:["Harta benda awam ialah kemudahan yang disediakan oleh pemerintah untuk digunakan oleh rakyat secara bersama."]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"lain",f:"Contoh Kemudahan Awam",
+ items:["Padang Futsal","Jalan Raya","Taman Permainan","Pondok Telefon","Tandas Awam","Tiang Lampu Jalan","Tong Sampah Awam","Ruang Pejalan Kaki","Papan Tanda Jalan Raya","Hentian Bas"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"buat",f:"Adab Ketika Menggunakan Harta Benda Awam",
+ items:["Gunakan dengan cermatnya","Patuhi peraturan yang ditetapkan","Bertimbang rasa terhadap pengguna lain","Jaga kebersihan kemudahan awam","Bertanggungjawab sekiranya berlaku kerosakkan","Letakkan peralatan yang telah digunakan pada tempat asalnya"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"jangan",f:"Larangan Ketika Menggunakan Harta Benda Awam",
+ items:["Mencuri harta benda awam","Merosakkan kemudahan yang disediakan","Menggunakan air secara berlebih-lebihan","Menghalang orang lain menggunakan harta benda awam","Tidak menjaga kebersihan persekitaran tempat awam","Menggunakan ruang awam untuk kegunaan peribadi (tempat letak kereta)"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Menggunakan Harta Benda Awam",
+ items:["Menjimatkan kos penyelenggaraan","Mewujudkan persekitaran kondusif","Masyarakat dapat memanfaatkan penggunaan harta benda awam","Memberikan kemudahan dan keselesaan kepada pengguna","Menjadi teladan kepada orang lain","Menaikkan imej negara"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Menjaga Harta Benda Awam",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Menggunakan Harta Benda Awam",
+ items:["Menyusahkan orang lain","Menyebabkan kemudahan rosak dan musnah","Berlaku pembaziran","Merosakkan imej negara","Menjejaskan ekonomi negara","Meningkatkan kos penyelenggaraan"]},
+
+/* ---- T5.6 ADAB MEMELIHARA DAN MEMULIHARA ALAM SEKITAR ---- */
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"erti",f:"Pengertian Memelihara & Memulihara",
+ items:["Memelihara: Membela, menjaga atau merawat.","Memulihara: Melindungi sesuatu supaya sentiasa dalam keadaan yang baik.","Alam sekitar: Keadaan alam sekeliling yang terbentuk secara semula jadi."]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"lain",f:"Contoh-Contoh Alam Sekitar",
+ items:["Tumbuh-tumbuhan","Haiwan","Batuan semula jadi","Laut","Sungai"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"buat",f:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",
+ items:["Melaksanakan aktiviti penanaman pokok semula","Sentiasa menjaga kebersihan","Mengamalkan aktiviti kitar semula","Melaporkan pencemaran yang berlaku kepada pihak berkuasa","Mengumpulkan sampah dan dibuang ditempat sepatutnya","Sentiasa berhemah dalam menggunakan sumber air"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"jangan",f:"Perlakuan Yang Dilarang Terhadap Alam Sekitar",
+ items:["Penghasilan asap yang tidak terkawal daripada kilang","Membuat bunyi bising yang mengganggu ketenteraman awam","Membuang bahan toksik di tasik atau sungai","Melakukan pembakaran terbuka tanpa pengawasan","Menebang pokok di kawasan larangan seperti hutan simpanan","Membuang sampah merata-rata","Memburu haiwan yang dilindungi"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Memelihara Dan Memulihara Alam Sekitar",
+ items:["Memperindah alam sekitar","Menarik kedatangan pelancong","Menjamin bekalan sumber alam","Memelihara haiwan terancam daripada kepupusan","Persekitaran yang bersih dan bebas daripada penyakit","Melahirkan pencinta alam sekitar"]},
+{src:"t5",s:"bersosial",t:"Adab Ketika Memelihara Dan Memulihara Alam Sekitar",k:"aki",f:"Akibat Tidak Mengamalkan Adab: Jenis-Jenis Pencemaran",
+ items:["PENCEMARAN AIR: 1) Sungai kotor 2) Sumber minuman terjejas 3) Hidupan sungai dan laut akan pupus","PENCEMARAN BUNYI: 1) Mengganggu ketenteraman awam 2) Menjejaskan deria pendengaran","PENCEMARAN UDARA: 1) Jerebu 2) Hujan asid 3) Pemanasan bumi","PENCEMARAN TANAH: 1) Merosakkan kualiti tanah 2) Menjadikan tumbuh-tumbuhan tidak subur 3) Berlaku hakisan tanah atau tanah runtuh","PENCEMARAN SISA PEPEJAL: 1) Menjadikan persekitaran kotor 2) Menjejaskan kesihatan 3) Mengakibatkan banjir"]},
+
+/* ---- T5.7 ADAB MASUK DAN KELUAR MASJID ---- */
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"dalil",f:"Dalil Berkenaan Adab Masuk Dan Keluar Masjid",
+ ar:[{a:"عَنْ أَبِي حُمَيْدٍ أَوْ أَبِي أُسَيْدٍ قَالَ: قَالَ رَسُولُ اللهِ ﷺ: إِذَا دَخَلَ أَحَدُكُمُ الْمَسْجِدَ فَلْيَقُلِ اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ وَإِذَا خَرَجَ فَلْيَقُلِ اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",m:"Maksudnya: Apabila salah seorang daripada kamu masuk kemasjid, maka ucapkanlah, 'Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu,' dan apabila keluar (dari masjid) maka ucapkanlah, 'Ya Allah, sesungguhnya aku meminta kepada-Mu akan kurniaan-Mu dan kelebihan-Mu.'"}],items:[]},
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"dalil",f:"Doa Masuk & Keluar Masjid",
+ ar:[{l:"Doa Masuk Masjid",a:"اَللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",m:"Maksudnya: Ya Allah, bukakanlah untukku pintu-pintu rahmat."},{l:"Doa Keluar Masjid",a:"اَللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",m:"Maksudnya: Ya Allah, sesungguhnya aku bermohon kepada-Mu akan kurnian dan kelebihan-Mu."}],items:[]},
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"buat",f:"Adab Masuk Dan Keluar Masjid",
+ items:["Berpakaian bersih dan berwangi-wangian","Membaca doa masuk dan keluar masjid","Masuk ke masjid dalam keadaan berwuduk","Melangkah masuk ke masjid dimulai dengan kaki kanan","Menyusun kasut ditempat yang disediakan","Bersalaman dengan jemaah yang lain","Melangkah keluar masjid dimulai dengan kaki kiri","Mematikan suis elektrik selepas digunakan"]},
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"jangan",f:"Perlakuan Tidak Beradab Ketika Masuk Dan Keluar Masjid",
+ items:["Memasuki masjid dengan berpakaian kotor","Tidak membaca doa masuk dan keluar masjid","Tidak melakukan solat sunat tahiyatul masjid","Memasuki ruang solat tanpa berwuduk","Tidak menutup air dengan sempurnanya","Tidak mematikan suis elektrik selepas digunakan"]},
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Masuk & Keluar Masjid",
+ items:["Menjadikan masjid makmur","Menjadikan masjid sebagai pusat penyebaran dakwah","Dapat melaksanakan ibadah dengan selesanya","Merapatkan silaturahim dengan jemaah masjid","Mewujudkan suasana tenang dan harmoni didalam masjid","Menarik orang bukan islam berkenaan ajaran islam"]},
+{src:"t5",s:"masjid",t:"Adab Masuk Dan Keluar Masjid",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Masuk & Keluar Masjid",
+ items:["Berlaku pembaziran (tenaga elektrik dan air)","Menyebabkan jemaah lain berasa terganggu","Sukar menyebarkan dakwah islam","Mengurangkan jemaah ke masjid","Menjejaskan kemeriahan dan keharmonian masjid","Menjatuhkan imej islam pada mata orang bukan islam"]},
+
+/* ---- T5.8 ADAB KETIKA BERIKTIKAF DI MASJID ---- */
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"erti",f:"Pengertian Iktikaf",
+ items:["Bahasa: Menetap di sesuatu tempat.","Syarak: Menetap di dalam masjid dengan tujuan mendekatkan diri kepada Allah yang dilakukan oleh seseorang muslim yang mumaiyiz, berakal serta suci daripada hadas."]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"dalil",f:"Dalil Galakan Beriktikaf",
+ ar:[{a:"عَنِ ابْنِ عُمَرَ رَضِيَ اللهُ عَنْهُ قَالَ: كَانَ رَسُولُ اللهِ ﷺ يَعْتَكِفُ الْعَشْرَ الْأَوَاخِرَ مِنْ رَمَضَانَ",m:"Maksudnya: Adalah Rasulullah SAW itu beriktikaf pada sepuluh hari terakhir ramadan. (Hadis Bukhari: Hadis Nombor 2025)"}],items:[]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"dalil",f:"Niat Beriktikaf",
+ ar:[{a:"نَوَيْتُ الْإِعْتِكَافَ فِي هَذَا الْمَسْجِدِ لِلّٰهِ تَعَالَى",m:"Maksudnya: Sahaja aku beriktikaf di dalam masjid ini kerana Allah Taala."}],items:[]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"buat",f:"Adab Ketika Beriktikaf Di Dalam Masjid",
+ items:["Berniat iktikaf","Menjaga kebersihan","Duduk secara sopan dan tertib","Tidak mengganggu jemaah lain","Memperbanyakkan zikir kepada Allah","Memperbanyak solat sunat dan membaca Al-Quran"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"jangan",f:"Larangan Ketika Beriktikaf Di Dalam Masjid",
+ items:["Menghalang laluan masuk dan keluar","Membazirkan tenaga elektrik dan air masjid","Mengganggu orang lain beribadah","Tidak menjaga kebersihan diri dan sekitar masjid"],
+ grp2:"Perkara Yang Boleh Membatalkan Iktikaf",
+ items2:["Meninggalkan masjid secara sengaja","Murtad","Berhadas besar","Hilang akal (Mabuk / Pengsan)"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Beriktikaf Di Dalam Masjid",
+ items:["Mengeratkan silaturahim sesama ahli jemaah masjid","Menanam rasa cinta akan masjid","Mendapat ketenangan hati","Terpelihara daripada maksiat","Menjadikan sunnah Rasulullah sebagai amalan","Dapat berkenalan dengan orang yang baik","Merehatkan diri daripada kesibukan dunia"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Beriktikaf Di Masjid",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Beriktikaf Di Dalam Masjid",
+ items:["Melakukan perkara yang tidak berfaedah","Mengganggu keselesaan jemaah lain","Memberikan imej yang buruk kepada diri sendiri","Tidak menghormati kemuliaan di dalam masjid","Tidak bersungguh-sungguh ketika melakukan amal ibadah"]},
+
+/* ---- T5.9 ADAB KETIKA DALAM MAJLIS ILMU ---- */
+{src:"t5",s:"masjid",t:"Adab Ketika Dalam Majlis Ilmu",k:"erti",f:"Pengertian Majlis Ilmu",
+ items:["Sesuatu perhimpunan atau kelas pengajian berkaitan ilmu islam."]},
+{src:"t5",s:"masjid",t:"Adab Ketika Dalam Majlis Ilmu",k:"buat",f:"Adab Ketika Dalam Majlis Ilmu Di Masjid",
+ items:["Berpakaian bersih dan sesuai","Bersalaman dengan orang berdekatan","Memenuhkan tempat dihadapan terlebih dahulu","Memberikan tempat duduk kepada orang yang lebih memerlukan","Meminta keizinan sekiranya hendak bertanya","Menjaga pandangan dan memberikan perhatian","Duduk secara tertib dan sopan"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Dalam Majlis Ilmu",k:"jangan",f:"Larangan Ketika Dalam Majlis Ilmu Di Masjid",
+ items:["Berbisik-bisik","Tidak memberikan perhatian mengenai ilmu yang diajar","Mengganggu keselesaan orang lain","Mengganggu perjalanan majlis seperti membuat bising","Menghalang laluan orang keluar masuk di dalam masjid","Mencelah percakapan guru yang mengajar tanpa meminta keizinan"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Dalam Majlis Ilmu",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Dalam Majlis Ilmu",
+ items:["Mudah memahami ilmu yang diterima","Mendapat ilmu pengetahuan yang baharu","Boleh berkongsi ilmu dengan orang lain","Dapat melancarkan majlis ilmu tanpa gangguan","Bersemangat untuk mengamalkan ilmu yang dipelajari","Dapat mengamalkan ilmu dalam kehidupan seharian"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Dalam Majlis Ilmu",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Dalam Majlis Ilmu",
+ items:["Menyebabkan guru berasa tidak dihormati","Mengakibatkan perjalanan majlis ilmu terganggu","Tidak dapat memahami ilmu yang diajar dengan jelasnya","Menimbulkan rasa tidak selesa kepada jemaah lain","Tidak dapat mengamalkan ilmu yang dipelajari","Menyampaikan ilmu yang salah kepada orang lain"]},
+
+/* ---- T5.10 ADAB KETIKA BERSOLAT JUMAAT DAN HARI RAYA ---- */
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Jumaat Dan Hari Raya",k:"lain",f:"Persamaan Solat Jumaat Dan Hari Raya",
+ items:["Dilakukan secara berjemaah, mempunyai khatib dan khutbah serta didirikan sebanyak dua rakaat."]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Jumaat Dan Hari Raya",k:"buat",f:"Adab Ketika Bersolat Jumaat & Hari Raya",
+ items:["Mandi sunat jumaat dan hari raya sebelum ke masjid","Memakai pakaian yang bersih dan berwangi-wangian","Pergi dan pulang melalui jalan yang berbeza","Datang awal ke masjid","Bersalam sesama jemaah yang ditemui dalam perjalanan","Menumpukan perhatian ketika khatib berkhutbah","Tidak mengganggu jemaah lain semasa mendengar khutbah"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Jumaat Dan Hari Raya",k:"jangan",f:"Perlakuan Tidak Beradab Ketika Bersolat Jumaat & Hari Raya",
+ items:["Tidur ketika khutbah disampaikan","Lewat datang ke masjid","Melangkah jemaah lain untuk ke ruang hadapan","Bercakap ketika khatib menyampaikan khutbah","Bermain telefon ketika khatib menyampaikan khutbah","Melakukan perkara yang mengganggu khatib dan jemaah."]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Jumaat Dan Hari Raya",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Bersolat Jumaat & Hari Raya",
+ num:true,
+ items:["Merapatkan silaturahim dengan jemaah yang lain","Dapat memahami isi khutbah dengan baiknya","Dapat mendirikan solat dengan selesanya","Menikmati kemeriahan hari raya","Menunjukkan keindahan syiar islam"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Jumaat Dan Hari Raya",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Bersolat Jumaat & Hari Raya",
+ items:["Jemaah yang sedang mendengar khutbah berasa terganggu","Jemaah yang datang ke masjid berasa tidak dihormati","Ukhwah sesama ahli jemaah menjadi renggang","Kemeriahan hari raya tidak dirasai","Keindahan syiar islam tidak dapat ditunjukkan"]},
+
+/* ---- T5.11 ADAB KETIKA BERSOLAT TERAWIH ---- */
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Terawih",k:"buat",f:"Adab Ketika Bersolat Terawih",
+ items:["Datang awal ke masjid","Solat isyak berjemaah terlebih dahulu","Bertakbiratul ihram bersama-sama imam setiap kali memulakan rakaat","Melengkapkan jumlah rakaat bersama-sama","Bertadarus Al-Quran sebelum atau selepas terawih","Melakukan solat sunat witir berjemaah"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Terawih",k:"jangan",f:"Perlakuan Tidak Beradab Ketika Bersolat Terawih",
+ items:["Datang ke masjid dengan tujuan yang tidak baik","Membuat bising sehingga menyebabkan solat orang lain terganggu","Membazirkan makanan atau minuman yang disediakan","Bermain bunga api berdekatan masjid","Makan makanan yang disediakan sebelum jemaah selesai solat terawih"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Terawih",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Bersolat Terawih",
+ items:["Dapat mengamalkan sunnah Rasulullah","Mewujudkan suasana tenang dan harmoni kepada jemaah","Dapat beribadah dengan selesanya","Dapat mengimarahkan masjid dengan jemaah yang ramai","Memuliakan bulan ramadhan dengan solat terawih","Menarik minat orang datang ke masjid untuk menunaikan solat terawih secara berjemaah"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Bersolat Terawih",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Bersolat Terawih",
+ items:["Jemaah lain berasa terganggu","Jemaah di masjid akan berkurangan","Kemeriahan bulan ramadan tidak dirasai","Jemaah memberikan pandangan yang buruk pada imej diri","Jemaah kurang tertarik untuk ke masjid dalam bulan ramadan"]},
+
+/* ---- T5.12 ADAB KETIKA MENGGUNAKAN KEMUDAHAN MASJID ---- */
+{src:"t5",s:"masjid",t:"Adab Ketika Menggunakan Kemudahan Masjid",k:"buat",f:"Adab Ketika Menggunakan Kemudahan Masjid",
+ items:["Mematuhi peraturan yang telah ditetapkan","Menjaga kebersihan kawasan masjid","Berjimat cermat ketika menggunakan air dan tenaga elektrik","Menggunakan kemudahan masjid dengan berhemahnya","Memastikan tandas sentiasa bersih selepas digunakan","Menyimpan dan meletakkan peralatan masjid pada tempat asalnya selepas digunakan"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Menggunakan Kemudahan Masjid",k:"jangan",f:"Perlakuan Yang Dilarang Ketika Menggunakan Kemudahan Masjid",
+ items:["Membazirkan air dan tenaga elekterik","Merosakkan kemudahan yang disediakan","Menghalang orang lain menggunakan kemudahan masjid","Menyalahgunakan peralatan untuk urusan peribadi","Tidak meletakkan peralatan masjid pada tempat asalnya selepas digunakan"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Menggunakan Kemudahan Masjid",k:"hik",f:"Kelebihan Mengamalkan Adab Ketika Menggunakan Kemudahan Masjid",
+ items:["Memastikan kebersihan masjid terjaga","Masjid dapat dimanfaatkan untuk pelbagai aktiviti","Kemudahan di masjid dapat dinikmati secara bersama","Masjid menjadi tempat masyarakat berkumpul","Lebih banyak orang akan memberikan sumbangan kepada masjid"]},
+{src:"t5",s:"masjid",t:"Adab Ketika Menggunakan Kemudahan Masjid",k:"aki",f:"Akibat Tidak Mengamalkan Adab Ketika Menggunakan Kemudahan Masjid",
+ items:["Masjid menjadi kotor","Masjid tidak menjadi tumpuan para penderma","Imej masjid sebagai pusat aktiviti kemasyarakatan akan terjejas","Kos penyelenggaraan masjid meningkat","Masyarakat bersifat mementingkan diri sendiri"]},
+];
+
+/* ================= BINA KAD ================= */
+const SECLABEL={asas:"Perkara Asas",bersosial:"Bersosial",masjid:"Di Masjid",ziarah:"Ziarah",ilmu:"Menuntut Ilmu",masyarakat:"Bermasyarakat",nilai:"Nilai Murni"};
+const SRCLABEL={booster:"Booster",t3:"Peta Minda T3",t4:"Peta Minda T4",t5:"Peta Minda T5"};
+const KIND={
+  erti:  {label:"Pengertian",             icon:"i", prompt:'Nyatakan <b>pengertian / maksudnya</b>.'},
+  buat:  {label:"Adab (Buat)",            icon:"✓", prompt:'Nyatakan <b>adab</b> — perkara yang perlu dibuat.'},
+  jangan:{label:"Larangan (Jangan Buat)", icon:"✗", prompt:'Nyatakan <b>larangan</b> — perkara yang tidak boleh dibuat.'},
+  hik:   {label:"Hikmah (Kesan Baik)",    icon:"★", prompt:'Nyatakan <b>hikmah</b> — kesan baik.'},
+  aki:   {label:"Akibat (Kesan Buruk)",   icon:"!", prompt:'Nyatakan <b>akibat</b> — kesan buruk jika tidak beradab.'},
+  dalil: {label:"Dalil & Doa",            icon:"۞", prompt:'Nyatakan <b>dalil / doa</b> beserta maksudnya.'},
+  lain:  {label:"Lain-lain",              icon:"•", prompt:'Nyatakan jawapannya.'}
+};
+const ASPORDER=[{k:"buat",f:"b"},{k:"jangan",f:"l"},{k:"hik",f:"h"},{k:"aki",f:"a"}];
+
 const CARDS=[];
-DECK.forEach(t=>{
-  ASPECTS.forEach(asp=>{
-    const c={s:t.s, topic:t.q, aspect:asp.k, aLabel:asp.label, aIcon:asp.icon, aPrompt:asp.prompt, items:t[asp.field]};
-    if(asp.k==="buat" && t.doa) c.doa=t.doa;
+/* Sumber 1 — Booster: setiap topik dipecah kepada 4 kad (Adab/Larangan/Hikmah/Akibat) */
+BOOSTER.forEach(t=>{
+  ASPORDER.forEach(asp=>{
+    const c={src:"booster", s:t.s, t:t.q, k:asp.k, f:KIND[asp.k].label, items:t[asp.f]};
+    if(asp.k==="buat" && t.doa) c.ar=[{a:t.doa.ar,m:t.doa.mk}];
     if(asp.k==="aki" && t.note) c.note=t.note;
     CARDS.push(c);
   });
 });
+/* Sumber 2 — Peta Minda: kad rata mengikut medan asal nota */
+[].concat(PETA_T3,PETA_T4,PETA_T5).forEach(c=>CARDS.push(c));
 CARDS.forEach((c,i)=>c.id=i);
 
-let filterSec="all",filterAsp="all",order=[],pos=0,flipped=false;
+/* ================= UI ================= */
+let filterSrc="all",filterSec="all",filterAsp="all",order=[],pos=0,flipped=false;
 let known=loadKnown();
 const el=id=>document.getElementById(id);
 const card=el("card");
-function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("adabUpkkSplit_known")||"[]"));}catch(e){return new Set();}}
-function saveKnown(){try{localStorage.setItem("adabUpkkSplit_known",JSON.stringify([...known]));}catch(e){}}
-function buildOrder(){order=CARDS.filter(c=>(filterSec==="all"||c.s===filterSec)&&(filterAsp==="all"||c.aspect===filterAsp)).map(c=>c.id);pos=0;}
-function setAccent(asp){
-  const map={buat:["--buat","--buat-bg"],jangan:["--jangan","--jangan-bg"],hik:["--hik","--hik-bg"],aki:["--aki","--aki-bg"]};
-  const [c,bg]=map[asp]||map.buat;
-  document.documentElement.style.setProperty("--accent",`var(${c})`);
-  document.documentElement.style.setProperty("--accent-bg",`var(${bg})`);
+function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("adabUpkkMerged_known")||"[]"));}catch(e){return new Set();}}
+function saveKnown(){try{localStorage.setItem("adabUpkkMerged_known",JSON.stringify([...known]));}catch(e){}}
+function buildOrder(){
+  order=CARDS.filter(c=>(filterSrc==="all"||c.src===filterSrc)&&(filterSec==="all"||c.s===filterSec)&&(filterAsp==="all"||c.k===filterAsp)).map(c=>c.id);
+  pos=0;
+}
+function setAccent(k){
+  const map={buat:["--buat","--buat-bg"],jangan:["--jangan","--jangan-bg"],hik:["--hik","--hik-bg"],aki:["--aki","--aki-bg"],erti:["--erti","--erti-bg"],dalil:["--dalil","--dalil-bg"],lain:["--lain","--lain-bg"]};
+  const [c,bg]=map[k]||map.lain;
+  document.documentElement.style.setProperty("--accent","var("+c+")");
+  document.documentElement.style.setProperty("--accent-bg","var("+bg+")");
+}
+function arBlocks(list){
+  return (list||[]).map(x=>'<div class="arb">'+(x.l?'<div class="lb">'+x.l+'</div>':'')+'<div class="ar">'+x.a+'</div>'+(x.m?'<div class="mk">'+x.m+'</div>':'')+'</div>').join("");
+}
+function listHtml(items,num){
+  if(!items||!items.length)return "";
+  return '<ul class="qlist'+(num?' num':'')+'">'+items.map(t=>'<li>'+t+'</li>').join("")+'</ul>';
 }
 function render(){
   const total=order.length;
-  if(!total){el("counter").textContent="Tiada kad";el("bList").innerHTML="";return;}
+  if(!total){el("counter").textContent="Tiada kad";el("bBody").innerHTML="";el("barFill").style.width="0%";
+    el("fTopic").textContent="Tiada kad untuk tapisan ini";el("fAspill").textContent="—";el("fPrompt").textContent="Cuba tukar tapisan Sumber / Topik / Poin.";return;}
   const c=CARDS[order[pos]];
   flipped=false;card.classList.remove("flip");
-  setAccent(c.aspect);
+  setAccent(c.k);
+  const kd=KIND[c.k]||KIND.lain;
   el("fChip").textContent=SECLABEL[c.s];
   el("bChip").textContent=SECLABEL[c.s];
-  el("fIcon").textContent=c.aIcon;
-  el("bIcon").textContent=c.aIcon;
-  el("fTopic").textContent=c.topic;
-  el("bTopic").textContent=c.topic;
-  el("fAspill").textContent=c.aLabel;
-  el("bAspect").textContent=c.aLabel;
-  el("fPrompt").innerHTML=c.aPrompt;
-  el("bList").innerHTML=c.items.map(t=>`<li>${t}</li>`).join("");
-  el("bDoa").innerHTML=c.doa?`<div class="doa"><div class="ar">${c.doa.ar}</div><div class="mk">${c.doa.mk}</div></div>`:"";
+  el("fSrc").textContent=SRCLABEL[c.src];
+  el("bSrc").textContent=SRCLABEL[c.src];
+  el("fIcon").textContent=kd.icon;
+  el("bIcon").textContent=kd.icon;
+  el("fTopic").textContent=c.t;
+  el("bTopic").textContent=c.t;
+  el("fAspill").textContent=c.f;
+  el("bField").textContent=c.f;
+  el("fPrompt").innerHTML=kd.prompt;
+  let html="";
+  if(c.pre)html+='<div class="pre">'+c.pre+'</div>';
+  if(c.ar)html+=arBlocks(c.ar);
+  html+=listHtml(c.items,c.num);
+  if(c.grp2)html+='<div class="grp">'+c.grp2+'</div>';
+  if(c.items2)html+=listHtml(c.items2,c.num);
+  if(c.ar2)html+=arBlocks(c.ar2);
+  el("bBody").innerHTML=html;
   if(c.note){el("bNote").style.display="block";el("bNote").textContent=c.note;}else{el("bNote").style.display="none";}
-  el("counter").textContent=`Kad ${pos+1} / ${total}`;
+  el("counter").textContent="Kad "+(pos+1)+" / "+total;
   el("barFill").style.width=((pos+1)/total*100)+"%";
   const knownInView=order.filter(id=>known.has(id)).length;
-  el("knownCount").textContent=`✓ ${knownInView} sudah tahu`;
+  el("knownCount").textContent="✓ "+knownInView+" sudah tahu";
   el("btnKnown").classList.toggle("on",known.has(c.id));
 }
 function flip(){flipped=!flipped;card.classList.toggle("flip",flipped);}
@@ -468,21 +923,13 @@ el("btnFlip").addEventListener("click",e=>{e.stopPropagation();flip();});
 el("btnNext").addEventListener("click",next);
 el("btnPrev").addEventListener("click",prev);
 el("btnShuffle").addEventListener("click",shuffle);
-el("btnKnown").addEventListener("click",()=>{const id=CARDS[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
-el("btnReview").addEventListener("click",()=>{const id=CARDS[order[pos]].id;known.delete(id);saveKnown();next();});
+el("btnKnown").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
+el("btnReview").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.delete(id);saveKnown();next();});
 el("btnReset").addEventListener("click",()=>{if(confirm("Set semula semua progres 'sudah tahu'?")){known.clear();saveKnown();render();}});
-document.querySelectorAll("#tabsSec .sec").forEach(t=>{
-  t.addEventListener("click",()=>{document.querySelectorAll("#tabsSec .sec").forEach(x=>x.classList.remove("active"));
-    t.classList.add("active");filterSec=t.dataset.k;buildOrder();render();});
-});
-document.querySelectorAll("#tabsAsp .asp").forEach(t=>{
-  t.addEventListener("click",()=>{document.querySelectorAll("#tabsAsp .asp").forEach(x=>x.classList.remove("active"));
-    t.classList.add("active");filterAsp=t.dataset.a;buildOrder();render();});
-});
-document.addEventListener("keydown",e=>{
-  if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();
-  else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}
-});
+document.querySelectorAll("#tabsSrc .src").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsSrc .src").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterSrc=t.dataset.r;buildOrder();render();});});
+document.querySelectorAll("#tabsSec .sec").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsSec .sec").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterSec=t.dataset.k;buildOrder();render();});});
+document.querySelectorAll("#tabsAsp .asp").forEach(t=>{t.addEventListener("click",()=>{document.querySelectorAll("#tabsAsp .asp").forEach(x=>x.classList.remove("active"));t.classList.add("active");filterAsp=t.dataset.a;buildOrder();render();});});
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")prev();else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}});
 buildOrder();render();
 </script>
 </body>
