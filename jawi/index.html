@@ -1,1 +1,825 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kad Imbas · Jawi UPKK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3E9; --paper-2:#FBF8F0; --ink:#2B2A26; --ink-soft:#5B574C;
+    --gold:#C9A227; --gold-deep:#A47F14; --line:#E4DBC5;
+    --imbuhan:#2A7D8C; --imbuhan-bg:#E4F1F3;
+    --ganda:#2E7D5B; --ganda-bg:#E7F3EC;
+    --vokal:#7B4B94; --vokal-bg:#F1E9F5;
+    --akronim:#C2703D; --akronim-bg:#FBEDE3;
+    --pinjaman:#2F6F9E; --pinjaman-bg:#E6EFF5;
+    --hukum:#A47F14; --hukum-bg:#FBF3DE;
+    --ayat:#C0392B; --ayat-bg:#FBEAE7;
+    --accent:var(--imbuhan); --accent-bg:var(--imbuhan-bg);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{overflow-x:hidden}
+  ul.qlist li{overflow-wrap:anywhere}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%, #FDFBF4 0%, transparent 60%), var(--paper);
+    color:var(--ink);min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+    padding:18px 16px 40px;-webkit-tap-highlight-color:transparent}
+  .wrap{width:100%;max-width:620px;display:flex;flex-direction:column;gap:12px}
+  header{text-align:center;padding-top:4px}
+  .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  h1{font-family:'Amiri',serif;font-weight:700;font-size:25px;line-height:1.2;margin:5px 0 2px}
+  .sub{font-size:12px;color:var(--ink-soft)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 0;color:var(--gold)}
+  .divider::before,.divider::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .divider span{font-size:13px}
+  .filters{display:flex;flex-direction:column;gap:6px}
+  .frow{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;align-items:center}
+  .flabel{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:800;margin-right:2px}
+  .tab{border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink-soft);
+    font:inherit;font-weight:600;font-size:10.5px;padding:5px 9px;border-radius:999px;cursor:pointer;
+    transition:.16s;display:flex;align-items:center;gap:5px;line-height:1.2}
+  .tab .dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.45}
+  .tab.active{color:#fff}
+  .tab.active .dot{opacity:1;background:#fff}
+  .bhg[data-b="all"].active,.st.active{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .bhg[data-b="imbuhan"].active{background:var(--imbuhan);border-color:var(--imbuhan)}
+  .bhg[data-b="ganda"].active{background:var(--ganda);border-color:var(--ganda)}
+  .bhg[data-b="vokal"].active{background:var(--vokal);border-color:var(--vokal)}
+  .bhg[data-b="akronim"].active{background:var(--akronim);border-color:var(--akronim)}
+  .bhg[data-b="pinjaman"].active{background:var(--pinjaman);border-color:var(--pinjaman)}
+  .bhg[data-b="hukum"].active{background:var(--hukum);border-color:var(--hukum)}
+  .bhg[data-b="ayat"].active{background:var(--ayat);border-color:var(--ayat)}
+  .bhg[data-b="imbuhan"] .dot{background:var(--imbuhan);opacity:.7}
+  .bhg[data-b="ganda"] .dot{background:var(--ganda);opacity:.7}
+  .bhg[data-b="vokal"] .dot{background:var(--vokal);opacity:.7}
+  .bhg[data-b="akronim"] .dot{background:var(--akronim);opacity:.7}
+  .bhg[data-b="pinjaman"] .dot{background:var(--pinjaman);opacity:.7}
+  .bhg[data-b="hukum"] .dot{background:var(--hukum);opacity:.7}
+  .bhg[data-b="ayat"] .dot{background:var(--ayat);opacity:.7}
+  .bhg.active .dot{background:#fff;opacity:1}
+  .arah{display:flex;gap:0;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper-2)}
+  .arah button{font:inherit;font-weight:700;font-size:10.5px;padding:6px 12px;border:0;cursor:pointer;
+    background:transparent;color:var(--ink-soft);transition:.16s;white-space:nowrap}
+  .arah button.on{background:var(--accent);color:#fff}
+  .meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+  .meta .known{color:var(--ganda)}
+  .bar{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .3s}
+  .stage{perspective:1600px;width:100%}
+  .card{position:relative;width:100%;cursor:pointer;display:grid;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+  .card.flip{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .face{grid-area:1/1;width:100%;min-height:300px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:18px;background:var(--paper-2);border:1px solid var(--line);
+    box-shadow:0 1px 0 #fff inset, 0 18px 40px -24px rgba(60,50,20,.5);
+    padding:22px 20px;display:flex;flex-direction:column;overflow:visible}
+  .face::before{content:"";position:absolute;inset:9px;border-radius:12px;pointer-events:none;
+    border:1.5px solid color-mix(in srgb, var(--accent) 32%, transparent)}
+  .corner{position:absolute;width:15px;height:15px;border:2px solid var(--accent);opacity:.6}
+  .corner.tl{top:13px;left:13px;border-right:0;border-bottom:0;border-radius:4px 0 0 0}
+  .corner.tr{top:13px;right:13px;border-left:0;border-bottom:0;border-radius:0 4px 0 0}
+  .corner.bl{bottom:13px;left:13px;border-right:0;border-top:0;border-radius:0 0 0 4px}
+  .corner.br{bottom:13px;right:13px;border-left:0;border-top:0;border-radius:0 0 4px 0}
+  .back{transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+  .tagrow{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;z-index:1;margin-bottom:4px}
+  .chips{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;color:var(--accent);
+    background:var(--accent-bg);border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);
+    padding:4px 8px;border-radius:999px;white-space:nowrap}
+  .chip.jwc{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;font-size:12px;text-transform:none;letter-spacing:0;padding:2px 9px}
+  .side{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .q-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;position:relative;z-index:1;padding:8px 4px}
+  .a-icon{width:42px;height:42px;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -8px var(--accent)}
+  .topic{font-family:'Amiri',serif;font-size:20px;font-weight:700;line-height:1.3;color:var(--ink)}
+  .aspill{font-weight:800;font-size:12px;letter-spacing:.02em;color:var(--accent);
+    background:var(--accent-bg);border:1.5px solid color-mix(in srgb,var(--accent) 35%,transparent);
+    padding:6px 13px;border-radius:999px;line-height:1.35}
+  .prompt{font-size:12.5px;color:var(--ink-soft);line-height:1.5;max-width:340px}
+  .prompt b{color:var(--accent)}
+  .hint{font-size:11.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;justify-content:center;margin-top:4px}
+  .hint .tapdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+  /* Jawi display */
+  .jw{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;unicode-bidi:isolate}
+  .jwbig{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;unicode-bidi:isolate;
+    font-size:46px;font-weight:700;line-height:1.8;color:var(--ink);padding:4px 2px}
+  .jwbig.sm2{font-size:32px}
+  .msbig{font-size:25px;font-weight:800;line-height:1.35;color:var(--ink)}
+  .vsplit{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;
+    padding:14px 6px;border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:11px}
+  .vsplit .lb{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep)}
+  .a-head{display:flex;align-items:flex-start;gap:9px;position:relative;z-index:1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .a-head .hi{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+  .a-head .ht{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+  .a-head .ht .t1{font-family:'Amiri',serif;font-size:15.5px;font-weight:700;color:var(--ink)}
+  .a-head .ht .t2{font-size:10.5px;font-weight:800;letter-spacing:.02em;color:var(--accent);text-transform:uppercase}
+  .a-body{flex:1;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1}
+  .pre{font-size:13px;line-height:1.55;color:var(--ink)}
+  .pre b{color:var(--accent)}
+  .big{text-align:center;font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;unicode-bidi:isolate;
+    font-size:32px;font-weight:700;color:var(--accent);padding:10px 6px;line-height:1.6}
+  .grp{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);
+    margin-top:4px;padding-top:6px;border-top:1px dashed var(--line)}
+  ul.qlist{list-style:none;display:flex;flex-direction:column;gap:6px}
+  ul.qlist li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.5}
+  ul.qlist li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px}
+  ul.qlist.num{counter-reset:qn}
+  ul.qlist.num li{counter-increment:qn}
+  ul.qlist.num li::before{content:counter(qn);width:auto;height:auto;border-radius:0;background:none;color:var(--accent);font-weight:800;font-size:11.5px;margin-top:0;min-width:15px}
+  ul.qlist li b{color:var(--accent);font-weight:800}
+  ul.qlist li .jw{font-size:18px;font-weight:700;color:var(--ink)}
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:2px;table-layout:fixed}
+  table.tbl th{background:var(--accent);color:#fff;font-weight:800;font-size:10px;letter-spacing:.03em;
+    padding:6px 4px;border:1px solid var(--accent);text-align:center}
+  table.tbl td{border:1px solid var(--line);padding:7px 4px;text-align:center;line-height:1.5;background:#fff;
+    word-break:break-word}
+  table.tbl tr:nth-child(even) td{background:var(--paper)}
+  table.tbl .jw{font-size:18px;font-weight:700;display:inline-block}
+  table.tbl small{font-size:9.5px;color:var(--ink-soft);font-weight:700}
+  .arb{border:1.5px dashed var(--gold);background:#FCF7E6;border-radius:9px;padding:10px 11px;text-align:center}
+  .arb + .arb{margin-top:5px}
+  .arb .lb{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+  .arb .ar{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;unicode-bidi:isolate;font-size:22px;line-height:2;color:#1a1a17}
+  .arb .mk{font-size:12px;color:var(--ink-soft);font-style:italic;margin-top:5px;line-height:1.5}
+  .note{position:relative;z-index:1;margin-top:8px;font-size:10.5px;color:var(--ink-soft);text-align:center;font-style:italic;line-height:1.5}
+  .note::before{content:"\203B  "}
+  .controls{display:flex;flex-direction:column;gap:10px}
+  .nav{display:flex;gap:9px}
+  .btn{flex:1;font:inherit;font-weight:700;font-size:14px;padding:12px;border-radius:13px;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--paper-2);color:var(--ink);transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px}
+  .btn:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .btn:active{transform:translateY(1px)}
+  .btn.solid{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.solid:hover{filter:brightness(1.05);color:#fff}
+  .mark{display:flex;gap:9px}
+  .btn.known{color:var(--ganda)} .btn.known:hover{border-color:var(--ganda)}
+  .btn.review{color:var(--ayat)} .btn.review:hover{border-color:var(--ayat)}
+  .btn.known.on{background:var(--ganda);border-color:var(--ganda);color:#fff}
+  .util{display:flex;gap:9px}
+  .util .btn{font-size:12.5px;font-weight:600;padding:9px}
+  footer{text-align:center;font-size:10.5px;color:var(--ink-soft);line-height:1.6;margin-top:2px}
+  footer b{color:var(--gold-deep)}
+  @media (max-width:420px){h1{font-size:20px}.topic{font-size:18px}.face{padding:20px 14px}
+    ul.qlist li{font-size:13px}.jwbig{font-size:38px}.jwbig.sm2{font-size:27px}.msbig{font-size:22px}
+    table.tbl{font-size:11px}table.tbl th,table.tbl td{padding:5px 3px}table.tbl .jw{font-size:16px}
+    .arb .ar{font-size:19px}.big{font-size:27px}}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}.tapdot{animation:none}}
 
+  /* iPhone/Safari compatibility: avoid 3D flip rendering that can mirror or overlap text */
+  .stage{perspective:none !important;-webkit-perspective:none !important;}
+  .card{transform:none !important;-webkit-transform:none !important;transform-style:flat !important;-webkit-transform-style:flat !important;}
+  .face{backface-visibility:visible !important;-webkit-backface-visibility:visible !important;opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  .back{transform:none !important;-webkit-transform:none !important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .front{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease, visibility 0s linear .22s !important;}
+  .card.flip .back{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease, visibility 0s linear 0s !important;}
+  @media (prefers-reduced-motion:reduce){.face,.back,.card.flip .front,.card.flip .back{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kad Imbas UPKK</div>
+    <h1>Jawi UPKK</h1>
+    <div class="sub">Imbuhan · Kata Ganda · Akronim · Pinjaman · Hukum Ejaan · Ayat</div>
+    <div class="divider"><span>۞</span></div>
+  </header>
+
+  <div class="filters">
+    <div class="frow" id="tabsBhg">
+      <span class="flabel">Bahagian</span>
+      <button class="tab bhg active" data-b="all"><span class="dot"></span>Semua</button>
+      <button class="tab bhg" data-b="imbuhan"><span class="dot"></span>Imbuhan</button>
+      <button class="tab bhg" data-b="ganda"><span class="dot"></span>Kata Ganda</button>
+      <button class="tab bhg" data-b="vokal"><span class="dot"></span>Vokal &amp; Hamzah</button>
+      <button class="tab bhg" data-b="akronim"><span class="dot"></span>Akronim</button>
+      <button class="tab bhg" data-b="pinjaman"><span class="dot"></span>Pinjaman &amp; Tradisi</button>
+      <button class="tab bhg" data-b="hukum"><span class="dot"></span>Hukum Ejaan</button>
+      <button class="tab bhg" data-b="ayat"><span class="dot"></span>Ayat &amp; Khat</button>
+    </div>
+    <div class="frow" id="tabsSet">
+      <span class="flabel">Set</span>
+    </div>
+    <div class="frow" id="rowArah">
+      <span class="flabel">Arah</span>
+      <div class="arah">
+        <button id="arJ2R" class="on">جاوي ← Rumi</button>
+        <button id="arR2J">Rumi ← جاوي</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span id="counter">Kad 1 / 1</span>
+    <span class="known" id="knownCount">✓ 0 sudah tahu</span>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="face front">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><div class="chips"><span class="chip" id="fSet">—</span><span class="chip jwc" id="fSetJw">—</span></div><span class="side">Soalan</span></div>
+        <div class="q-center" id="fBody"></div>
+        <div class="hint"><span class="tapdot"></span> Ketik untuk lihat jawapan</div>
+      </div>
+      <div class="face back">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="tagrow"><div class="chips"><span class="chip" id="bSet">—</span><span class="chip jwc" id="bSetJw">—</span></div><span class="side">Jawapan</span></div>
+        <div id="bHead"></div>
+        <div class="a-body" id="bBody"></div>
+        <div class="note" id="bNote" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="mark">
+      <button class="btn known" id="btnKnown">✓ Sudah tahu</button>
+      <button class="btn review" id="btnReview">↻ Ulang semula</button>
+    </div>
+    <div class="nav">
+      <button class="btn" id="btnPrev">‹ Sebelum</button>
+      <button class="btn solid" id="btnFlip">Selak kad</button>
+      <button class="btn" id="btnNext">Seterus ›</button>
+    </div>
+    <div class="util">
+      <button class="btn" id="btnShuffle">🔀 Kocok</button>
+      <button class="btn" id="btnReset">⟲ Set semula progres</button>
+    </div>
+  </div>
+
+  <footer>
+    <b>Nota Jawi UPKK · Siliibus Jawi 2.0 + Kaedah Jawi</b><br>
+    Disediakan oleh Bonda Nisa' Jauri (@BondaLutfi) · Nota bergambar: kredit KAFA Penang<br>
+    Ejaan Jawi dikekalkan seperti nota asal. Sila semak dengan cetakan asal.
+  </footer>
+</div>
+
+<script>
+/* ===== SET (kumpulan) — ikut susunan nota ===== */
+/* nr:true = Rumi TIDAK ada dalam nota asal (nota beri Jawi sahaja). Bacaan Rumi ditambah. */
+const SETS=[
+ {id:"pengenalan", b:"imbuhan",  label:"Pengenalan Imbuhan", jw:"ايمبوهن"},
+ {id:"awalan",     b:"imbuhan",  label:"Imbuhan Awalan",     jw:"ايمبوهن اولن"},
+ {id:"an",         b:"imbuhan",  label:"Imbuhan AN",         jw:"ايمبوهن (ان/ءن/ن)"},
+ {id:"i",          b:"imbuhan",  label:"Imbuhan I",          jw:"ايمبوهن (ي/ءي)"},
+ {id:"ganda",      b:"ganda",    label:"Kata Ganda",         jw:"كات ݢنداء"},
+ {id:"berganding", b:"vokal",    label:"Vokal Berganding",   jw:"ۏوكال برݢنديڠ"},
+ {id:"diftong",    b:"vokal",    label:"Diftong",            jw:"ديفتوڠ"},
+ {id:"hamzah",     b:"vokal",    label:"Kedudukan Hamzah",   jw:"همزه"},
+ {id:"akronim",    b:"akronim",  label:"Akronim",            jw:"اكرونيم"},
+ {id:"singkatan",  b:"akronim",  label:"Kata Singkatan",     jw:"كات سيڠكاتن"},
+ {id:"padanan",    b:"akronim",  label:"Padanan Huruf A-Z",  jw:"ڤادانن حروف"},
+ {id:"inggeris",   b:"pinjaman", label:"Pinjaman Inggeris",  jw:"بهاس ايڠݢريس", nr:true},
+ {id:"arab",       b:"pinjaman", label:"Pinjaman Arab",      jw:"بهاس عرب",     nr:true},
+ {id:"tradisi",    b:"pinjaman", label:"Ejaan Tradisi",      jw:"ايجاءن تراديسي", nr:true},
+ {id:"kvk",        b:"hukum",    label:"Hukum KVK",          jw:"حكوم KVK"},
+ {id:"sukukata3",  b:"hukum",    label:"3 Suku Kata / Lebih", jw:"٣ سوكو كات"},
+ {id:"kaga",       b:"hukum",    label:"Hukum KA / GA",      jw:"حكوم ک / ݢ"},
+ {id:"darlung",    b:"hukum",    label:"Hukum DARLUNG",      jw:"د ر ل و ڠ"},
+ {id:"kt12",       b:"hukum",    label:"Hukum KT 12",        jw:"بتق سكنڠ چيك جم"},
+ {id:"hurufk",     b:"hukum",    label:"Kaedah Huruf K",     jw:"ق & ک"},
+ {id:"epepet",     b:"hukum",    label:"E Taling & E Pepet", jw:"اي تاليڠ / اي ڤيڤيت"},
+ {id:"aha",        b:"hukum",    label:"Hukum _A/HA",        jw:"حكوم _أ/ها"},
+ {id:"homograf",   b:"hukum",    label:"Homograf",           jw:"هوموݢراف"},
+ {id:"tandabaca",  b:"ayat",     label:"Tanda Bacaan",       jw:"تندا باچاءن"},
+ {id:"jenisayat",  b:"ayat",     label:"Jenis-Jenis Ayat",   jw:"جنيس ايات"},
+ {id:"khat",       b:"ayat",     label:"Jenis-Jenis Khat",   jw:"جنيس خط"},
+];
+
+/* ===== SENARAI PERKATAAN — [Rumi, Jawi] ===== */
+const VOCAB={
+/* P4 — Imbuhan Awalan (nota beri Rumi + Jawi) */
+awalan:[
+ ["Se","سـ"],["Ke","كـ"],["Di","د"],["Be","ب"],
+ ["Ber","بر"],["Me","م"],["Mem","ممـ"],["Men","من"],
+ ["Meng","مڠ"],["Pe","ڤ"],["Per","ڤر"],["Pem","ڤم"],
+ ["Pen","ڤن"],["Peng","ڤڠ"],["Te","ت"],["Ter","تر"]
+],
+/* P9 — Akronim (nota beri Rumi + Jawi) */
+akronim:[
+ ["JAKIM","جاكيم"],["ABIM","ابيم"],["PLUS","ڤلوس"],
+ ["TADIKA","تاديكا"],["MARA","مارا"],["CEREKA","چريكا"]
+],
+/* P9 — Kata Singkatan (nota beri Rumi + Jawi) */
+singkatan:[
+ ["PIBG","ڤي.اءي.بي.جي."],["JKR","جيه.كي.ار."],["BSN","بي.ايس.عين."],
+ ["KLIA","كي.ايل.اءي.أي."],["PWTC","ڤي. دبليو.تي.سي."]
+],
+/* P10 — Padanan Huruf (nota beri Rumi + Jawi) */
+padanan:[
+ ["A","أي"],["B","بي"],["C","سي"],["D","دي"],["E","إي"],
+ ["F","ايف"],["G","جي"],["H","ايچ"],["I","اءي"],["J","جيه"],
+ ["K","كي"],["L","ايل"],["M","عيم"],["N","عين"],["O","او"],
+ ["P","ڤي"],["Q","قيو"],["R","ار"],["S","ايس"],["T","تي"],
+ ["U","يو"],["V","في"],["W","دبليو"],["X","ايك س"],["Y","واي"],["Z","زيد"]
+],
+/* P11 — Pinjaman Bahasa Inggeris (nota beri JAWI SAHAJA) */
+inggeris:[
+ ["Ambulans","امبولنس"],["Insurans","اينسورنس"],["Ekspres","ايكسڤريس"],["Subsidi","سوبسيدي"],["Burger","بوركر"],
+ ["Blaus","بلاءوس"],["Badminton","بدمينتون"],["Beg","بيݢ"],["Basikal","باسيكل"],["Teks","تيكس"],
+ ["Tiket","تيكيت"],["Teknologi","تيكنولوݢي"],["Teknik","تيكنيك"],["Teksi","تيكسي"],["Tisu","تيسو"],
+ ["Televisyen","تيليۏيشن"],["Telefon","تيليفون"],["Tradisional","تراديسيونل"],["Jus","جوس"],["Jim","جيم"],
+ ["Disel","ديسيل"],["Radio","راديو"],["Zip","زيڤ"],["Sains","ساءينس"],["Syampu","شمڤو"],
+ ["Faks","فكس"],["Filem","فيلم"],["Fail","فاءيل"],["Foto","فوتو"],["Paip","ڤاءيف"],
+ ["Pil","ڤيل"],["Pos","ڤوس"],["Gol","ݢول"],["Kamera","كاميرا"],["Komputer","كومڤوتر"],
+ ["Klinik","كلينيك"],["Van","ۏن"],["Video","ۏيديو"],["Virus","ۏيروس"],["Volt","ۏولت"]
+],
+/* P11 — Pinjaman Bahasa Arab (nota beri JAWI SAHAJA) */
+arab:[
+ ["Amal","عمل"],["Takwa","تقوى"],["Masjid","مسجد"],["Syukur","شكور"],
+ ["Akhlak","اخلاق"],["Insan","انسان"],["Syaitan","شيطان"],["Syarak","شرع"],["Alim","عاليم"],["Ibadah","عبادة"],
+ ["Ikhlas","اخلاص"],["Syariah","شريعة"],["Syarat","شرط"],["Malaikat","ملائكة"],["Solat","صلاة"],["Sabar","صبر"],
+ ["Kitab","كتاب"],["Sedekah","صدقه"],["Al-Quran","القرءان"],["Azan","اذان"],["Ihsan","احسان"],["Sihat","صيحت"],
+ ["Istinjak","استنجاء"],["Tayamum","تيمم"],["Hadir","حاضير"],["Ulama","علماء"],["Zakat","زكاة"],
+ ["Doa","دعاء"],["Hadis","حديث"]
+],
+/* P12 — Ejaan Tradisi (nota beri JAWI SAHAJA) */
+tradisi:[
+ ["Ada","اد"],["Pada","ڤد"],["Tiada","تياد"],["Dia","دي"],
+ ["Ia","اي"],["Lima","ليم"],["Dari","دري"],["Kita","كيت"],
+ ["Dan","دان"],["Daripada","درڤد"],["Itu","ايت"],["Maka","مك"],
+ ["Manusia","ماءنسي"],["Demikian","دمكين"],["Iaitu","ياءيت"],["Di","د"],
+ ["Syurga","شرݢ"],["Kepada","كڤد"],["Ini","اين"],["Jika","جك"]
+]
+};
+/* ===== KAD NOTA / RUMUS ===== */
+const NOTA_A=[
+/* ---------- P3 PENGENALAN IMBUHAN ---------- */
+{set:"pengenalan",f:"Pengertian Imbuhan",
+ items:["Imbuhan ialah proses <b>penambahan</b> pada kata dasar.","Penambahan imbuhan boleh ubah makna perkataan."],
+ grp2:"Imbuhan terbahagi kepada tiga bahagian iaitu;",
+ items2:["Imbuhan awalan.","Imbuhan akhiran","Imbuhan apitan."],num2:true},
+{set:"pengenalan",f:"Contoh Tiga Jenis Imbuhan",
+ tbl:{head:["Jenis","HIAS","BUAT"],rows:[
+  ["Awalan","<span class='jw'>برهياس</span><br><small>بر</small>","<span class='jw'>ممبوات</span><br><small>مم</small>"],
+  ["Akhiran","<span class='jw'>هياسن</span><br><small>ـن</small>","<span class='jw'>بواتن</span><br><small>ـن</small>"],
+  ["Apitan","<span class='jw'>ڤرهياسن</span><br><small>ڤر...ـن</small>","<span class='jw'>ممبواتكن</span><br><small>مم...كن</small>"]]}},
+{set:"pengenalan",f:"Kaedah Eja Perkataan Berimbuhan",
+ items:["Mengeja kata dasar dahulu.","Kemudian masukkan imbuhan dikehendaki.","Ejaan <b>kata dasar tidak berubah</b> KECUALI pada <b>KEADAAN TERTENTU</b>"]},
+
+/* ---------- P5 IMBUHAN AN ---------- */
+{set:"an",f:"Ditulis (ان) — akhir kata dasar O/U",
+ pre:"Bila akhir kata dasar huruf <b>O / U</b>.",
+ big:"ان",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["TU JU AN","<span class='jw'>توجوان</span>"],
+  ["BAN TU AN","<span class='jw'>بنتوان</span>"],
+  ["LA LU AN","<span class='jw'>لالوان</span>"]]}},
+{set:"an",f:"Ditulis (ءن) — akhir kata dasar A",
+ pre:"Bila akhir kata dasar huruf <b>A</b>.",
+ big:"ءن",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["BI NA AN","<span class='jw'>بيناءن</span>"],
+  ["KE A DA AN","<span class='jw'>كأداءن</span>"],
+  ["BA WA AN","<span class='jw'>باواءن</span>"]]}},
+{set:"an",f:"Ditulis (ن) — akhir kata dasar selain A/O/U",
+ pre:"Bila akhir kata dasar <b>selain huruf A/O/U</b>.",
+ big:"ن",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["TU LIS AN","<span class='jw'>توليسن</span>"],
+  ["MA KAN AN","<span class='jw'>ماكنن</span>"],
+  ["LA TIH AN","<span class='jw'>لاتيهن</span>"]]}},
+
+/* ---------- P6 IMBUHAN I ---------- */
+{set:"i",f:"Ditulis (ي) — akhir kata dasar selain A/O/U",
+ pre:"Bila akhir kata dasar <b>selain A/O/U</b>.",
+ big:"ي",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["KA SIH I","<span class='jw'>كاسيهي</span>"],
+  ["DE KAT I","<span class='jw'>دكتي</span>"],
+  ["MEM BA LUT I","<span class='jw'>ممبالوتي</span>"]]}},
+{set:"i",f:"Ditulis (ءي) — akhir kata dasar A/O/U",
+ pre:"Bila akhir kata dasar huruf <b>A/O/U</b>.",
+ big:"ءي",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["DI TE MU I","<span class='jw'>دتموءي</span>"],
+  ["ME LA LU I","<span class='jw'>ملالوءي</span>"],
+  ["DI RIN DU I","<span class='jw'>دريندوءي</span>"],
+  ["WAR NA I","<span class='jw'>ورناءي</span>"],
+  ["DI SU KA I","<span class='jw'>دسوكاءي</span>"],
+  ["HAR GA I","<span class='jw'>دهرݢاءي</span>"]]},
+ note:"Baris terakhir: nota asal tulis Rumi 'HAR GA I' tetapi Jawi 'دهرݢاءي' (ada awalan د). Dikekalkan verbatim — sila sahkan dengan cikgu"},
+
+/* ---------- P7 KATA GANDA ---------- */
+{set:"ganda",f:"Pengertian Kata Ganda",
+ items:["Atau kata ulang ialah proses pengulangan perkataan sama ada pada keseluruhan atau sebahagian perkataan"]},
+{set:"ganda",f:"Kata Ganda Penuh",
+ pre:"Ditulis dengan menggunakan <b>tanda angka ٢</b>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["Buku-buku","<span class='jw'>بوكو٢</span>"],
+  ["Rapat-rapat","<span class='jw'>راڤت٢</span>"],
+  ["Anak-anak","<span class='jw'>انق٢</span>"],
+  ["Rumah-rumah","<span class='jw'>رومه٢</span>"]]}},
+{set:"ganda",f:"Kata Ganda Berimbuhan",
+ pre:"Kata ganda separa. Ditulis dengan <b>tanda sempang (-)</b>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["Berhari-hari","<span class='jw'>برهاري-هاري</span>"],
+  ["Bersama-sama","<span class='jw'>برساما-سام</span>"],
+  ["Maaf-memaafi","<span class='jw'>معاف-ممعافي</span>"],
+  ["Melambai-lambai","<span class='jw'>ملمباي-لمباي</span>"],
+  ["Berkata-kata","<span class='jw'>بركاتا-كات</span>"]]}},
+{set:"ganda",f:"Kata Ganda Berentak",
+ pre:"Kata ganda separa. Ditulis dengan <b>tanda sempang (-)</b>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["Kuih-muih","<span class='jw'>كوءيه-موءيه</span>"],
+  ["Riuh-rendah","<span class='jw'>ريوه-رنده</span>"],
+  ["Mandi-manda","<span class='jw'>مندي-مندا</span>"],
+  ["Saudara-mara","<span class='jw'>ساودارا-مارا</span>"]]}},
+{set:"ganda",f:"❗ Nota Penting — Tambah Alif",
+ items:["Ditambah huruf <b>alif</b> pada suku kata akhir perkataan <b>sebelum sempang</b> jika diakhiri dengan bunyi 'a'."],
+ grp2:"Sebab itu",
+ items2:["Bersama-sama → <span class='jw'>برساما-سام</span>","Berkata-kata → <span class='jw'>بركاتا-كات</span>"]},
+
+/* ---------- P8 VOKAL BERGANDING ---------- */
+{set:"berganding",f:"Tulis Hamzah — 3 keadaan",
+ pre:"Vokal berganding = <b>2 vokal yang bersebelahan dalam 2 suku kata (KVVK)</b>. Tulis hamzah pada 3 keadaan ini:",
+ tbl:{head:["Pola","Rumi","Jawi"],rows:[
+  ["<b>ai</b>","baik","<span class='jw'>باءيق</span>"],
+  ["<b>au</b>","laut","<span class='jw'>لاءوت</span>"],
+  ["<b>ui</b>","kuih","<span class='jw'>كوءيه</span>"]]}},
+{set:"berganding",f:"Tiada Hamzah",
+ pre:"Terbalik dari yang ada — pola ini <b>tiada hamzah</b>:",
+ tbl:{head:["Pola","Rumi","Jawi"],rows:[
+  ["<b>ia</b>","biar","<span class='jw'>بيار</span>"],
+  ["<b>ua</b>","keluar","<span class='jw'>كلوار</span>"],
+  ["<b>iu</b>","tiup","<span class='jw'>تيوڤ</span>"]]}},
+
+/* ---------- P8 DIFTONG ---------- */
+{set:"diftong",f:"Tulis Hamzah — di awal suku kata",
+ pre:"Diftong = <b>2 vokal dalam 1 suku kata (KVV) / (VVK)</b>. Tulis hamzah bila di <b>awal</b> suku kata:",
+ tbl:{head:["Pola","Rumi","Jawi"],rows:[
+  ["<b>ai</b>","aising","<span class='jw'>اءيسيڠ</span>"],
+  ["<b>au</b>","auto","<span class='jw'>اءوتو</span>"]]}},
+{set:"diftong",f:"Tiada Hamzah — tengah/akhir suku kata",
+ pre:"Tiada hamzah bila di <b>tengah / akhir</b> suku kata:",
+ tbl:{head:["Pola","Rumi","Jawi"],rows:[
+  ["<b>au</b>","surau","<span class='jw'>سوراو</span>"],
+  ["<b>ai</b>","balai","<span class='jw'>بالاي</span>"],
+  ["<b>oi</b>","boroi","<span class='jw'>بوروي</span>"]]}},
+
+/* ---------- P17 KEDUDUKAN HAMZAH ---------- */
+{set:"hamzah",f:"1. Hamzah Di Atas",
+ pre:"Imbuhan <b>SE / KE / DI</b> + huruf alif = hamzah <b>di atas alif</b>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["<b>Se</b>orang","<span class='jw'>سأورڠ</span>"],
+  ["<b>Ke</b> atas","<span class='jw'>كأتس</span>"],
+  ["<b>Di</b>ikat","<span class='jw'>دأيكت</span>"]]}},
+{set:"hamzah",f:"2. Hamzah Di Bawah",
+ pre:"Hanya pada <b>beberapa perkataan sahaja</b>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["Islam","<span class='jw'>إسلام</span>"],
+  ["Eh","<span class='jw'>إيه</span>"],
+  ["E-mel","<span class='jw'>إي-ميل</span>"]]}},
+{set:"hamzah",f:"3. Hamzah Setara",
+ pre:"Serapan atau pinjaman bahasa Arab",
+ arb:[{a:"وضوء / القرءان"}],
+ grp2:"Perkataan antara 2 vokal dan lain-lain",
+ arb2:[{a:"كاءين / باءيق / سوءالن / سلاءين / دتموءي"}]},
+{set:"hamzah",f:"4. Hamzah Berumah",
+ pre:"Biasanya serapan / pinjaman bahasa Arab",
+ arb:[{a:"ملائكة / تهنيئه / مسئله / عائشة"}]},
+
+/* ---------- P9 AKRONIM & SINGKATAN (definisi) ---------- */
+{set:"akronim",f:"Pengertian Akronim",
+ items:["Kata singkatan yang terbentuk daripada gabungan beberapa huruf pertama atau suku kata membentuk perkataan baru.","Dieja berdasarkan <b>bunyi sebutan</b>."]},
+{set:"singkatan",f:"Pengertian Kata Singkatann",
+ items:["Singkatan yang terbentuk daripada perkataan yang disingkatkan kepada huruf saja.","Nama huruf Rumi dalam Jawi dieja.","<b>1 huruf, 1 titik</b>"],
+ note:"Nota asal mengeja tajuk 'KATA SINGKATANN' (dua N) — dikekalkan verbatim"},
+{set:"padanan",f:"Nota — Padanan Huruf",
+ items:["Nama huruf Rumi dalam Jawi dieja.","Pastikan <b>1 huruf, 1 titik</b>"]},
+
+/* ---------- P12 EJAAN TRADISI (definisi) ---------- */
+{set:"tradisi",f:"Pengertian Perkataan Tradisi",
+ arb:[{a:"ڤركاتاءن تراديسي : ڤركاتاءن يڠ ايجاءنڽ تيدق براوبه دري دهولو هيڠݢ سكارڠ، دان تيدق مڠيكوت قاعده عموم جاوي",m:"Perkataan tradisi: perkataan yang ejaannya tidak berubah dari dahulu hingga sekarang, dan tidak mengikut kaedah umum Jawi."}]},
+];
+const NOTA_B=[
+/* ---------- P18 HUKUM KVK ---------- */
+{set:"kvk",f:"Hukum KVK",
+ pre:"<b>K</b> – konsonan &nbsp; <b>V</b> – vokal &nbsp; <b>K</b> – Konsonan",
+ items:["Terjadi apabila vokal <b>'a'</b> berada di tengah (KVK)","Vokal 'a' <b>tidak dilambang alif</b> bila tulis jawi"],
+ grp2:"Contoh",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["BAS","<span class='jw'>بس</span>"],["JAM","<span class='jw'>جم</span>"],
+  ["JA LAN","<span class='jw'>جالن</span>"],["PA SAR","<span class='jw'>ڤاسر</span>"],
+  ["HA LA MAN","<span class='jw'>هلامن</span>"],["SAM PAN","<span class='jw'>سمڤن</span>"],
+  ["BANG SA","<span class='jw'>بڠسا</span>"]]}},
+
+/* ---------- P19 3 SUKU KATA ---------- */
+{set:"sukukata3",f:"Perkataan 3 Suku Kata Atau Lebih",
+ items:["Perkataan 3 suku kata atau lebih yang <b>suku kata pertamanya ada vokal 'a'</b>, maka tidak dituliskan dengan huruf alif pada suku kata pertama tu","<b>BAHASA MELAYU JATI</b>"],
+ grp2:"Contoh",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["H<b>A</b> RI MAU","<span class='jw'>هريماو</span>"],
+  ["S<b>A</b> HA JA","<span class='jw'>سهاج</span>"],
+  ["B<b>A</b> HA GI A","<span class='jw'>بهاڬيا</span>"],
+  ["H<b>A</b> LI LIN TAR","<span class='jw'>هليلينتر</span>"],
+  ["H<b>A</b> LA MAN","<span class='jw'>هلامن</span>"]]},
+ note:"Huruf bertanda tebal ialah huruf berwarna biru dalam nota asal — tidak ditulis alif bila Jawi"},
+
+/* ---------- P20 HUKUM KA/GA ---------- */
+{set:"kaga",f:"Hukum KA ک / GA ݢ",
+ items:["<b>BAHASA MELAYU JATI</b>","Perkataan yang ada huruf <b>KAF</b> dan <b>GA</b> di akhir perkataan <b>DIGUGURKAN alif</b> bila Jawi"],
+ grp2:"Contoh",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["CU <b>KA</b>","<span class='jw'>چوک</span>"],["TI <b>GA</b>","<span class='jw'>تيݢ</span>"],
+  ["HAR <b>GA</b>","<span class='jw'>هرݢ</span>"],["KE TI <b>KA</b>","<span class='jw'>كتيک</span>"],
+  ["GE LI <b>GA</b>","<span class='jw'>ݢليݢ</span>"],["SU <b>KA</b>","<span class='jw'>سوک</span>"],
+  ["BANG <b>GA</b>","<span class='jw'>بڠݢ</span>"]]}},
+
+/* ---------- P21 HUKUM DARLUNG ---------- */
+{set:"darlung",f:"Hukum DARLUNG — PERLU alif ✓",
+ pre:"<b>DARLUNG</b> = <span class='jw'>د ر ل و ڠ</span>",
+ items:["<b>BAHASA MELAYU JATI</b>","Suku kata terbuka _a/_a <b>PERLU ditulis huruf alif</b> pada akhir suku kata selepas huruf <b>DAL, RO, LAM, WAU, NGA</b>."],
+ grp2:"Contoh",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["DA <b>DA</b>","<span class='jw'>دادا</span>"],["U DA <b>RA</b>","<span class='jw'>اودارا</span>"],
+  ["JA <b>LA</b>","<span class='jw'>جالا</span>"],["KE TA <b>WA</b>","<span class='jw'>كتاوا</span>"],
+  ["BE LA <b>NGA</b>","<span class='jw'>بلاڠا</span>"]]}},
+
+/* ---------- P22 HUKUM KT 12 ---------- */
+{set:"kt12",f:"Hukum KT 12 — TIDAK PERLU alif ✗",
+ pre:"Mnemonik nota: <span class='jw'>بتق سكنڠ چيك جم</span>",
+ items:["<b>BAHASA MELAYU JATI</b>","Suku kata terbuka _a/_a <b>TIDAK PERLU ditulis huruf alif</b> pada akhir suku kata selepas huruf <b>BA TA PA SIN GA NUN NYA CA YA KAF JIM MIM</b>"],
+ grp2:"Contoh",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["HA <b>BA</b>","<span class='jw'>هاب</span>"],["BA <b>CA</b>","<span class='jw'>باچ</span>"],
+  ["GER HA <b>NA</b>","<span class='jw'>ݢرهان</span>"],["SA <b>YA</b>","<span class='jw'>ساي</span>"],
+  ["BER SA <b>MA</b>","<span class='jw'>برسام</span>"]]}},
+{set:"kt12",f:"Hukum KT 12 — KECUALI",
+ pre:"KECUALI:",
+ items:["masuk imbuhan @ bahasa asing @ bukan pola (_a/_a)"],
+ grp2:"Contoh kecuali",
+ arb2:[{a:"باچاءن   داتا   كرجا"}]},
+
+/* ---------- P23 KAEDAH HURUF K ---------- */
+{set:"hurufk",f:"Kaedah Huruf K — Peraturan",
+ items:["<b>PERKATAAN BAHASA MELAYU:</b> Awal suku kata guna <span class='jw'>ک</span> · Akhir suku kata guna <span class='jw'>ق</span>","<b>PERKATAAN BAHASA INGGERIS:</b> K akan ditulis <span class='jw'>ک</span>"]},
+{set:"hurufk",f:"Contoh — Dari Bahasa Inggeris",
+ pre:"Semua guna <span class='jw'>ک</span>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["KLINIK","<span class='jw'>كلينيك</span>"],["TEKNIK","<span class='jw'>تيكنيك</span>"],
+  ["KEK","<span class='jw'>كيك</span>"],["MATEMATIK","<span class='jw'>ماتماتيك</span>"]]}},
+{set:"hurufk",f:"Contoh — Bahasa Melayu",
+ pre:"Awal suku kata <span class='jw'>ک</span> · akhir suku kata <span class='jw'>ق</span>",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["PO <b>KOK</b>","<span class='jw'>ڤوكوق</span>"],["<b>KATAK</b>","<span class='jw'>كاتق</span>"],
+  ["BI <b>LIK</b>","<span class='jw'>بيليق</span>"],["PEN DU <b>DUK</b>","<span class='jw'>ڤندودوق</span>"]]}},
+
+/* ---------- P24 E TALING & E PEPET ---------- */
+{set:"epepet",f:"E Taling & E Pepet — Peraturan",
+ items:["Huruf <b>E TALING</b> dilambangkan dengan huruf <span class='jw'>ي</span> bila di tengah dan <span class='jw'>اي</span> bila di awal perkataan","Huruf <b>E PEPET</b> tiada perlambangan huruf Jawi bila di tengah perkataan. Tetapi akan guna <b>ALIF</b> apabila di permulaan perkataan"]},
+{set:"epepet",f:"Contoh — E Taling",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["<b>E</b> KOR","<span class='jw'>ايكور</span>"],["<b>E</b> NAK","<span class='jw'>اينق</span>"],
+  ["<b>ME</b> RAH","<span class='jw'>ميره</span>"],["<b>TEM</b> POH","<span class='jw'>تيمڤوه</span>"],
+  ["<b>KEM PEN</b>","<span class='jw'>كيمڤين</span>"]]}},
+{set:"epepet",f:"Contoh — E Pepet",
+ tbl:{head:["Rumi","Jawi"],rows:[
+  ["<b>E</b> MAK","<span class='jw'>امق</span>"],["<b>E</b> MAS","<span class='jw'>امس</span>"],
+  ["<b>BE</b> RAS","<span class='jw'>برس</span>"],["<b>SE TE</b> LAH","<span class='jw'>ستله</span>"],
+  ["<b>CE DE</b> RA","<span class='jw'>چدرا</span>"]]}},
+
+/* ---------- P25 HUKUM _A/HA ---------- */
+{set:"aha",f:"Hukum _A/HA",
+ items:["<b>BAHASA MELAYU JATI</b>","_a/ha dalam perkataan, <b>vokal a sebelum HA tidak ditulis alif</b>"],
+ grp2:"Contoh",
+ tbl:{head:["U S<b>A</b> HA","M<b>A</b> HA","BA H<b>A</b> NA"],rows:[
+  ["<span class='jw'>اوسها</span>","<span class='jw'>مها</span>","<span class='jw'>بهان</span>"]]}},
+
+/* ---------- P25 HOMOGRAF ---------- */
+{set:"homograf",f:"Pengertian Homograf",
+ items:["Ejaan seakan sama tapi membawa maksud berbeza.","Untuk bezakan maksud perkataan <b>PERLU tulis alif</b>"],
+ note:"E pepet tidak ditulis/dilambangkan dengan apa-apa huruf Jawi"},
+{set:"homograf",f:"Contoh Homograf",
+ tbl:{head:["Ada alif","Jawi","Tiada alif","Jawi"],rows:[
+  ["<b>PAN</b> TAS","<span class='jw'>ڤانتس</span>","PEN TAS","<span class='jw'>ڤنتس</span>"],
+  ["<b>BAN</b> DAR","<span class='jw'>باندر</span>","BEN DAR","<span class='jw'>بندر</span>"],
+  ["<b>KAM</b> PUNG","<span class='jw'>كامڤوڠ</span>","KEM PUNG","<span class='jw'>كمڤوڠ</span>"],
+  ["BU A <b>YA</b>","<span class='jw'>بوايا</span>","BU AI","<span class='jw'>بواي</span>"],
+  ["PU A <b>SA</b>","<span class='jw'>ڤواسا</span>","PUAS","<span class='jw'>ڤواس</span>"]]}},
+
+/* ---------- P13 TANDA BACAAN ---------- */
+{set:"tandabaca",f:"Noktah  .",
+ items:["Letaknya dihujung ayat.","Setelah lengkap sesuatu ayat."],
+ grp2:"Contoh",
+ arb2:[{a:"اين كاكق ساي."}]},
+{set:"tandabaca",f:"Koma  ,",
+ items:["Memisahkan perkataan berurutan.","Atau selepas perkataan seru."],
+ grp2:"Contoh",
+ arb2:[{a:"ساتو، دوا، ..."},{a:"ادوه، ..."}]},
+{set:"tandabaca",f:"Tanda Soal  ?",
+ items:["Letaknya di akhir ayat tanya."],
+ grp2:"Contoh",
+ arb2:[{a:"دماناكه اوق؟"}]},
+{set:"tandabaca",f:"Tanda Seru  !",
+ items:["Di akhir ayat seruan"],
+ grp2:"Contoh",
+ arb2:[{a:"واه، بيجقڽ دي!"}]},
+{set:"tandabaca",f:"Noktah Bertindih  :",
+ items:["Menambah keterangan atau menulis perbualan"],
+ grp2:"Contoh",
+ arb2:[{a:"علي : السلام عليكم"},{a:"ابو : وعليكم السلام"}]},
+{set:"tandabaca",f:"Pengikat Kata  “ ”",
+ items:["Mengapit ayat perbualan atau erti khas"],
+ grp2:"Contoh",
+ arb2:[{a:"”سيلاكن ماسوق.“"}]},
+
+/* ---------- P14 JENIS AYAT ---------- */
+{set:"jenisayat",f:"Ayat Penyata  ايات ڤڽات",
+ items:["Menerangkan sesuatu"],
+ grp2:"Contoh",
+ arb2:[{a:"راجين براوسها ڤستي برجاي."},{a:"اين بوكو بارو ليلي."}]},
+{set:"jenisayat",f:"Ayat Nafi  ايات نفي",
+ items:["Menafikan sesuatu dengan menggunakan perkataan seperti <span class='jw'>بوكن</span> dan <span class='jw'>تيدق</span>"],
+ grp2:"Contoh",
+ arb2:[{a:"بوكو ايت بوكن ميليق ساي."},{a:"هادي تيدق حاضير كسكوله."}]},
+{set:"jenisayat",f:"Ayat Tanya  ايات تاڽ",
+ items:["Guna untuk bertanya.","Ada tanda soal."],
+ grp2:"Contoh",
+ arb2:[{a:"بيلاكه ايبو اكن سمڤاي؟"}]},
+{set:"jenisayat",f:"Ayat Seru  ايات سرو",
+ items:["Ayat menyatakan perasaan; marah, sedih, terkejut, kagum, gembira"],
+ grp2:"Contoh",
+ arb2:[{a:"واه، چنتيقڽ رومه ايت!"},{a:"ادوه، ڤروت ساي ساكيت!"}]},
+{set:"jenisayat",f:"Ayat Perintah  ايات ڤرينته",
+ items:["Menyatakan permintaan / bantuan / larangan / suruhan / jemputan"],
+ grp2:"Contoh",
+ arb2:[{a:"تولوڠ سوسون كاسوت ايت."},{a:"جاڠن ممبوات بيسيڠ."}]},
+
+/* ---------- P15 JENIS KHAT ---------- */
+{set:"khat",f:"Khat Nasakh  خط نسخ",
+ items:["Tulisan biasa dan jelas.","Ditulis satu-satu"],
+ grp2:"Contoh dalam nota",
+ arb2:[{a:"براخلاق موليا"}]},
+{set:"khat",f:"Khat Riq'ah  خط رقعة",
+ items:["Biasanya ditulis tebal dan bersambung hurufnya"],
+ grp2:"Contoh dalam nota",
+ arb2:[{a:"راجين براوسها"}]},
+{set:"khat",f:"Khat Thuluth  خط ثلث",
+ items:["Tulisan yang cantik dan berekor panjang"],
+ grp2:"Contoh dalam nota",
+ arb2:[{a:"باءيق هاتي"}]},
+{set:"khat",f:"TIPS Menulis Khat",
+ items:["Tiru tulisan khat yang diberi dalam soalan dengan kemas","Untuk soalan kenalpasti tulisan khat, ikutlah ciri-ciri setiap tulisan.","Menulis di atas garisan atau di mana kedudukan huruf itu"]},
+];
+
+/* ================= BINA KAD ================= */
+const BHGLABEL={imbuhan:"Imbuhan",ganda:"Kata Ganda",vokal:"Vokal & Hamzah",akronim:"Akronim",pinjaman:"Pinjaman & Tradisi",hukum:"Hukum Ejaan",ayat:"Ayat & Khat"};
+const SETMAP={}; SETS.forEach(s=>SETMAP[s.id]=s);
+const NRNOTE="Nota asal beri ejaan Jawi sahaja. Bacaan Rumi ini ditambah sebagai bantuan — sila sahkan dengan cikgu.";
+
+const CARDS=[];
+/* Kad perkataan (dwi-arah) */
+SETS.forEach(s=>{
+  const list=VOCAB[s.id];
+  if(!list)return;
+  list.forEach(([ms,jw])=>CARDS.push({ty:"v",set:s.id,b:s.b,ms,jw,note:s.nr?NRNOTE:null}));
+});
+/* Kad nota / rumus */
+[].concat(NOTA_A,NOTA_B).forEach(c=>{
+  const s=SETMAP[c.set];
+  CARDS.push(Object.assign({ty:"n",b:s?s.b:"imbuhan"},c));
+});
+/* Susun ikut turutan SETS supaya kad satu set berturutan; nota dahulu, kemudian perkataan */
+const SETORDER={}; SETS.forEach((s,i)=>SETORDER[s.id]=i);
+CARDS.sort((a,b)=>(SETORDER[a.set]-SETORDER[b.set]) || ((a.ty==="n"?0:1)-(b.ty==="n"?0:1)));
+CARDS.forEach((c,i)=>c.id=i);
+
+/* ================= UI ================= */
+let filterBhg="all",filterSet="all",arah="j2r",order=[],pos=0,flipped=false;
+let known=loadKnown();
+const el=id=>document.getElementById(id);
+const card=el("card");
+function loadKnown(){try{return new Set(JSON.parse(localStorage.getItem("jawiUpkk_known")||"[]"));}catch(e){return new Set();}}
+function saveKnown(){try{localStorage.setItem("jawiUpkk_known",JSON.stringify([...known]));}catch(e){}}
+function setAccent(b){
+  const map={imbuhan:["--imbuhan","--imbuhan-bg"],ganda:["--ganda","--ganda-bg"],vokal:["--vokal","--vokal-bg"],
+    akronim:["--akronim","--akronim-bg"],pinjaman:["--pinjaman","--pinjaman-bg"],hukum:["--hukum","--hukum-bg"],ayat:["--ayat","--ayat-bg"]};
+  const [c,bg]=map[b]||map.imbuhan;
+  document.documentElement.style.setProperty("--accent","var("+c+")");
+  document.documentElement.style.setProperty("--accent-bg","var("+bg+")");
+}
+/* Baris SET dibina semula ikut Bahagian yang dipilih */
+function buildSetTabs(){
+  const row=el("tabsSet");
+  row.innerHTML='<span class="flabel">Set</span>';
+  const mk=(id,label)=>{
+    const btn=document.createElement("button");
+    btn.className="tab st"+(filterSet===id?" active":"");
+    btn.dataset.s=id;
+    btn.innerHTML='<span class="dot"></span>'+label;
+    btn.addEventListener("click",()=>{filterSet=id;buildSetTabs();buildOrder();render();});
+    row.appendChild(btn);
+  };
+  mk("all","Semua");
+  SETS.filter(s=>filterBhg==="all"||s.b===filterBhg).forEach(s=>mk(s.id,s.label));
+}
+function buildOrder(){
+  order=CARDS.filter(c=>(filterBhg==="all"||c.b===filterBhg)&&(filterSet==="all"||c.set===filterSet)).map(c=>c.id);
+  pos=0;
+}
+function arBlocks(list){
+  return (list||[]).map(x=>'<div class="arb">'
+    +(x.l?'<div class="lb">'+x.l+'</div>':'')
+    +'<div class="ar">'+x.a+'</div>'
+    +(x.m?'<div class="mk">'+x.m+'</div>':'')
+    +'</div>').join("");
+}
+function listHtml(items,num){
+  if(!items||!items.length)return "";
+  return '<ul class="qlist'+(num?' num':'')+'">'+items.map(t=>'<li><span>'+t+'</span></li>').join("")+'</ul>';
+}
+function tblHtml(t){
+  if(!t)return "";
+  return '<table class="tbl"><thead><tr>'+t.head.map(h=>'<th>'+h+'</th>').join("")+'</tr></thead><tbody>'
+    +t.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join("")+'</tr>').join("")+'</tbody></table>';
+}
+function jwSize(s){return s.length>14?"jwbig sm2":"jwbig";}
+function render(){
+  const total=order.length;
+  if(!total){
+    el("counter").textContent="Tiada kad";el("bBody").innerHTML="";el("bHead").innerHTML="";el("barFill").style.width="0%";
+    el("fBody").innerHTML='<div class="topic">Tiada kad untuk tapisan ini</div><div class="prompt">Cuba tukar tapisan Bahagian atau Set.</div>';
+    return;
+  }
+  const c=CARDS[order[pos]];
+  flipped=false;card.classList.remove("flip");
+  setAccent(c.b);
+  const s=SETMAP[c.set];
+  el("fSet").textContent=s.label;
+  el("bSet").textContent=s.label;
+  el("fSetJw").textContent=s.jw;
+  el("bSetJw").textContent=s.jw;
+
+  if(c.ty==="v"){
+    /* --- KAD PERKATAAN (ikut arah) --- */
+    if(arah==="j2r"){
+      el("fBody").innerHTML='<div class="'+jwSize(c.jw)+'">'+c.jw+'</div>'
+        +'<div class="prompt">Apakah <b>bacaan Rumi</b>-nya?</div>';
+    }else{
+      el("fBody").innerHTML='<div class="msbig">'+c.ms+'</div>'
+        +'<div class="prompt">Bagaimana <b>ejaan Jawi</b>-nya?</div>';
+    }
+    el("bHead").innerHTML="";
+    el("bBody").innerHTML='<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px">'
+      +'<div class="vsplit"><div class="lb">جاوي</div><div class="'+jwSize(c.jw)+'">'+c.jw+'</div></div>'
+      +'<div class="vsplit"><div class="lb">Rumi</div><div class="msbig">'+c.ms+'</div></div></div>';
+  }else{
+    /* --- KAD NOTA / RUMUS --- */
+    el("fBody").innerHTML='<div class="a-icon">۞</div>'
+      +'<div class="topic">'+s.label+'</div>'
+      +'<div class="aspill">'+c.f+'</div>'
+      +'<div class="prompt">Nyatakan jawapannya.</div>';
+    el("bHead").innerHTML='<div class="a-head"><div class="hi">۞</div><div class="ht">'
+      +'<span class="t1">'+s.label+'</span><span class="t2">'+c.f+'</span></div></div>';
+    let html="";
+    if(c.pre)html+='<div class="pre">'+c.pre+'</div>';
+    if(c.big)html+='<div class="big">'+c.big+'</div>';
+    if(c.arb)html+=arBlocks(c.arb);
+    html+=listHtml(c.items,c.num);
+    if(c.tbl)html+=tblHtml(c.tbl);
+    if(c.grp2)html+='<div class="grp">'+c.grp2+'</div>';
+    if(c.items2)html+=listHtml(c.items2,c.num2);
+    if(c.arb2)html+=arBlocks(c.arb2);
+    el("bBody").innerHTML=html;
+  }
+  if(c.note){el("bNote").style.display="block";el("bNote").textContent=c.note;}else{el("bNote").style.display="none";}
+  el("counter").textContent="Kad "+(pos+1)+" / "+total;
+  el("barFill").style.width=((pos+1)/total*100)+"%";
+  const knownInView=order.filter(id=>known.has(id)).length;
+  el("knownCount").textContent="✓ "+knownInView+" sudah tahu";
+  el("btnKnown").classList.toggle("on",known.has(c.id));
+}
+function flip(){flipped=!flipped;card.classList.toggle("flip",flipped);}
+function next(){if(!order.length)return;pos=(pos+1)%order.length;render();}
+function goPrev(){if(!order.length)return;pos=(pos-1+order.length)%order.length;render();}
+function shuffle(){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}pos=0;render();}
+card.addEventListener("click",flip);
+el("btnFlip").addEventListener("click",e=>{e.stopPropagation();flip();});
+el("btnNext").addEventListener("click",next);
+el("btnPrev").addEventListener("click",goPrev);
+el("btnShuffle").addEventListener("click",shuffle);
+el("btnKnown").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.has(id)?known.delete(id):known.add(id);saveKnown();render();});
+el("btnReview").addEventListener("click",()=>{if(!order.length)return;const id=CARDS[order[pos]].id;known.delete(id);saveKnown();next();});
+el("btnReset").addEventListener("click",()=>{if(confirm("Set semula semua progres 'sudah tahu'?")){known.clear();saveKnown();render();}});
+document.querySelectorAll("#tabsBhg .bhg").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll("#tabsBhg .bhg").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");filterBhg=t.dataset.b;filterSet="all";
+    buildSetTabs();buildOrder();render();
+  });
+});
+el("arJ2R").addEventListener("click",()=>{arah="j2r";el("arJ2R").classList.add("on");el("arR2J").classList.remove("on");render();});
+el("arR2J").addEventListener("click",()=>{arah="r2j";el("arR2J").classList.add("on");el("arJ2R").classList.remove("on");render();});
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();else if(e.key==="ArrowLeft")goPrev();else if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}});
+buildSetTabs();buildOrder();render();
+</script>
+</body>
+</html>
